@@ -68,7 +68,7 @@ Models
     belongs_to :covid_stat
 
     attributes
-    query_date:string
+    query_datdate
     user_id:int
     covidstat_id
 
@@ -81,7 +81,7 @@ Models
     belongs_to :state
 
     attributes
-    query_date:string
+    query_date:date
     datapoint_id:integer
     state_id:integer
     county_id:integer
@@ -104,7 +104,7 @@ Models
     has_many :age_group_data, through: age_group_cases
 
     arrtibutes
-    query_date:string
+    query_date:date
     name:string
 
 
@@ -115,7 +115,7 @@ Models
     belongs_to :county 
 
     attributes
-    query_date:string
+    query_date:date
     name:string
     county_id:integer
 
@@ -128,7 +128,7 @@ Models
     has_many :hospitalizations  
 
     attributes
-    query_date:string     
+    query_date:date     
     name:string
       
 
@@ -138,7 +138,7 @@ Models
     belongs_to :town
 
     attributes
-    query_date:string 
+    query_date:date 
     state_id:integer
     town_id:integer
     county_id: integer
@@ -150,7 +150,7 @@ Models
     belongs_to :town    
 
     attributes
-    query_date:string 
+    query_date:date 
     state_id:integer
     county_id:integer
     town_id:integer
@@ -163,7 +163,7 @@ Models
     belongs_to :town
 
     attributes
-    query_date:string 
+    query_date:date 
     state_id:integer
     county_id:integer
     town_id:integer    
@@ -174,22 +174,11 @@ Models
     belongs_to :county 
 
     attributes
-    query_date:string 
+    query_date:date 
     state_id:integer
     county_id:integer
     num_hospitalizations:integer   
 
-
-
-
-    ### The AR Association we want is state.cases.gender_cases ###
-    has_many :gender_data, through: gender_cases
-
-    ### The AR Association we want is state.cases.ethnic_cases ###
-    has_many :ethnic_data, through: ethnic_cases
-
-    ### The AR Association we want is state.cases.age_group_cases ###
-    has_many :age_group_data, through: age_group_cases     
 
   GenderCase (Join Table)
 
@@ -203,7 +192,7 @@ Models
    GenderData
     
     attributes
-    query_date:string 
+    query_date:date 
     male_cases:integer
     female_cases:integer
     male_deaths:integer
@@ -222,7 +211,7 @@ Models
     EthnicData
 
     attributes
-    query_date:string 
+    query_date:date 
     cases_hispanic:integer
     cases_NH_American_Indian_or_Alaskan_Native:integer
     cases_NH_Asian_or_Pacific_Islander:integer
