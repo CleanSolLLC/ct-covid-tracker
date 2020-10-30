@@ -1,0 +1,2 @@
+class AgeGroupDatum < ApplicationRecord
+end

@@ -10,10 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_30_204959) do
+ActiveRecord::Schema.define(version: 2020_10_30_211714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "age_group_cases", force: :cascade do |t|
+    t.bigint "state_id", null: false
+    t.bigint "age_group_data_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["age_group_data_id"], name: "index_age_group_cases_on_age_group_data_id"
+    t.index ["state_id"], name: "index_age_group_cases_on_state_id"
+  end
+
+  create_table "age_group_data", force: :cascade do |t|
+    t.integer "query_date"
+    t.integer "cases_0_9"
+    t.integer "cases_10_19"
+    t.integer "cases_20_29"
+    t.integer "cases_30_39"
+    t.integer "cases_40_49"
+    t.integer "cases_50_59"
+    t.integer "cases_60_69"
+    t.integer "cases_70_79"
+    t.integer "cases_80_and_older"
+    t.integer "deaths_0_9"
+    t.integer "deaths_10_19"
+    t.integer "eaths_20_29"
+    t.integer "deaths_30_39"
+    t.integer "deaths_40_49"
+    t.integer "deaths_50_59"
+    t.integer "deaths_60_69"
+    t.integer "deaths_70_79"
+    t.integer "deaths_80_and_older"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "cases", force: :cascade do |t|
     t.bigint "state_id", null: false
@@ -70,6 +103,46 @@ ActiveRecord::Schema.define(version: 2020_10_30_204959) do
     t.index ["county_id"], name: "index_deaths_on_county_id"
     t.index ["state_id"], name: "index_deaths_on_state_id"
     t.index ["town_id"], name: "index_deaths_on_town_id"
+  end
+
+  create_table "ethnic_cases", force: :cascade do |t|
+    t.bigint "state_id", null: false
+    t.bigint "ethnic_data_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ethnic_data_id"], name: "index_ethnic_cases_on_ethnic_data_id"
+    t.index ["state_id"], name: "index_ethnic_cases_on_state_id"
+  end
+
+  create_table "ethnic_data", force: :cascade do |t|
+    t.date "query_date"
+    t.integer "cases_hispanic"
+    t.integer "cases_NH_American_Indian_or_Alaskan_Native"
+    t.integer "cases_NH_Asian_or_Pacific_Islander"
+    t.integer "cases_NH_Black"
+    t.integer "cases_NH_Multracial"
+    t.integer "cases_NH_White"
+    t.integer "cases_NH_Other"
+    t.integer "cases_Unknown"
+    t.integer "deaths_hispanic"
+    t.integer "deaths_NH_American_Indian_or_Alaskan_Native"
+    t.integer "deaths_NH_Asian_or_Pacific_Islander"
+    t.integer "deaths_NH_Black"
+    t.integer "deaths_NH_Multracial"
+    t.integer "deaths_NH_White"
+    t.integer "deaths_NH_Other"
+    t.integer "deaths_Unknown"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "gender_cases", force: :cascade do |t|
+    t.bigint "state_id", null: false
+    t.bigint "gender_data_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gender_data_id"], name: "index_gender_cases_on_gender_data_id"
+    t.index ["state_id"], name: "index_gender_cases_on_state_id"
   end
 
   create_table "gender_data", force: :cascade do |t|
@@ -140,6 +213,8 @@ ActiveRecord::Schema.define(version: 2020_10_30_204959) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "age_group_cases", "age_group_data", column: "age_group_data_id"
+  add_foreign_key "age_group_cases", "states"
   add_foreign_key "cases", "counties"
   add_foreign_key "cases", "states"
   add_foreign_key "cases", "towns"
@@ -152,6 +227,10 @@ ActiveRecord::Schema.define(version: 2020_10_30_204959) do
   add_foreign_key "deaths", "counties"
   add_foreign_key "deaths", "states"
   add_foreign_key "deaths", "towns"
+  add_foreign_key "ethnic_cases", "ethnic_data", column: "ethnic_data_id"
+  add_foreign_key "ethnic_cases", "states"
+  add_foreign_key "gender_cases", "gender_data", column: "gender_data_id"
+  add_foreign_key "gender_cases", "states"
   add_foreign_key "hospitalizations", "counties"
   add_foreign_key "hospitalizations", "states"
   add_foreign_key "tests", "counties"

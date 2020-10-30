@@ -189,7 +189,7 @@ Models
     state_id:integer
     gender_data_id:integer
 
-   GenderData
+   GenderDatum
     
     attributes
     query_date:date 
@@ -208,7 +208,7 @@ Models
     state_id:integer
     ethnic_data_id:integer
 
-    EthnicData
+    EthnicDatum
 
     attributes
     query_date:date 
