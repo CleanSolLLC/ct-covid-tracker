@@ -5,12 +5,51 @@ Flatiron
 https://www.loom.com/share/9e066894c613463684bc094694a9fa09
 
 
-Use of several apis:
+Use of several state of CT apis:
+      
+     key id: 30szkkjvrgf2tdgoybcjrepsb
+     key secret: 19a3jmgptqif5fqf9sgzo1vmg1rcjqfcs86xm0v2uo1l0f0zil
 
   1. COVID-19 Tests, Cases, Hospitalizations, and Deaths (Statewide)
      https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-Hospitalizations-and-Deaths-S/rf3k-f8fg  
 
      api: https://data.ct.gov/resource/rf3k-f8fg.json 
+
+
+     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"})
+
+     data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json")
+
+
+        Hash Keys:
+
+        date
+        state
+        covid_19_pcr_tests_reported
+        totalcases
+        confirmedcases
+        probablecases
+        hospitalizedcases
+        totaldeaths
+        confirmeddeaths
+        probabledeaths
+        cases_age0_9
+        cases_age10_19
+        cases_age20_29
+        cases_age30_39
+        cases_age40_49
+        cases_age50_59
+        cases_age60_69
+        cases_age70_79
+        cases_age80_older
+
+        Getting data based on a date range:
+        
+        data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between '2020-10-28T00:00:00.000' and '2020-10-29T00:00:00.000'")
+
+
+
+
 
   2. COVID-19 Tests, Cases, and Deaths (By Town)
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-and-Deaths-By-Town-/28fr-iqnx
