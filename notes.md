@@ -145,6 +145,20 @@ Models
     arrtibutes
     query_date:date
     name:string
+    total_tests:integer
+    total_cases:integer
+    confirmed_cases:integer
+    hospitalized_cases:integer
+    confirmed_deaths:integer
+    cases_age_0_9:integer
+    cases_age_10_19:integer
+    cases_age_20_29:integer
+    cases_age_30_39:integer
+    cases_age_40_49:integer
+    cases_age_50_59:integer
+    cases_age_60_69:integer
+    cases_age_70_79:integer
+    cases_age_80_older:integer
 
 
   Town
