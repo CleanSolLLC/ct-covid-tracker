@@ -134,13 +134,13 @@ Models
     has_many :hospitalizations 
 
     ### The AR Association we want is state.cases.gender_cases ###
-    has_many :gender_data, through: gender_cases
+    has_many :gender_datum, through: gender_cases
 
     ### The AR Association we want is state.cases.ethnic_cases ###
-    has_many :ethnic_data, through: ethnic_cases
+    has_many :ethnic_datum, through: ethnic_cases
 
     ### The AR Association we want is state.cases.age_group_cases ###
-    has_many :age_group_data, through: age_group_cases
+    has_many :age_group_datum, through: age_group_cases
 
     arrtibutes
     query_date:date
