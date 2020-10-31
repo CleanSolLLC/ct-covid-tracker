@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   
   #root to: "home#index"
 
-  resources :states, only: [:index, :show]
+  resources :states, only: [:index, :show, :new]
   
 end
