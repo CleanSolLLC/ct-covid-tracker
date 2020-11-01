@@ -21,7 +21,7 @@ class StatesController < ApplicationController
   	# data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
 
   	state = State.find_or_create_by(name: "CONNECTICUT")
-
+    ct_user = Ct_User.new(username: "Mark")
 
   	#create a collection of state data totals and shovel in after each interation
   	# a state has_many :covid_totals ????
@@ -45,9 +45,11 @@ class StatesController < ApplicationController
 		state.cases_age_60_69 = data.body[i].cases_age60_69
 		state.cases_age_70_79 = data.body[i].cases_age70_79
 		state.cases_age_80_older = data.body[i].cases_age80_older		
-  		state.save
+  	ct_user << state
   		i+=1
   	end
+    ct_user.save
+    binding.pry
   end
 
 end
