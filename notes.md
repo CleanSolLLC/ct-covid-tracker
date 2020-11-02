@@ -16,14 +16,9 @@ Use of several state of CT apis:
      api: https://data.ct.gov/resource/rf3k-f8fg.json 
 
 
-     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"})
-
-     data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json")
-
-
         Hash Keys:
 
-        date
+        date - should we make this the primary key????
         state
         covid_19_pcr_tests_reported
         totalcases
@@ -43,9 +38,56 @@ Use of several state of CT apis:
         cases_age70_79
         cases_age80_older
 
-        Getting data based on a date range:
+
+        client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"}) 
+
+        #Getting data based on a date range:             
         
         data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between '2020-10-28T00:00:00.000' and '2020-10-29T00:00:00.000'")
+
+        #logic for 1 date passed in
+        data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
+
+
+  2. COVID-19 PCR-Based Test Results by Date of Specimen Collection (By County)
+
+      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-PCR-Based-Test-Results-by-Date-of-Specime/qfkt-uahj
+
+      api: https://data.ct.gov/resource/qfkt-uahj.json
+
+        Hash Keys:
+
+        county
+        date - should we make this the primary key????
+        number_of_indeterminates
+        number_of_negatives
+        number_of_positives
+        number_of_tests 
+
+        client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"}) 
+
+        #Getting data based on a date range:             
+        
+        data = client.get("https://data.ct.gov/resource/qfkt-uahj.json.json", "$where" => "date between '2020-10-28T00:00:00.000' and '2020-10-29T00:00:00.000'")
+
+        #logic for 1 date passed in
+        data = client.get("https://data.ct.gov/resource/qfkt-uahj.json", "$where" => "date='2020-10-29T00:00:00.000'")      
+
+
+  3. COVID-19 Cases, Hospitalizations, and Deaths (By County)
+
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-Hospitalizations-and-Deaths-By-Coun/bfnu-rgqt
+
+     api: https://data.ct.gov/resource/bfnu-rgqt.json      
+
+
+
+
+
+
+
+
+
 
 
 
@@ -73,17 +115,7 @@ Use of several state of CT apis:
 
      api: https://data.ct.gov/resource/7rne-efic.json
 
-  6. COVID-19 Cases, Hospitalizations, and Deaths (By County)
 
-     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-Hospitalizations-and-Deaths-By-Coun/bfnu-rgqt
-
-     api: https://data.ct.gov/resource/bfnu-rgqt.json
-
-  7. COVID-19 PCR-Based Test Results by Date of Specimen Collection (By County)
-
-      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-PCR-Based-Test-Results-by-Date-of-Specime/qfkt-uahj
-
-      api: https://data.ct.gov/resource/qfkt-uahj.json
 
 
 Some of Dwayne's popular gems 
@@ -91,9 +123,9 @@ https://dwayne.fm/rails-gems-to-consider/
 
 
 Models
-  User
-  has_many :data_points
-  has_many :covid_stats, through: :data_points
+  User - which is used by Devise gem is not allowing me to persist associative data.
+  has_many :covid_stats
+  has_many :states, through: :covid_stats
 
   attributes
   *** SEE DEVISE DOCUMENTATION FOR OTHER ATTRIBUTES **
@@ -102,36 +134,28 @@ Models
   password:string
   password_confirmation:string
 
-  DataPoint (Join Table)
-    belongs_to :user
-    belongs_to :covid_stat
+  CtUser - is a stop gap to test and persist associations 
+  has_many :covid_stats
+  has_many :states, through: :covid_stats
 
-    attributes
-    query_datdate
-    user_id:int
-    covidstat_id
+  attributes
+  username:string
 
 
   CovidStat (Join Table)
-  ## Using SQL Joins ??? ##
-    belongs_to :datapoint
-    belongs_to :town
-    belongs_to :county
     belongs_to :state
+    belongs_to :ct_user
 
     attributes
-    query_date:date
-    datapoint_id:integer
+    ct_user_id
     state_id:integer
     county_id:integer
-    town_id:integer
 
 
   State
-    has_many :tests
-    has_many :cases
-    has_many :deaths
-    has_many :hospitalizations 
+
+    has_many :covid_stats
+    has_many :users, through: :covid_stats
 
     ### The AR Association we want is state.cases.gender_cases ###
     has_many :gender_datum, through: gender_cases
@@ -159,6 +183,11 @@ Models
     cases_age_60_69:integer
     cases_age_70_79:integer
     cases_age_80_older:integer
+
+
+
+
+
 
 
   Town
