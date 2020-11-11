@@ -51,3 +51,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.7"
 
 gem "pry-byebug", "~> 3.9"
+
+gem "time", "~> 0.1.0"
+
+gem 'simple_form'

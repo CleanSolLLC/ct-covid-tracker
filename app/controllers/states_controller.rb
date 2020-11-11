@@ -1,42 +1,42 @@
 class StatesController < ApplicationController
 
 
+  def index
+  end
+
   def show
   	#Just adding logic here for now to test out api and saving to ruby object
 
   	# 1. assume that user wants to see data at the state level
   	# user would select Connecticut and a date that date would query the database to see if the date entered date exists. If it does view the data. If not access the apis for the data, persist and view it.
 
-    date = "2020-10-08".to_date
+    #pass in date or date range
 
-    state = State.find_by(query_date: date)
+    params[:start_date] = "2020-10-01"
+    params[:end_date] = "2020-10-07"
+
+    state = State.where("query_date >= :start_date AND query_date <= :end_date",
+      {start_date: params[:start_date], end_date: params[:end_date]})
+
+    # date = "2020-10-08".to_date
+
+    # state = State.find_by(query_date: date)
 
 
-    if state
-        @state = state
-
-
-       # cases_age_0_9: 1337,
-       # cases_age_10_19: 3418,
-       # cases_age_20_29: 8844,
-       # cases_age_30_39: 8839,
-       # cases_age_40_49: 8300,
-       # cases_age_50_59: 9592,
-       # cases_age_60_69: 7497,
-       # cases_age_70_79: 4893,
-       # cases_age_80_older: 7291,
-       # created_at: Sun, 01 Nov 2020 21:35:22 UTC +00:00,
-       # updated_at: Sun, 01 Nov 2020 21:35:23 UTC +00:00>
+   #  if state
+   #      @state = state
   	
 
-  	#*** Logic for Getting State Data that is not persisted ***
+  	# #*** Logic for Getting State Data that is not persisted ***
 
-    else
+   #  else
 
     	client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"})
 
     	  	# logic for multiple dates passed in
-    	  	data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between '2020-10-01T00:00:00.000' and '2020-10-10T00:00:00.000'")
+          binding.pry
+    	  	data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between #{params[:start_date]} and #{params[:end_date]}")
+          
 
     	# logic for 1 date passed in
     	# data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
@@ -67,10 +67,11 @@ class StatesController < ApplicationController
   		state.cases_age_60_69 = data.body[i].cases_age60_69
   		state.cases_age_70_79 = data.body[i].cases_age70_79
   		state.cases_age_80_older = data.body[i].cases_age80_older	
-    	@ct_user.states << state 
+    	ct_user.states << state 
     		i+=1
     	end
     end
-  end
+    #binding.pry
+  #end
 
 end
