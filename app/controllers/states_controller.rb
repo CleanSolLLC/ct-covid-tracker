@@ -11,49 +11,29 @@ class StatesController < ApplicationController
   	# user would select Connecticut and a date that date would query the database to see if the date entered date exists. If it does view the data. If not access the apis for the data, persist and view it.
 
     #pass in date or date range
-
-    params[:start_date] = "2020-10-01"
-    params[:end_date] = "2020-10-07"
-
-    state = State.where("query_date >= :start_date AND query_date <= :end_date",
-      {start_date: params[:start_date], end_date: params[:end_date]})
-
     # date = "2020-10-08".to_date
-
     # state = State.find_by(query_date: date)
+          # logic for 1 date passed in
+      # data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
 
+    ct_user = CtUser.find_or_create_by(username: "Mark")  
 
-   #  if state
-   #      @state = state
-  	
+    params[:start_date] = "2020-10-01T00:00:00.000"
+    params[:end_date] = "2020-10-07T00:00:00.000"
 
-  	# #*** Logic for Getting State Data that is not persisted ***
-
-   #  else
+    # state = State.where("query_date >= :start_date AND query_date <= :end_date",
+    #   {start_date: params[:start_date], end_date: params[:end_date]})
+    #  binding.pry
+    # if state.empty?
 
     	client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"})
-
-    	  	# logic for multiple dates passed in
-          binding.pry
-    	  	data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between #{params[:start_date]} and #{params[:end_date]}")
-          
-
-    	# logic for 1 date passed in
-    	# data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
-
-    	
-      ct_user = CtUser.find_or_create_by(username: "Mark")
-
-      #state = State.new
-    	#create a collection of state data totals and shovel in after each interation
-    	# a state has_many :covid_totals ????
-
+     data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between '#{params[:start_date]}' and '#{params[:end_date]}'")
     	i=0
 
     	while i < data.body.count
         state = State.new(name: "CONNECTICUT")
     		state.query_date = data.body[i].date
-  		state.total_tests = data.body[i].covid_19_pcr_tests_reported
+  		state.total_tests = data.body[i].covid_19_tests_reported
     		state.total_cases = data.body[i].totalcases
           state.confirmed_cases = data.body[i].confirmedcases
     		state.hospitalized_cases = data.body[i].hospitalizedcases
@@ -70,8 +50,7 @@ class StatesController < ApplicationController
     	ct_user.states << state 
     		i+=1
     	end
-    end
-    #binding.pry
-  #end
+    #end
+  end
 
 end

@@ -22,16 +22,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_212529) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "covid_stats", force: :cascade do |t|
-    t.bigint "state_id", null: false
-    t.bigint "ct_user_id", null: false
-    t.date "query_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ct_user_id"], name: "index_covid_stats_on_ct_user_id"
-    t.index ["state_id"], name: "index_covid_stats_on_state_id"
-  end
-
   create_table "ct_users", force: :cascade do |t|
     t.string "username"
     t.date "query_date"
@@ -69,6 +59,16 @@ ActiveRecord::Schema.define(version: 2020_10_29_212529) do
     t.index ["county_id"], name: "index_towns_on_county_id"
   end
 
+  create_table "user_states", force: :cascade do |t|
+    t.bigint "state_id", null: false
+    t.bigint "ct_user_id", null: false
+    t.date "query_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ct_user_id"], name: "index_user_states_on_ct_user_id"
+    t.index ["state_id"], name: "index_user_states_on_state_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_212529) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "covid_stats", "ct_users"
-  add_foreign_key "covid_stats", "states"
   add_foreign_key "towns", "counties"
+  add_foreign_key "user_states", "ct_users"
+  add_foreign_key "user_states", "states"
 end

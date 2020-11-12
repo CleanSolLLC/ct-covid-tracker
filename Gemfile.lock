@@ -205,6 +205,7 @@ GEM
       sprockets (>= 3.0.0)
     sys-uname (1.0.4)
       ffi (>= 1.0.0)
+    table_print (1.5.7)
     thor (1.0.1)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
@@ -257,6 +258,7 @@ DEPENDENCIES
   soda-ruby
   spring
   spring-watcher-listen (~> 2.0.0)
+  table_print
   time (~> 0.1.0)
   turbolinks (~> 5)
   tzinfo-data

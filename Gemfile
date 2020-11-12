@@ -55,3 +55,5 @@ gem "pry-byebug", "~> 3.9"
 gem "time", "~> 0.1.0"
 
 gem 'simple_form'
+
+gem "table_print"

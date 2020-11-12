@@ -1,6 +1,6 @@
 class State < ApplicationRecord
-  has_many :covid_stats
-  has_many :users, through: :covid_stats
+  has_many :user_states
+  has_many :users, through: :user_states
 
 end
   # has_many :gender_cases

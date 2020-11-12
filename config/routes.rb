@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  
   get 'counties/show'
-  #root to: "home#index"
 
+get '/ct_user/:id', to: 'ct_user#home'
   resources :states, only: [:index, :show, :new]
-  
+  resources :ct_user
 end
