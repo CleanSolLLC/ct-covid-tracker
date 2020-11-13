@@ -1,2 +1,0 @@
-class GenderDatum < ApplicationRecord
-end

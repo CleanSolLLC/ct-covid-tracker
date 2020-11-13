@@ -5,6 +5,10 @@ class StatesController < ApplicationController
   end
 
   def show
+    @state = State.find_by(id: params[:id])
+  end
+
+  def new
   	#Just adding logic here for now to test out api and saving to ruby object
 
   	# 1. assume that user wants to see data at the state level
@@ -33,24 +37,20 @@ class StatesController < ApplicationController
     	while i < data.body.count
         state = State.new(name: "CONNECTICUT")
     		state.query_date = data.body[i].date
-  		state.total_tests = data.body[i].covid_19_tests_reported
+  		  state.total_tests = data.body[i].covid_19_tests_reported
     		state.total_cases = data.body[i].totalcases
-          state.confirmed_cases = data.body[i].confirmedcases
+        state.confirmed_cases = data.body[i].confirmedcases
     		state.hospitalized_cases = data.body[i].hospitalizedcases
-  		state.confirmed_deaths = data.body[i].confirmeddeaths
-    		state.cases_age_0_9 = data.body[i].cases_age0_9
-  		state.cases_age_10_19 = data.body[i].cases_age10_19
-  		state.cases_age_20_29 = data.body[i].cases_age20_29
-  		state.cases_age_30_39 = data.body[i].cases_age30_39
-  		state.cases_age_40_49 = data.body[i].cases_age40_49
-  		state.cases_age_50_59 = data.body[i].cases_age50_59
-  		state.cases_age_60_69 = data.body[i].cases_age60_69
-  		state.cases_age_70_79 = data.body[i].cases_age70_79
-  		state.cases_age_80_older = data.body[i].cases_age80_older	
-    	ct_user.states << state 
-    		i+=1
+  		  state.confirmed_deaths = data.body[i].confirmeddeaths
+    	  ct_user.states << state 
+    	  i+=1
     	end
     #end
+
+
+    #This code will ultimately end up in the 
+
+
   end
 
 end

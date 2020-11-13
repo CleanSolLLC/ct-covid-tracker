@@ -1,44 +1,66 @@
 <!DOCTYPE html>
 <html>
-<% if @ct_user.states.empty? %>
 
-    <h4>Welcome <%= @ct_user.username %>!</h4>
+  <head>
+  	<style type="text/css">
 
-     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_state_path %>
+       table {
+       	width: 1200px;
+       }
+
+       th, td {
+       	padding: 10px 10px 10px 10px 10px 10px 10px;
+       }       
 
 
-<% else %>
+  	</style>
 
-    <h4>Welcome Back <%= @ct_user.username %>!</h4>
 
-		<p>Your last log in was: <%= @ct_user.updated_at.strftime("%A %B %e, %Y at %I:%M %P") %></p>
+  </head>
 
-		<p>Here is a list of your statewide COVID-19 data by date</p>
 
-		<p>Click on date to drill down on more data take to show page for each instance of state</p>
+  <body>
 
-		<table>
-			<tr>
-				<% @ct_user.states.column_names[1..7].map do |col_name| %>		
-				  <th colspan="1.5"> <%= col_name.split("_").join(" ").titleize %></th>
-					<td></td>
-				<% end %>
-			</tr>
-			
-				<% @ct_user.states.map do |state| %>
-				<tr>			
-				   <td colspan="2"> <%= link_to state.query_date, state_path(state.id) %> </td>
-				   <td colspan="2"> <%= state.name %> </td>
-				   <td colspan="2"> <%= state.total_tests %> </td>
-				   <td colspan="2"> <%= state.total_cases %> </td>
-				   <td colspan="2"> <%= state.confirmed_cases %> </td>
-				   <td colspan="2"> <%= state.hospitalized_cases %> </td>
-				   <td colspan="2"> <%= state.confirmed_deaths %> </td>
+	<% if @ct_user.states.empty? %>
+
+	    <h4>Welcome <%= @ct_user.username %>!</h4>
+
+	     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_state_path %>
+
+
+	<% else %>
+
+	    <h4>Welcome Back <%= @ct_user.username %>!</h4>
+
+			<p>Your last log in was: <%= @ct_user.updated_at.strftime("%A %B %e, %Y at %I:%M %P") %></p>
+
+			<p>Here is a list of your statewide COVID-19 data by date</p>
+
+			<p>Click on date to drill down on more data take to show page for each instance of state</p>
+
+			<table>
+				<tr>
+					<% @ct_user.states.column_names[1..].map do |col_name| %>		
+					  <th colspan="1.5"> <%= col_name.split("_").join(" ").titleize %></th>
+						<td></td>
+					<% end %>
 				</tr>
-				<% end %>
-		</table>
+				
+					<% @ct_user.states.map do |state| %>
+					<tr>			
+					   <td colspan="2"> <%= link_to state.query_date, ct_user_state_path(state.id) %></td>
+					   <td colspan="2"> <%= state.name %></td>
+					   <td colspan="2"> <%= state.total_tests %> </td>
+					   <td colspan="2"> <%= state.total_cases %> </td>
+					   <td colspan="2"> <%= state.confirmed_cases %> </td>
+					   <td colspan="2"> <%= state.hospitalized_cases %> </td>
+					   <td colspan="2"> <%= state.confirmed_deaths %> </td>
+					</tr>
+					<% end %>
+			</table>
 
-<% end %>		 
+	<% end %>
+	</body>		 
 </html>
 
 

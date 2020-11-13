@@ -1,7 +1,29 @@
 <h1>States#show</h1>
-<p>Find me in app/views/states/show.html.erb</p>
 
 
-       
+
+
+    <h4>Date: <%= @state.query_date %></h4>
+
+    <ul>
+      <br>Cases Ages 0 to 9:</br><%= @state.cases_age_0_9 %>
+
+      <br>Cases Ages 10 to 19:</br><%= @state.cases_age_10_19 %>
+
+      <br>Cases Ages 20 to 29:</br><%= @state.cases_age_20_29 %>
+
+      <br>Cases Ages 30 to 39:</br><%= @state.cases_age_30_39 %>
+
+      <br>Cases Ages 40 to 49:</br><%= @state.cases_age_40_49 %>
+
+      <br>Cases Ages 50 to 59:</br><%= @state.cases_age_50_59 %>
+
+      <br>Cases Ages 60 to 69:</br><%= @state.cases_age_60_69 %>
+
+      <br>Cases Ages 70 to 79:</br><%= @state.cases_age_70_79 %>
+
+      <br>Cases Ages 80 and older:</br><%= @state.cases_age_80_older %>
+
+     </ul>  
 
 

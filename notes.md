@@ -10,17 +10,17 @@ Use of several state of CT apis:
      key id: 30szkkjvrgf2tdgoybcjrepsb
      key secret: 19a3jmgptqif5fqf9sgzo1vmg1rcjqfcs86xm0v2uo1l0f0zil
 
-  1. COVID-19 Tests, Cases, Hospitalizations, and Deaths (Statewide)
+  1. COVID-19 Tests, Cases, Hospitalizations, and Deaths (Statewide) ✔ 
      https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-Hospitalizations-and-Deaths-S/rf3k-f8fg  
 
      api: https://data.ct.gov/resource/rf3k-f8fg.json 
 
 
-        Hash Keys:
+        Hash Keys Used: 
 
         date - should we make this the primary key????
         state
-        covid_19_pcr_tests_reported
+        covid_19_tests_reported
         totalcases
         confirmedcases
         probablecases
@@ -28,15 +28,6 @@ Use of several state of CT apis:
         totaldeaths
         confirmeddeaths
         probabledeaths
-        cases_age0_9
-        cases_age10_19
-        cases_age20_29
-        cases_age30_39
-        cases_age40_49
-        cases_age50_59
-        cases_age60_69
-        cases_age70_79
-        cases_age80_older
 
 
         client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"}) 
@@ -82,17 +73,6 @@ Use of several state of CT apis:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   2. COVID-19 Tests, Cases, and Deaths (By Town)
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-and-Deaths-By-Town-/28fr-iqnx
 
@@ -107,7 +87,21 @@ Use of several state of CT apis:
 
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Age-Group/ypz6-8qyf
 
-     api: https://data.ct.gov/resource/ypz6-8qyf.json
+     example: data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json?dateupdated=2020-05-01T00:00:00.000")
+
+     Hash Keys:
+
+      dateupdated
+      agegroups
+      totalcases
+      totalcaserate
+      totaldeaths
+
+      Data is an array of hashes returns data for each age group
+
+       #<Hashie::Mash agegroups="0-9" dateupdated="2020-05-01T00:00:00.000" totalcaserate="56" totalcases="214" totaldeaths="1"> 
+
+
 
   5. COVID-19 Cases and Deaths by Race/Ethnicity
 
@@ -154,17 +148,20 @@ Models
 
   State
 
-    has_many :covid_stats
-    has_many :users, through: :covid_stats
+    has_many :user_states
+    has_many :users, through: :user_states
 
-    ### The AR Association we want is state.cases.gender_cases ###
-    has_many :gender_datum, through: gender_cases
+    ### The AR Association we want is user.states.gender_cases ###
+    :state has_many :gender_cases
+    :gender_case belongs_to :state 
 
-    ### The AR Association we want is state.cases.ethnic_cases ###
-    has_many :ethnic_datum, through: ethnic_cases
+    ### The AR Association we want is user.states.ethnic_cases ###
+    :state has_many :ethnic_cases
+    :ethnic_case belongs_to :state 
 
-    ### The AR Association we want is state.cases.age_group_cases ###
-    has_many :age_group_datum, through: age_group_cases
+    ### The AR Association we want is user.states.age_group_cases ###
+    :state has_many :age_group_cases
+    :age_group_case belongs_to :state
 
     arrtibutes
     query_date:date
@@ -174,20 +171,6 @@ Models
     confirmed_cases:integer
     hospitalized_cases:integer
     confirmed_deaths:integer
-    cases_age_0_9:integer
-    cases_age_10_19:integer
-    cases_age_20_29:integer
-    cases_age_30_39:integer
-    cases_age_40_49:integer
-    cases_age_50_59:integer
-    cases_age_60_69:integer
-    cases_age_70_79:integer
-    cases_age_80_older:integer
-
-
-
-
-
 
 
   Town
@@ -212,64 +195,7 @@ Models
     attributes
     query_date:date     
     name:string
-      
 
-  Test
-    belongs_to :state
-    belongs_to : county
-    belongs_to :town
-
-    attributes
-    query_date:date 
-    state_id:integer
-    town_id:integer
-    county_id: integer
-    num_tests:integer
-
-  Case
-    belongs_to :state
-    belongs_to :county
-    belongs_to :town    
-
-    attributes
-    query_date:date 
-    state_id:integer
-    county_id:integer
-    town_id:integer
-    num_cases:integer
-
-
-  Death
-    belongs_to :state
-    belongs_to :county    
-    belongs_to :town
-
-    attributes
-    query_date:date 
-    state_id:integer
-    county_id:integer
-    town_id:integer    
-    num_deaths:integer       
-
-  Hospitalization
-    belongs_to :state
-    belongs_to :county 
-
-    attributes
-    query_date:date 
-    state_id:integer
-    county_id:integer
-    num_hospitalizations:integer   
-
-
-  GenderCase (Join Table)
-
-    belongs_to :state
-    belongs_to :gender_data
-
-    attributes
-    state_id:integer
-    gender_data_id:integer
 
    GenderDatum
     
@@ -281,18 +207,12 @@ Models
     female_deaths:integer  
   
 
-  EthnicCase (Join Table)
+  EthnicCase
 
     belongs_to :state
-    belongs_to :ethnic_data
-
-    attributes 
-    state_id:integer
-    ethnic_data_id:integer
-
-    EthnicDatum
 
     attributes
+    state_id:integer
     query_date:date 
     cases_hispanic:integer
     cases_NH_American_Indian_or_Alaskan_Native:integer
@@ -313,18 +233,12 @@ Models
     deaths_Unknown:integer 
 
 
-  AgeGroupCase (Join Table)
+  AgeGroupCase
     
     belongs_to :state
-    belongs_to :age_group_data
 
     attributes 
     state_id:integer
-    age_group_data_id:integer
-
-  AgeGroupData
-  
-    attributes
     query_date:string 
     cases_0_9:integer
     cases_10_19:integer
