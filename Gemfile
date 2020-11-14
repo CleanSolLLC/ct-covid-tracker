@@ -56,4 +56,4 @@ gem "time", "~> 0.1.0"
 
 gem 'simple_form'
 
-gem "table_print"
+gem 'validates_timeliness', '~> 4.1'

@@ -25,7 +25,7 @@
 
 	    <h4>Welcome <%= @ct_user.username %>!</h4>
 
-	     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_state_path %>
+	     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_ct_user_state_path(@ct_user) %>
 
 
 	<% else %>
