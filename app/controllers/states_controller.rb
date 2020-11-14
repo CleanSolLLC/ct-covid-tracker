@@ -6,9 +6,10 @@ class StatesController < ApplicationController
 
   def show
     @state = State.find_by(id: params[:id])
+    @agegroup = AgeGroup.find_by(query_date: @state.query_date)
   end
 
-  def new
+  def home
   	#Just adding logic here for now to test out api and saving to ruby object
 
   	# 1. assume that user wants to see data at the state level
@@ -48,9 +49,23 @@ class StatesController < ApplicationController
     #end
 
 
-    #This code will ultimately end up in the 
+    #This code will ultimately end up in the AgeGroupCase model but will be called in the State model
 
 
+      client = SODA::Client.new({:domain => "https://data.ct.gov/resource/ypz6-8qyf.json"})
+        
+     
+      data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json", "$where" => "dateupdated between'#{params[:start_date]}' and '#{params[:end_date]}'")
+
+      while i < data.body.count
+        age_group = AgeGroup.new
+        age_group.query_date = data.body[i].dateupdated
+        age_group.age_group = data.body[i].agegroups
+        age_group.total_cases = data.body[i].totalcases
+        age_group.total_case_rate = data.body[i].totalcaserate
+        age_group.total_deaths = data.body[i].totaldeaths
+        age_group.save
+        i+=1
+      end  
   end
-
 end

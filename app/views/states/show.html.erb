@@ -2,27 +2,19 @@
 
 
 
-
+    <h3>Date: <%= @state.name %></h3>  
     <h4>Date: <%= @state.query_date %></h4>
 
     <ul>
-      <br>Cases Ages 0 to 9:</br><%= @state.cases_age_0_9 %>
+      <br>Total Tests:</br><%= @state.total_tests %>
 
-      <br>Cases Ages 10 to 19:</br><%= @state.cases_age_10_19 %>
+      <br>Total Cases:</br><%= @state.total_cases %>
 
-      <br>Cases Ages 20 to 29:</br><%= @state.cases_age_20_29 %>
+      <br>Confirmed Cases:</br><%= @state.confirmed_cases %>
 
-      <br>Cases Ages 30 to 39:</br><%= @state.cases_age_30_39 %>
+      <br>Hospitalized Cases:</br><%= @state.hospitalized_cases %>
 
-      <br>Cases Ages 40 to 49:</br><%= @state.cases_age_40_49 %>
-
-      <br>Cases Ages 50 to 59:</br><%= @state.cases_age_50_59 %>
-
-      <br>Cases Ages 60 to 69:</br><%= @state.cases_age_60_69 %>
-
-      <br>Cases Ages 70 to 79:</br><%= @state.cases_age_70_79 %>
-
-      <br>Cases Ages 80 and older:</br><%= @state.cases_age_80_older %>
+      <br>Confirmed Deaths:</br><%= @state.confirmed_deaths %>
 
      </ul>  
 

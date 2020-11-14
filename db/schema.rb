@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_11_13_164510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "age_group_cases", force: :cascade do |t|
+  create_table "age_groups", force: :cascade do |t|
     t.bigint "state_id", null: false
     t.datetime "query_date"
     t.string "age_group"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_11_13_164510) do
     t.integer "total_deaths"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["state_id"], name: "index_age_group_cases_on_state_id"
+    t.index ["state_id"], name: "index_age_groups_on_state_id"
   end
 
   create_table "counties", force: :cascade do |t|
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_11_13_164510) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "age_group_cases", "states"
+  add_foreign_key "age_groups", "states"
   add_foreign_key "towns", "counties"
   add_foreign_key "user_states", "ct_users"
   add_foreign_key "user_states", "states"
