@@ -13,9 +13,10 @@ class StatesController < ApplicationController
   end
 
   def create
-    ct_user = CtUser.find_by(id: params[:ct_user_id]) 
+    #ct_user = CtUser.find_by(id: params[:ct_user_id]) 
     State.state_data(params)
-    redirect_to ct_user_path(ct_user)
+    AgeGroup.age_data(params)
+    redirect_to ct_user_path(params[:ct_user_id])
   end
 end
   	#Just adding logic here for now to test out api and saving to ruby object
@@ -46,19 +47,8 @@ end
     #This code will ultimately end up in the AgeGroupCase model but will be called in the State model
 
 
-  #     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/ypz6-8qyf.json"})
+
         
      
-  #     data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json", "$where" => "dateupdated between'#{params[:start_date]}' and '#{params[:end_date]}'")
-
-  #     while i < data.body.count
-  #       age_group = AgeGroup.new
-  #       age_group.query_date = data.body[i].dateupdated
-  #       age_group.age_group = data.body[i].agegroups
-  #       age_group.total_cases = data.body[i].totalcases
-  #       age_group.total_case_rate = data.body[i].totalcaserate
-  #       age_group.total_deaths = data.body[i].totaldeaths
-  #       age_group.save
-  #       i+=1
-  #     end  
+ 
   # end

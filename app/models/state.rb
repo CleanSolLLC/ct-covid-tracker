@@ -1,7 +1,5 @@
 class State < ApplicationRecord
-  has_many :user_states
-  has_many :users, through: :user_states
-  has_many :age_groups
+  belongs_to :ct_user
 
   # validates_date :start_date
   # validates_date :end_date 
@@ -15,7 +13,7 @@ class State < ApplicationRecord
 
   def self.state_data(params)
 
-  	ct_user = CtUser.find_by(id: params[:ct_user_id])
+  	ct_user = CtUser.find_or_create_by(id: params[:ct_user_id])
   	
   	client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"})
      data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between '#{params[:start_date]}' and '#{params[:end_date]}'")

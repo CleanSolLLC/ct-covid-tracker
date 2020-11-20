@@ -6,6 +6,7 @@ get '/ct_user/:id', to: 'ct_user#home'
   
   resources :ct_user do
   	resources :states
+    resources :age_groups
   end
 end
 

@@ -1,8 +1,7 @@
 class CreateAgeGroups < ActiveRecord::Migration[6.0]
   def change
     create_table :age_groups do |t|
-    	
-      t.references :state, null: false, foreign_key: true
+    	t.belongs_to :ct_user
       t.datetime :query_date
       t.string :age_group 
       t.integer :total_cases
