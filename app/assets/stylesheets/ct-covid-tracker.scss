@@ -1,0 +1,29 @@
+@import "bulma";
+
+
+p.alert {
+	color: red;
+}
+
+div#error_explanation li{
+	color: red;
+}
+
+h1 {
+	text-align: center;
+	font-size: 30px;
+}
+
+p.notice {
+	color: green;
+}
+
+a.link-to-text_color {
+	color: blue;
+}
+
+.tasks {
+	text-indent: 5%;
+
+}
+

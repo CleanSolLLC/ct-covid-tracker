@@ -1,7 +1,7 @@
 class CreateAgeGroups < ActiveRecord::Migration[6.0]
   def change
     create_table :age_groups do |t|
-    	t.belongs_to :ct_user
+    	t.belongs_to :user
       t.datetime :query_date
       t.string :age_group 
       t.integer :total_cases

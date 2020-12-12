@@ -110,6 +110,22 @@ Use of several state of CT apis:
      api: https://data.ct.gov/resource/7rne-efic.json
 
 
+  6. COVID-19 State Summary **** Data to show on the landing page
+      COVID-19 state summary including the following metrics, including the change from the data reported the previous day:
+
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-state-summary/ncg4-6gkj
+
+     api: https://data.ct.gov/resource/ncg4-6gkj.json
+
+     Hash Keys:
+
+      measure
+      total
+      changedirection
+      change
+      dateupdated 
+
+
 
 
 Some of Dwayne's popular gems 

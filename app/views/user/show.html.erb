@@ -1,0 +1,20 @@
+<% if user_signed_in? %>
+
+	<h3><b>Welcome <%= current_user.username %></b></h3>
+
+	<p> Logged in on: <%= current_user.current_sign_in_at %></p>
+	<p> Last log in on: <%= current_user.last_sign_in_at%></p><br>
+
+	<%= link_to :Logout, destroy_user_session_path, method: :delete %>
+
+
+<% else %>
+	
+  	  <h2><b>Welcome to the Chore Helper Management System</b></h2>
+
+  	  <ul>
+		  <li><%= link_to('Sign In', new_user_session_path) %></li>
+		  <li><%= link_to('Register', new_user_registration_path) %></li>
+	  </ul>
+
+<% end %>

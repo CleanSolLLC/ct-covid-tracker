@@ -57,3 +57,5 @@ gem "time", "~> 0.1.0"
 gem 'simple_form'
 
 gem 'validates_timeliness', '~> 4.1'
+
+gem 'bulma-rails', '~> 0.9.0'

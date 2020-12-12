@@ -1,8 +1,14 @@
 class User < ApplicationRecord
-  has_many :data_points
-  has_many :covid_stats, through: :data_points
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :states
+  has_many :age_groups
+  has_many :counties
+  has_many :towns
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :trackable
 end

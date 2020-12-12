@@ -1,5 +1,5 @@
 class State < ApplicationRecord
-  belongs_to :ct_user
+  belongs_to :user
 
   # validates_date :start_date
   # validates_date :end_date 

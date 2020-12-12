@@ -1,19 +1,118 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CtCovidTracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>CTCovid19Tracker</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
 
-  <body>
+
+  <body>   
+       
+            <section class="hero is-info is-medium is-bold">
+            <div class="hero-head">
+                <h1>Connecticut COVID-19 Tracker System</h1>
+
+
+
+                <!-- <nav class="navbar">
+                    <div class="container">
+
+                        
+                            <div class="navbar-brand">
+ 
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                </span>
+                            </div>
+                        <div id="navbarMenu" class="navbar-menu">
+                            <div class="navbar-end">
+                                <div class="tabs is-right">
+                                    <ul>
+                                        <li class="is-active"><a>Home</a></li>
+                                        <li><a href="">Examples</a></li>
+                                        <li><a href="">Features</a></li>
+                                        <li><a href="">Team</a></li>
+                                        <li><a href="">Help</a></li>
+                                    </ul>
+
+                                            
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </nav>
+            </div><br><br>
+
+                <div class="tile is-ancestor">
+                    <div class="tile is-vertical is-8">
+                        <div class="tile">
+                            <div class="tile is-parent is-vertical">
+
+                            </div>
+                            <div class="tile is-parent">
+                                <article class="tile is-child notification is-white">
+                                    <div id="date" class="date_display">
+                                        <%= Date.today.strftime('%A %B %d, %Y') %>
+                                    </div>
+                                    <div  id="time" class="time_display"></div>
+<script type="text/javascript">
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+    t = setTimeout(function () {
+        startTime()
+    }, 500);
+}
+startTime();
+</script> 
+
+
     <%= yield %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
     
-    
-  </body>
+
+</div>
+
+
+                                                                    </article>
+                                                                </div>
+                                                            </div>
+
+                                                                </article>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                    <div class="tile is-parent is-shady">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+    </body>
 </html>
