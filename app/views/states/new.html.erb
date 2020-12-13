@@ -10,7 +10,7 @@
  4. The date or date range should be validated for proper input format -->
  <h5>Enter Date Range:</h5>
 
- <%= form_tag(ct_user_states_path) do %>
+ <%= form_tag('/user/:user_id/states') do %>
   <p><%= label_tag('start_date', "Start Date") %>
   <%= date_field_tag('start_date') %></p>
  

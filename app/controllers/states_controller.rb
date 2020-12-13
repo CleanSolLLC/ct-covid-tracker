@@ -2,22 +2,30 @@ class StatesController < ApplicationController
 
 
   def index
+    @user = User.find(current_user.id)
   end
 
+  def new
+    @user = User.find(current_user.id)
+  end
+
+  def create
+    user = User.find(current_user.id)
+    State.state_data(params, user)
+    #AgeGroup.age_data(params)
+    redirect_to user_states_path(user)
+  end
+
+  
   def show
     @state = State.find_by(id: params[:id])
     #@agegroup = AgeGroup.find_by(query_date: @state.query_date)
   end
 
-  def new
-  end
 
-  def create
-    #ct_user = CtUser.find_by(id: params[:ct_user_id]) 
-    State.state_data(params)
-    AgeGroup.age_data(params)
-    redirect_to ct_user_path(params[:ct_user_id])
-  end
+
+
+
 end
   	#Just adding logic here for now to test out api and saving to ruby object
 

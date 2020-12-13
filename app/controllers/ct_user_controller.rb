@@ -7,8 +7,6 @@ class CtUserController < ApplicationController
   end
 
   def home
-  	@user = User.find(current_user.id)
-  	#@ct_user = CtUser.find(1)
   end
 
   def show
