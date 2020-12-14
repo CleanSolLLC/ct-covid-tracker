@@ -10,7 +10,7 @@ Rails.application.routes.draw do
    get  'users/sign_out', to: 'devise/sessions#destroy', as: 'logged_out'
   end
 
-  root 'site#welcome'
+  root 'site#home'
 
   
 end

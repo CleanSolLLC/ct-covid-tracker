@@ -23,20 +23,20 @@
 
 	<% if @user.states.empty? %>
 
-	    <h4>Welcome <%= @user.username %>!</h4>
+	    <h3><b>Welcome <%= @user.username %>!</b></h3>
 
 	     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_user_state_path(@user) %>
 
 
 	<% else %>
+		<br>
+	    <h3><b>Welcome <%= @user.username %>!</b></h3>
 
-	    <h4>Welcome Back <%= @user.username %>!</h4>
-
-			<p>Your last log in was: <%= @user.updated_at.strftime("%A %B %e, %Y at %I:%M %P") %></p>
+			<p>Your last log in was: <%= @user.updated_at.strftime("%A %B %e, %Y at %I:%M %P") %></p><br>
 
 			<p>Here is a list of your statewide COVID-19 data by date</p>
 
-			<p>Click on date to drill down on more data take to show page for each instance of state</p>
+			<p>Click on date to drill down on more data take to show page for each instance of state</p><br>
 
 			<table>
 				<tr>

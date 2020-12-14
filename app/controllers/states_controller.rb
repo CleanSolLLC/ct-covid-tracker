@@ -1,5 +1,5 @@
 class StatesController < ApplicationController
-
+   before_action :authenticate_user!
 
   def index
     @user = User.find(current_user.id)
@@ -18,8 +18,14 @@ class StatesController < ApplicationController
 
   
   def show
-    @state = State.find_by(id: params[:id])
-    #@agegroup = AgeGroup.find_by(query_date: @state.query_date)
+    user = User.find(current_user.id)
+    user.states.find do |state|
+      if state.id.to_s == params[:id]
+        @state = State.find(state.id)
+      # else
+      #   redirect_to user_states_path
+      end
+    end
   end
 
 
