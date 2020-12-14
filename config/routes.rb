@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'user#show'
+
   devise_for :users
 
   devise_scope :user do
@@ -9,9 +11,6 @@ Rails.application.routes.draw do
   end
    get  'users/sign_out', to: 'devise/sessions#destroy', as: 'logged_out'
   end
-
-  root 'site#home'
-
   
 end
 

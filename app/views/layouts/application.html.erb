@@ -19,7 +19,7 @@
 
 
 
-                <!-- <nav class="navbar">
+                <nav class="navbar">
                     <div class="container">
 
                         
@@ -35,7 +35,7 @@
                                 <div class="tabs is-right">
                                     <ul>
                                         <li class="is-active"><a>Home</a></li>
-                                        <li><a href="">Examples</a></li>
+                                        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
                                         <li><a href="">Features</a></li>
                                         <li><a href="">Team</a></li>
                                         <li><a href="">Help</a></li>
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </nav>
             </div><br><br>
 
