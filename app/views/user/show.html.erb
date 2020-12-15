@@ -1,11 +1,11 @@
 <% if user_signed_in? %>
 
-	<h3><b>Welcome <%= current_user.username %></b></h3>
+	<br>
+	<h3><b>Welcome <%= current_user.username %>!</b></h3>
 
-	<p> Logged in on: <%= current_user.current_sign_in_at %></p>
-	<p> Last log in on: <%= current_user.last_sign_in_at%></p><br>
+	<p> Last logged in on:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p')%></p><br>
 
-	<%= link_to :Logout, destroy_user_session_path, method: :delete %>
+
 
 
 <% else %>
