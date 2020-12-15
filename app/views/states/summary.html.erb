@@ -1,0 +1,12 @@
+
+<p>In Connecticut as of <%= Time.parse(@summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p') %></p><br>
+	<b>Number of Vaccines Administered:</b>
+	<% i=0 %>
+   	<% while i < 5 %>
+	  <p><b><%= @summary[i].measure %>:</b></p>
+	  <b><%= @summary[i].total %> <%= @summary[i].changedirection %><%= @summary[i].change %> cases</b>
+	  <br>
+      <% i+=1 %>
+      
+    <% end %>
+ 

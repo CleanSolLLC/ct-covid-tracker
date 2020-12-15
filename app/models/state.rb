@@ -30,6 +30,13 @@ class State < ApplicationRecord
     end
   end
 
+  def self.summary
+    
+    client = SODA::Client.new({:domain => "https://data.ct.gov/resource/ncg4-6gkj.json"})
+     data = client.get("https://data.ct.gov/resource/ncg4-6gkj.json?")
+     data.body
+  end  
+
 end
 
 

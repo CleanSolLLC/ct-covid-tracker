@@ -1,6 +1,10 @@
 class StatesController < ApplicationController
    before_action :authenticate_user!
 
+ def summary
+   @summary = State.summary
+ end
+
   def index
     @user = User.find(current_user.id)
   end

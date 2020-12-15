@@ -35,8 +35,9 @@
                                 <div class="tabs is-right">
                                     <ul>
                                         <li class="is-active"><a>Home</a></li>
-                                        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-                                        <li><a href="">Features</a></li>
+                                        <li></a><%= link_to "Daily Summary", state_summary_path %></li>
+                                        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+                                        
                                         <li><a href="">Team</a></li>
                                         <li><a href="">Help</a></li>
                                     </ul>
@@ -59,7 +60,11 @@
                             </div>
                             <div class="tile is-parent">
                                 <article class="tile is-child notification is-white">
-                                    <div id="date" class="date_display">
+
+                                <% if user_signed_in? %>
+                                    <h3><b>Welcome <%= current_user.username  %>!</b></h3> 
+
+                                    <div id="date" class="date_display" >
                                         <%= Date.today.strftime('%A %B %d, %Y') %>
                                     </div>
                                     <div  id="time" class="time_display"></div>
@@ -97,6 +102,11 @@ function startTime() {
 }
 startTime();
 </script> 
+
+    <br>
+    <p> Last logged in on:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p')%></p><br>
+
+<% end %>
 
 
     <%= yield %>

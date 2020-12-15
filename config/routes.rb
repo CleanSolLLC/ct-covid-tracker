@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
    get  'users/sign_out', to: 'devise/sessions#destroy', as: 'logged_out'
   end
-  
+  get '/state/summary', to: 'states#summary'
 end
 
   
