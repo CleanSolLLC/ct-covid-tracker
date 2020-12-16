@@ -34,8 +34,9 @@
                             <div class="navbar-end">
                                 <div class="tabs is-right">
                                     <ul>
-                                        <li class="is-active"><a>Home</a></li>
-                                        <li></a><%= link_to "Daily Summary", state_summary_path %></li>
+                                        <li class="is-active"><a></a></li>
+                                        <li><%= link_to "Daily Summary", state_summary_path %></li>
+                                        <li><%= link_to "State Totals","/user/:id/states" %></li>
                                         <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
                                         
                                         <li><a href="">Team</a></li>

@@ -22,6 +22,7 @@ class StatesController < ApplicationController
 
   
   def show
+    binding.pry
     user = User.find(current_user.id)
     user.states.find do |state|
       if state.id.to_s == params[:id]
