@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_13_164510) do
+ActiveRecord::Schema.define(version: 2020_12_17_201438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2020_11_13_164510) do
     t.integer "confirmed_deaths"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "test_change"
+    t.integer "case_change"
+    t.integer "hospitalized_change"
+    t.integer "death_change"
+    t.string "test_dir"
+    t.string "case_dir"
+    t.string "hosp_dir"
+    t.string "death_dir"
     t.index ["user_id"], name: "index_states_on_user_id"
   end
 

@@ -6,7 +6,7 @@ class StatesController < ApplicationController
  end
 
   def index
-    @user = User.find(current_user.id)
+    @states = current_user.states.order('query_date DESC')
   end
 
   def new

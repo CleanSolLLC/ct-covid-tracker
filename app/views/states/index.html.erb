@@ -21,11 +21,11 @@
 
   <body>
 
-	<% if @user.states.empty? %>
+	<% if current_user.states.empty? %>
 
-	    <h4><%= @user.username %>,</h4>
+	    <h4><%= current_user.username %>,</h4>
 
-	     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_user_state_path(@user) %>
+	     You have no data saved yet please click the following link to begin your search for <%= link_to "Connecticut COVID-19 Cases", new_user_state_path(current_user) %>
 
 
 	<% else %>
@@ -34,30 +34,49 @@
 
 			<p>Click on date to drill down on more data take to show page for each instance of state</p><br>
 
-			<table>
-				<tr>
-					<% @user.states.column_names[2..-3].map do |col_name| %>		
-					  <th colspan="1.5"> <%= col_name.split("_").join(" ").titleize %></th>
-						<td></td>
-					<% end %>
-				</tr>
+			<table >
+
+			  <tr>
+
+			  	<th>Date</th>
+			  	<th>Total Tests</th>
+			  	<th>Test Change</th>
+			  	<th>Total Cases</th>
+			  	<th>Case Change</th>
+			  	<th>Hospitalizations</th>
+			  	<th>Hospitalized</th>
+			  	<th>Deaths</th>
+			  	<th>Death Rate</th>
+
+
+
+					
+
+
+			  </tr>
 				
-					<% @user.states.map do |state| %>
-					<tr>		
-					   <td colspan="2"> <%= link_to state.query_date.strftime('%m/%d/%Y'), user_state_path(@user.id, state.id) %></td>
-					   <td colspan="2"> <%= state.name %></td>
-					   <td colspan="2"> <%= state.total_tests %> </td>
-					   <td colspan="2"> <%= state.total_cases %> </td>
-					   <td colspan="2"> <%= state.confirmed_cases %> </td>
-					   <td colspan="2"> <%= state.hospitalized_cases %> </td>
-					   <td colspan="2"> <%= state.confirmed_deaths %> </td>
+					<% @states.map do |state| %>
+					<tr>			
+					   <td> <%= link_to state.query_date.strftime('%m/%d/%Y'), user_state_path(current_user.id, state.id) %></td>
+					   <td><%= state.total_tests %> </td>
+					   <td><%= state.test_dir %> <%= state.test_change %> </td>
+					   <td><%= state.total_cases %> </td>
+					   <td><%= state.case_dir %> <%= state.case_change %> </td>
+					   <td><%= state.hospitalized_cases %> </td>
+					   <td><%= state.hosp_dir %> <%= state.hospitalized_change %> </td>
+					   <td><%= state.confirmed_deaths %> </td>
+					   <td><%= state.death_dir %> <%= state.death_change %> </td>
+
+
 					</tr>
 					<% end %>
 			</table>
 
 	<% end %>
 
-	       <p><%= link_to "Retrieve More State Data", new_user_state_path %></p>
+<br>
+	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	
 	</body>		 
 </html>
 
