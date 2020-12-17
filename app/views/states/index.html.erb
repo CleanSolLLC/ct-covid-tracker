@@ -43,8 +43,8 @@
 				</tr>
 				
 					<% @user.states.map do |state| %>
-					<tr>			
-					   <td colspan="2"> <%= link_to state.query_date.strftime('%m/%d/%Y'), user_state_path(user.id) %></td>
+					<tr>		
+					   <td colspan="2"> <%= link_to state.query_date.strftime('%m/%d/%Y'), user_state_path(@user.id, state.id) %></td>
 					   <td colspan="2"> <%= state.name %></td>
 					   <td colspan="2"> <%= state.total_tests %> </td>
 					   <td colspan="2"> <%= state.total_cases %> </td>
@@ -56,6 +56,8 @@
 			</table>
 
 	<% end %>
+
+	       <p><%= link_to "Retrieve More State Data", new_user_state_path %></p>
 	</body>		 
 </html>
 

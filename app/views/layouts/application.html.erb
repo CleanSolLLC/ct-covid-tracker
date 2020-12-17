@@ -35,12 +35,9 @@
                                 <div class="tabs is-right">
                                     <ul>
                                         <li class="is-active"><a></a></li>
-                                        <li><%= link_to "Daily Summary", state_summary_path %></li>
-                                        <li><%= link_to "State Totals","/user/:id/states" %></li>
-                                        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-                                        
-                                        <li><a href="">Team</a></li>
-                                        <li><a href="">Help</a></li>
+                                        <li><%= link_to "Daily Summary", state_summary_path if user_signed_in?  %></li>
+                                        <li><%= link_to "State Totals", user_states_path(current_user) if user_signed_in? %></li>
+                                        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete if user_signed_in? %></li>
                                     </ul>
 
                                             

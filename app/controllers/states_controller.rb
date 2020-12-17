@@ -22,15 +22,7 @@ class StatesController < ApplicationController
 
   
   def show
-    binding.pry
-    user = User.find(current_user.id)
-    user.states.find do |state|
-      if state.id.to_s == params[:id]
-        @state = State.find(state.id)
-      # else
-      #   redirect_to user_states_path
-      end
-    end
+    @state = current_user.states.find(params[:id])
   end
 
 

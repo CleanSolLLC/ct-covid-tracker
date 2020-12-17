@@ -1,8 +1,0 @@
-<% if user_signed_in? %>
-
-	<br>
-	<h3><b>Welcome <%= current_user.username %>!</b></h3>
-
-	<p> Last logged in on:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p')%></p><br>
-
-<% end %>
