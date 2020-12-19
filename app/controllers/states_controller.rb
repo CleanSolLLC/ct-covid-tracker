@@ -1,5 +1,6 @@
 class StatesController < ApplicationController
    before_action :authenticate_user!
+   before_action :check_date, only: [:create]
 
  def summary
    @summary = State.summary
@@ -15,6 +16,7 @@ class StatesController < ApplicationController
 
   def create
     user = User.find(current_user.id)
+  
     State.state_data(params, user)
     #AgeGroup.age_data(params)
     redirect_to user_states_path(user)
@@ -25,9 +27,14 @@ class StatesController < ApplicationController
     @state = current_user.states.find(params[:id])
   end
 
+  private
 
-
-
+    def check_date
+      if Date.parse(params[:start_date]).friday? || Date.parse(params[:start_date]).saturday?
+        flash[:alert] = "Begin Date Cannot Be on a Friday or Saturday"
+        redirect_to new_user_state_path(current_user)
+      end
+    end
 
 end
   	#Just adding logic here for now to test out api and saving to ruby object

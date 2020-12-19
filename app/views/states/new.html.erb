@@ -8,14 +8,19 @@
  3. We need a form that will ask for a date or date range
 
  4. The date or date range should be validated for proper input format -->
+
+ <div class="alert"> 
+    <% flash.each do |name, msg| -%>
+       <%= content_tag :div, msg, class: name %>
+     <% end -%> 
+ </div><br>
+
  <h5>Enter Date Range:</h5>
 
  <%= form_tag('/user/:user_id/states') do %>
-  <p><%= label_tag('start_date', "Start Date") %>
-  <%= date_field_tag('start_date') %></p>
+  <p><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></p>
  
-  <p><%= label_tag('end_date', "End Date") %>
-  <%= date_field_tag('end_date') %><p>
+  <p><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %><p>
 
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  	
  

@@ -8,6 +8,8 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+
+
   </head>
 
 
@@ -58,6 +60,7 @@
                             </div>
                             <div class="tile is-parent">
                                 <article class="tile is-child notification is-white">
+                               
 
                                 <% if user_signed_in? %>
                                     <h3><b>Welcome <%= current_user.username  %>!</b></h3> 
@@ -105,6 +108,7 @@ startTime();
     <p> Last logged in on:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p')%></p><br>
 
 <% end %>
+
 
 
     <%= yield %>
