@@ -20,6 +20,7 @@ class StatesController < ApplicationController
     State.state_data(params, user)
     #AgeGroup.age_data(params)
     redirect_to user_states_path(user)
+    binding.pry
   end
 
   

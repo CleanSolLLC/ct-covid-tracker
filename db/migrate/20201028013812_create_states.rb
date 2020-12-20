@@ -9,6 +9,14 @@ class CreateStates < ActiveRecord::Migration[6.0]
       t.integer :confirmed_cases 
       t.integer :hospitalized_cases
       t.integer :confirmed_deaths
+      t.integer :test_change
+      t.integer :case_change
+      t.integer :hospitalized_change
+      t.integer :death_change
+      t.string :test_dir
+      t.string :case_dir
+      t.string :hosp_dir
+      t.string :death_dir
 
       t.timestamps
     end

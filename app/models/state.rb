@@ -1,6 +1,8 @@
 class State < ApplicationRecord
   
   belongs_to :user
+  has_many :counties
+  has_many :towns, through: :counties
 
   # validates_date :start_date
   # validates_date :end_date 

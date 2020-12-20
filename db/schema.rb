@@ -10,30 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_201438) do
+ActiveRecord::Schema.define(version: 2020_10_28_013814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "age_groups", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "query_date"
-    t.string "age_group"
-    t.integer "total_cases"
-    t.integer "total_case_rate"
-    t.integer "total_deaths"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_age_groups_on_user_id"
-  end
-
   create_table "counties", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "state_id"
     t.datetime "query_date"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_counties_on_user_id"
+    t.index ["state_id"], name: "index_counties_on_state_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -45,8 +33,6 @@ ActiveRecord::Schema.define(version: 2020_12_17_201438) do
     t.integer "confirmed_cases"
     t.integer "hospitalized_cases"
     t.integer "confirmed_deaths"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "test_change"
     t.integer "case_change"
     t.integer "hospitalized_change"
@@ -55,18 +41,18 @@ ActiveRecord::Schema.define(version: 2020_12_17_201438) do
     t.string "case_dir"
     t.string "hosp_dir"
     t.string "death_dir"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_states_on_user_id"
   end
 
   create_table "towns", force: :cascade do |t|
-    t.bigint "user_id"
     t.datetime "query_date"
     t.string "name"
     t.bigint "county_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["county_id"], name: "index_towns_on_county_id"
-    t.index ["user_id"], name: "index_towns_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
