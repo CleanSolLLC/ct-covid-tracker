@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  	<style type="text/css">
+
+       table {
+       	width: 1200px;
+       }
+
+       th, td {
+       	padding: 10px 10px 10px 10px 10px 10px 10px;
+       }       
+
+
+  	</style>
+
+
+  </head>
+
+
+  <body>
+
+	<% if current_user.age_groups.empty? %>
+
+	    <h4><%= current_user.username %>,</h4>
+
+	     You have no data saved yet please click the following link to begin your search: <br>
+
+	<% else %>
+
+			<p>Here is a list of your statewide COVID-19 data by age group</p>
+
+			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
+
+			<table>
+
+			  <tr>
+
+			  	<th>Date</th>
+			  	<th>Age Group</th>
+			  	<th>Cases</th>
+			  	<th>Deaths</th>
+					
+
+			  </tr>
+				
+					<% @age_groups.each do |age_group| %>
+					<tr>			
+					   <td> <%= link_to age_group.query_date.strftime('%m/%d/%Y'), user_age_group_path(current_user.id, age_group.id) %></td>
+					   <td><%= age_group.age_group %></td>
+					   <td><%= age_group.total_cases %></td>
+					   <td><%= age_group.total_deaths %></td>
+
+					</tr>
+					<% end %>
+			</table>
+
+	<% end %>
+
+	<br>
+	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	
+	</body>		 
+</html>
+
+
+
+
+
+
+
+
