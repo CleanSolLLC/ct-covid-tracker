@@ -1,4 +1,4 @@
-class StatesController < ApplicationController
+class EthnicCasesController < ApplicationController
    before_action :authenticate_user!
    before_action :check_date, only: [:create]
 
@@ -7,7 +7,7 @@ class StatesController < ApplicationController
  end
 
   def index
-    @states = current_user.states.order('query_date DESC')
+    @ethnic_cases = current_user.ethnic_cases.order('query_date DESC')
   end
 
   def new
@@ -17,10 +17,8 @@ class StatesController < ApplicationController
   def create
     user = User.find(current_user.id)
   
-    State.state_data(params, user)
     EthnicCase.get_ethnic_data(params, user)
-    AgeGroup.age_data(params, user)
-    redirect_to user_states_path(user)
+    redirect_to user_ethnic_cases_path(user)
   end
 
   
@@ -36,5 +34,4 @@ class StatesController < ApplicationController
         redirect_to new_user_state_path(current_user)
       end
     end
-
 end

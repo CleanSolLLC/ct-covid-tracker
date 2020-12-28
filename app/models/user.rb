@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
   has_many :states
+  has_many :ethnic_cases
+  has_many :age_groups
   has_many :counties, through: :states
   has_many :towns, through: :counties
 end

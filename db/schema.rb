@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_013814) do
+ActiveRecord::Schema.define(version: 2020_12_25_131529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "age_groups", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "query_date"
+    t.string "age_group"
+    t.integer "total_cases"
+    t.integer "total_case_rate"
+    t.integer "total_deaths"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_age_groups_on_user_id"
+  end
 
   create_table "counties", force: :cascade do |t|
     t.bigint "state_id"
@@ -22,6 +34,20 @@ ActiveRecord::Schema.define(version: 2020_10_28_013814) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["state_id"], name: "index_counties_on_state_id"
+  end
+
+  create_table "ethnic_cases", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "query_date"
+    t.string "ethnic_group"
+    t.integer "total_pop"
+    t.integer "case_tot"
+    t.integer "case_age_adjusted"
+    t.integer "deaths"
+    t.integer "death_age_adjusted"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_ethnic_cases_on_user_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -74,5 +100,6 @@ ActiveRecord::Schema.define(version: 2020_10_28_013814) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ethnic_cases", "users"
   add_foreign_key "towns", "counties"
 end

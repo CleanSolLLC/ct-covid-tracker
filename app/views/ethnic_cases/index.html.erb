@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  	<style type="text/css">
+
+       table {
+       	width: 1200px;
+       }
+
+       th, td {
+       	padding: 10px 10px 10px 10px 10px 10px 10px;
+       }       
+
+
+  	</style>
+
+
+  </head>
+
+
+  <body>
+
+	<% if current_user.ethnic_cases.empty? %>
+
+	    <h4><%= current_user.username %>,</h4>
+
+	     You have no data saved yet please click the following link to begin your search: <br>
+
+	<% else %>
+
+			<p>Here is a list of your statewide COVID-19 data by race and date</p>
+
+			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
+
+			<table>
+
+			  <tr>
+
+			  	<th>Date</th>
+			  	<th>Race</th>
+			  	<th>Population</th>
+			  	<th>Cases</th>
+			  	<th>Age Adjusted</th>
+			  	<th>Deaths</th>
+			  	<th>Deaths Adjusted</th>
+					
+
+			  </tr>
+				
+					<% @ethnic_cases.each do |c| %>
+					<tr>			
+					   <td> <%= link_to c.query_date.strftime('%m/%d/%Y'), user_ethnic_case_path(current_user.id, c.id) %></td>
+					   <td><%= c.ethnic_group %></td>
+					   <td><%= c.total_pop %></td>
+					   <td><%= c.case_tot %></td>
+					   <td><%= c.case_age_adjusted %></td>
+					   <td><%= c.deaths %></td>
+					   <td><%= c.death_age_adjusted %></td>
+
+
+					</tr>
+					<% end %>
+			</table>
+
+	<% end %>
+
+	<br>
+	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	
+	</body>		 
+</html>
+
+
+
+
+
+
+
+
+
+

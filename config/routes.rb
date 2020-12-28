@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
   
+  
   root 'user#show'
 
   devise_for :users
 
   resources :user do
   	resources :states
+    resources :ethnic_cases
   end
 
    devise_scope :user do
