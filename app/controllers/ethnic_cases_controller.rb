@@ -4,7 +4,7 @@ class EthnicCasesController < ApplicationController
 
 
   def index
-    @ethnic_cases = current_user.ethnic_cases.order('query_date DESC')
+    @ethnic_cases = current_user.ethnic_cases.order('query_date DESC', 'ethnic_group DESC')
   end
 
 

@@ -4,8 +4,8 @@ class CreateAgeGroups < ActiveRecord::Migration[6.0]
     	t.belongs_to :user
       t.datetime :query_date
       t.string :age_group 
-      t.integer :total_cases
-      t.integer :total_deaths   	
+      t.integer :confirmed_cases
+      t.integer :confirmed_deaths   	
 
       t.timestamps
     end

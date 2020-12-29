@@ -1,4 +1,5 @@
 class EthnicCase < ApplicationRecord
+  
   belongs_to :user
 
 

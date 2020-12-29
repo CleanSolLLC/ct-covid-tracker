@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_25_131529) do
+ActiveRecord::Schema.define(version: 2020_12_29_144752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,8 @@ ActiveRecord::Schema.define(version: 2020_12_25_131529) do
     t.bigint "user_id"
     t.datetime "query_date"
     t.string "age_group"
-    t.integer "total_cases"
-    t.integer "total_case_rate"
-    t.integer "total_deaths"
+    t.integer "confirmed_cases"
+    t.integer "confirmed_deaths"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_age_groups_on_user_id"
@@ -48,6 +47,17 @@ ActiveRecord::Schema.define(version: 2020_12_25_131529) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_ethnic_cases_on_user_id"
+  end
+
+  create_table "gender_cases", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "query_date"
+    t.string "gender"
+    t.integer "confirmed_cases"
+    t.integer "confirmed_deaths"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_gender_cases_on_user_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -101,5 +111,6 @@ ActiveRecord::Schema.define(version: 2020_12_25_131529) do
   end
 
   add_foreign_key "ethnic_cases", "users"
+  add_foreign_key "gender_cases", "users"
   add_foreign_key "towns", "counties"
 end

@@ -83,6 +83,14 @@ Use of several state of CT apis:
 
      api: https://data.ct.gov/resource/qa53-fghg.json
 
+      Hash Keys:
+
+        dateupdated
+        gender
+        totalcases
+        totaldeaths
+
+
   4. COVID-19 Cases and Deaths by Age Group
 
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Age-Group/ypz6-8qyf
@@ -94,7 +102,6 @@ Use of several state of CT apis:
       dateupdated
       agegroups
       totalcases
-      totalcaserate
       totaldeaths
 
       Data is an array of hashes returns data for each age group
@@ -213,69 +220,42 @@ Models
     name:string
 
 
-   GenderDatum
+   GenderCase
+
+     belongs_to :user
     
     attributes
-    query_date:date 
-    male_cases:integer
-    female_cases:integer
-    male_deaths:integer
-    female_deaths:integer  
+      query_date:date 
+      male_cases:integer
+      female_cases:integer
+      male_deaths:integer
+      female_deaths:integer  
   
 
   EthnicCase
 
-    belongs_to :state
+    belongs_to :user
 
     attributes
-    state_id:integer
-    query_date:date 
-    cases_hispanic:integer
-    cases_NH_American_Indian_or_Alaskan_Native:integer
-    cases_NH_Asian_or_Pacific_Islander:integer
-    cases_NH_Black:integer
-    cases_NH_Multracial:integer
-    cases_NH_White:integer
-    cases_NH_Other:integer
-    cases_Unknown:integer 
+      user_id:integer
+      query_date:datetime 
+      ethnic_group:string
+      total_pop:integer
+      case_tot:integer  
+      case_age_adjusted:integer         
+      deaths:integer                 
+      death_age_adjusted:integer
 
-    deaths_hispanic:integer
-    deaths_NH_American_Indian_or_Alaskan_Native:integer
-    deaths_NH_Asian_or_Pacific_Islander:integer
-    deaths_NH_Black:integer
-    deaths_NH_Multracial:integer
-    deaths_NH_White:integer
-    deaths_NH_Other:integer
-    deaths_Unknown:integer 
-
-
-  AgeGroupCase
+  AgeGroup
     
-    belongs_to :state
+    belongs_to :user
 
     attributes 
-    state_id:integer
-    query_date:string 
-    cases_0_9:integer
-    cases_10_19:integer
-    cases_20_29:integer
-    cases_30_39:integer
-    cases_40_49:integer
-    cases_50_59:integer
-    cases_60_69:integer
-    cases_70_79:integer
-    cases_80_and_older:integer
-
-    deaths_0_9:integer
-    deaths_10_19:integer
-    deaths_20_29:integer
-    deaths_30_39:integer
-    deaths_40_49:integer
-    deaths_50_59:integer
-    deaths_60_69:integer
-    deaths_70_79:integer
-    deaths_80_and_older:integer 
-
+      user_id:integer
+      query_date:datetime
+      age_group:integer
+      total_cases:integer
+      total_deaths:integer  
 
 Views
 

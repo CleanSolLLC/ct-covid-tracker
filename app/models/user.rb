@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :states
   has_many :ethnic_cases
   has_many :age_groups
+  has_many :gender_cases
   has_many :counties, through: :states
   has_many :towns, through: :counties
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   	resources :states
     resources :ethnic_cases
     resources :age_groups
+    resources :gender_cases
   end
 
    devise_scope :user do

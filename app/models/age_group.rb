@@ -22,8 +22,8 @@ class AgeGroup < ApplicationRecord
         age_group = AgeGroup.find_or_create_by(user_id: user.id, query_date: data.body[i].dateupdated, age_group: data.body[i].agegroups) 
         age_group.query_date = data.body[i].dateupdated
         age_group.age_group = data.body[i].agegroups
-        age_group.total_cases = data.body[i].totalcases
-        age_group.total_deaths = data.body[i].totaldeaths
+        age_group.confirmed_cases = data.body[i].confirmedcases
+        age_group.confirmed_deaths = data.body[i].confirmeddeaths
         user.age_groups << age_group
        
         i+=1

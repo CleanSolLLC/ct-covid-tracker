@@ -21,7 +21,7 @@
 
   <body>
 
-	<% if current_user.age_groups.empty? %>
+	<% if current_user.gender_cases.empty? %>
 
 	    <h4><%= current_user.username %>,</h4>
 
@@ -31,26 +31,26 @@
 
 			<p>Here is a list of your statewide COVID-19 data by age group</p>
 
-			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
+			<p>Click on date to drill down on more data take to show page for each instance data by gender<br>
 
 			<table>
 
 			  <tr>
 
 			  	<th>Date</th>
-			  	<th>Age Group</th>
+			  	<th>Gender</th>
 			  	<th>Cases</th>
 			  	<th>Deaths</th>
 					
 
 			  </tr>
 				
-					<% @age_groups.each do |age_group| %>
+					<% @gender_cases.each do |gender| %>
 					<tr>			
-					   <td> <%= link_to age_group.query_date.strftime('%m/%d/%Y'), user_age_group_path(current_user.id, age_group.id) %></td>
-					   <td><%= age_group.age_group %></td>
-					   <td><%= age_group.confirmed_cases %></td>
-					   <td><%= age_group.confirmed_deaths %></td>
+					   <td> <%= link_to gender.query_date.strftime('%m/%d/%Y'), user_gender_case_path(current_user.id, gender.id) %></td>
+					   <td><%= gender.gender %></td>
+					   <td><%= gender.confirmed_cases %></td>
+					   <td><%= gender.confirmed_deaths %></td>
 
 					</tr>
 					<% end %>
