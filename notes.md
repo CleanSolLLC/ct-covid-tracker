@@ -69,14 +69,23 @@ Use of several state of CT apis:
 
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-Hospitalizations-and-Deaths-By-Coun/bfnu-rgqt
 
-     api: https://data.ct.gov/resource/bfnu-rgqt.json      
+     api: https://data.ct.gov/resource/bfnu-rgqt.json  
 
+      Hash Keys:
+
+        dateupdated
+        county
+        confirmedcases
+        hospitalization
+        confirmeddeaths       
 
 
   2. COVID-19 Tests, Cases, and Deaths (By Town)
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-and-Deaths-By-Town-/28fr-iqnx
 
      api: https://data.ct.gov/resource/28fr-iqnx.json
+
+
 
   3. COVID-19 Cases and Deaths by Gender
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Gender/qa53-fghg
@@ -133,67 +142,55 @@ Use of several state of CT apis:
       dateupdated 
 
 
-
-
 Some of Dwayne's popular gems 
 https://dwayne.fm/rails-gems-to-consider/
 
 
 Models
-  User - which is used by Devise gem is not allowing me to persist associative data.
-  has_many :covid_stats
-  has_many :states, through: :covid_stats
 
-  attributes
-  *** SEE DEVISE DOCUMENTATION FOR OTHER ATTRIBUTES **
-  username:string
-  email:string
-  password:string
-  password_confirmation:string
-
-  CtUser - is a stop gap to test and persist associations 
-  has_many :covid_stats
-  has_many :states, through: :covid_stats
-
-  attributes
-  username:string
-
-
-  CovidStat (Join Table)
-    belongs_to :state
-    belongs_to :ct_user
+  User - is used by this aplication as well as the Devise gem
+    
+    has_many :states
+    has_many :ethnic_cases
+    has_many :age_groups
+    has_many :gender_cases
+    has_many :counties
+    has_many :towns, through: :counties
 
     attributes
-    ct_user_id
-    state_id:integer
-    county_id:integer
+      username:string
+      email:string
+      query_date:datetime
+      encrypted_password:string
+      password_confirmation:string
 
+      ** other Devise attributes see both model and schema **
 
   State
 
-    has_many :user_states
-    has_many :users, through: :user_states
+    belongs_to :user
+    has_many :counties
+    has_many :towns, through: :counties
+    has_many :ethnic_cases
 
-    ### The AR Association we want is user.states.gender_cases ###
-    :state has_many :gender_cases
-    :gender_case belongs_to :state 
-
-    ### The AR Association we want is user.states.ethnic_cases ###
-    :state has_many :ethnic_cases
-    :ethnic_case belongs_to :state 
-
-    ### The AR Association we want is user.states.age_group_cases ###
-    :state has_many :age_group_cases
-    :age_group_case belongs_to :state
 
     arrtibutes
-    query_date:date
-    name:string
-    total_tests:integer
-    total_cases:integer
-    confirmed_cases:integer
-    hospitalized_cases:integer
-    confirmed_deaths:integer
+      user_id:integer
+      query_date:datetime
+      name:string
+      total_tests:integer
+      total_cases:integer
+      confirmed_cases:integer
+      hospitalized_cases:integer
+      confirmed_deaths:integer
+      test_change:integer
+      case_change:integer
+      hospitalized_change:integer
+      death_change:integer
+      test_dir:string
+      case_dir:string
+      hosp_dir:string
+      death_dir:string
 
 
   Town
@@ -209,11 +206,8 @@ Models
 
 
   County
+    belongs_to :user
     has_many :towns
-    has_many :tests
-    has_many :cases
-    has_many :deaths
-    has_many :hospitalizations  
 
     attributes
     query_date:date     

@@ -21,6 +21,7 @@ class StatesController < ApplicationController
     EthnicCase.get_ethnic_data(params, user)
     AgeGroup.age_data(params, user)
     GenderCase.gender_data(params, user)
+    County.county_data(params, user)
     redirect_to user_states_path(user)
   end
 
