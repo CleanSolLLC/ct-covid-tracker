@@ -17,12 +17,21 @@
 
  <h5>Enter Date Range:</h5>
 
- <%= form_tag('/user/:user_id/states') do %>
-  <p><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></p>
+
+ <%= form_tag('/user/:user_id/states') do %> 
+
+  <p><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %>
+       <%= collection_select :county_lookup_id, CountyLookup.all, CountyLookup.order(:name), :id, :name, {:prompt => 'County/None'} %>
+   		<%= collection_select :town_lookup_id, TownLookup.all, TownLookup.order(:name), :id, :name, {:prompt => 'Town/None'}  %>
+  </p>
  
   <p><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %><p>
 
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  	
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  
+  <br>	
+
+ 
+
  
   <%= submit_tag "Enter Date" %>
 <% end %>

@@ -12,11 +12,13 @@ class StatesController < ApplicationController
 
   def new
     @user = User.find(current_user.id)
+    @state = State.new
   end
 
   def create
     user = User.find(current_user.id)
   
+      
     State.state_data(params, user)
     EthnicCase.get_ethnic_data(params, user)
     AgeGroup.age_data(params, user)

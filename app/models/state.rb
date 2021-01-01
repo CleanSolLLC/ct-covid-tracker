@@ -4,6 +4,9 @@ class State < ApplicationRecord
   has_many :counties
   has_many :towns, through: :counties
   has_many :ethnic_cases
+  has_one :county_lookup
+
+  accepts_nested_attributes_for :county_lookup
 
 
   #1. we need to find the prev date to grab totals that will be used to compare to current date

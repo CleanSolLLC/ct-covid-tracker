@@ -1,4 +1,6 @@
 class County < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :town_lookup
   belongs_to :user
   has_many :towns
 
@@ -20,7 +22,6 @@ class County < ApplicationRecord
 
       data = client.get("https://data.ct.gov/resource/bfnu-rgqt.json", "$where" => "dateupdated between'#{params[:start_date]}' and '#{params[:end_date]}'")
 
-      binding.pry
 
       #will use active record query similar to 
       # TownLookup.all.select { |m| m.county_lookup_id == 1 }
