@@ -19,11 +19,15 @@ class EthnicCase < ApplicationRecord
      data = client.get("https://data.ct.gov/resource/7rne-efic.json", "$where" => "dateupdated between '#{start_date}' and '#{end_date}'")
 
    
-    i=0
+    days = 0
+    i = 0
+    date = params[:start_date]
 
-    while i < data.body.count
+    while days <= (Date.parse(params[:end_date]) - Date.parse(params[:start_date])).to_i  
 
-        ethnic_case = EthnicCase.find_or_create_by(user_id: user.id, query_date: data.body[i].dateupdated, ethnic_group: data.body[i].hisp_race) 
+      ethnic_case = EthnicCase.find_or_initialize_by(user_id: user.id, query_date: data.body[i].dateupdated, ethnic_group: data.body[i].hisp_race) 
+
+      if ethnic_case.id.nil? && !data.body[i].nil?
 
           ethnic_case.query_date = data.body[i].dateupdated
       	  ethnic_case.ethnic_group = data.body[i].hisp_race
@@ -33,13 +37,13 @@ class EthnicCase < ApplicationRecord
           ethnic_case.deaths = data.body[i].deaths.to_i
           ethnic_case.death_age_adjusted = data.body[i].deathageadjusted.to_i
 
-          user.ethnic_cases << ethnic_case
-
-        i+=1
-        
-    end     
+          user.ethnic_cases << ethnic_case      
+      end     
     
+      date = (Date.parse(date) + 1).to_s
+      days+=1
+      i+=1
+    end
   end
-
 end
 

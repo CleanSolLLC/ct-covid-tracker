@@ -27,12 +27,16 @@ ActiveRecord::Schema.define(version: 2020_12_29_144752) do
   end
 
   create_table "counties", force: :cascade do |t|
-    t.bigint "state_id"
+    t.bigint "user_id"
     t.datetime "query_date"
     t.string "name"
+    t.integer "cnty_cod"
+    t.integer "confirmed_cases"
+    t.integer "hospitalizations"
+    t.integer "confirmed_deaths"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["state_id"], name: "index_counties_on_state_id"
+    t.index ["user_id"], name: "index_counties_on_user_id"
   end
 
   create_table "ethnic_cases", force: :cascade do |t|
@@ -77,6 +81,15 @@ ActiveRecord::Schema.define(version: 2020_12_29_144752) do
     t.string "case_dir"
     t.string "hosp_dir"
     t.string "death_dir"
+    t.integer "cases_age0_9"
+    t.integer "cases_age10_19"
+    t.integer "cases_age20_29"
+    t.integer "cases_age30_39"
+    t.integer "cases_age40_49"
+    t.integer "cases_age50_59"
+    t.integer "cases_age60_69"
+    t.integer "cases_age70_79"
+    t.integer "cases_age80_older"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_states_on_user_id"
