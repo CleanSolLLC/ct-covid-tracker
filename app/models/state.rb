@@ -21,7 +21,7 @@ class State < ApplicationRecord
 
 
 
-  def self.find_state_data(params, user)
+  def self.state_data(params, user)
 
     if Date.parse(params[:start_date]).sunday?
       start_date = (Date.parse(params[:start_date]).prev_day-2).to_s

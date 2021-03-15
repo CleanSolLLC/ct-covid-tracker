@@ -15,35 +15,43 @@ class County < ApplicationRecord
       end
 
       end_date = params[:end_date]
-
-  	  i=0  	  
+ 
 
   	  client = SODA::Client.new({:domain => "https://data.ct.gov/resource/bfnu-rgqt.json"})
 
-      data = client.get("https://data.ct.gov/resource/bfnu-rgqt.json", "$where" => "dateupdated between'#{params[:start_date]}' and '#{params[:end_date]}'")
+      array = params[:county_lookup_id].values.first.reject{|t| t == ""}
 
+      array_to_s = array.map { |s| "'#{s}'" }.join(', ')
+    
+      data = client.get("https://data.ct.gov/resource/bfnu-rgqt.json", "$where" => "dateupdated between'#{params[:start_date]}' and '#{params[:end_date]}' and cnty_cod in (#{array_to_s})")
+     
 
-      #will use active record query similar to 
-      # TownLookup.all.select { |m| m.county_lookup_id == 1 }
-      # this will return an array of all of the towns associated with a particular county
+  
+      #   county = County.find_or_initialize_by(user_id: user.id, query_date: date)
 
-      # while i < data.body.count
+      #   if county.id.nil? && (!Date.parse(date).friday? || !Date.parse(date).saturday?)
 
-      #   county = County.find_or_create_by(user_id: user.id, query_date: data.body[i].dateupdated, name: data.body[i].county) 
-      #   county.query_date = data.body[i].dateupdated
-      #   county.name = data.body[i].county
-      #   gender_case.confirmed_cases = data.body[i].confirmedcases
-      #   gender_case.hospitalizations = data.body[i].hospitalization        
-      #   gender_case.confirmed_deaths = data.body[i].confirmeddeaths
+      #     county.query_date = data.body[i].date 
+      #     county.total_tests = data.body[i].covid_19_tests_reported.to_i
+      #     county.total_cases = data.body[i].totalcases.to_i
+      #     county.confirmed_cases = data.body[i].confirmedcases.to_i
+      #     county.hospitalized_cases = data.body[i].hospitalizedcases.to_i
+      #     county.confirmed_deaths = data.body[i].confirmeddeaths.to_i
+      #     county.test_change = (data.body[i].covid_19_tests_reported.to_i - data.body[i-1].covid_19_tests_reported.to_i)
+      #     (data.body[i-1].covid_19_tests_reported.to_i < data.body[i].covid_19_tests_reported.to_i) ? county.test_dir = "+" : county.test_dir = "-"
+      #     county.case_change = (data.body[i].totalcases.to_i - data.body[i-1].totalcases.to_i)
+      #     (data.body[i-1].totalcases.to_i < data.body[i].totalcases.to_i) ? county.case_dir = "+" : county.case_dir = "-"
+      #     county.hospitalized_change = (data.body[i].hospitalizedcases.to_i - data.body[i-1].hospitalizedcases.to_i)
+      #     (data.body[i-1].hospitalizedcases.to_i < data.body[i].hospitalizedcases.to_i) ? county.hosp_dir = "+" : county.hosp_dir = "-"
+      #     county.death_change = (data.body[i].confirmeddeaths.to_i - data.body[i-1].confirmeddeaths.to_i)
+      #     (data.body[i-1].confirmeddeaths.to_i < data.body[i].confirmeddeaths.to_i) ? county.death_dir = "+" : county.death_dir = "-"
 
-      #   #make a call to towns conreoller then to model to query data for the repective towns that belong to thatcounty 
-
-      #   user.counties << county
+      #     user.counties << county
+      #   end
        
+      #   date = (Date.parse(date) + 1).to_s   
       #   i+=1
-      # end 
+      # end
   end
-
-
 end
 

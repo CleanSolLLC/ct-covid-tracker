@@ -26,8 +26,8 @@ development:
   adapter: postgresql
   encoding: unicode
   database: ct_covid_tracker_development
-  username: 'rubyuser'
-  password: 'rubyuser'
+  username: 'myapp'
+  password: 'password1'
   pool: 5
   timeout: 5000
   host: localhost
@@ -67,8 +67,8 @@ test:
   adapter: postgresql
   encoding: unicode
   database: ct_covid_tracker_test
-  username: 'rubyuser'
-  password: 'rubyuser'
+  username: 'myapp'
+  password: 'password1'
   pool: 5
   timeout: 5000
   host: localhost

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :user do
   	resources :states
+    resources :counties
+    resources :towns
     resources :ethnic_cases
     resources :age_groups
     resources :gender_cases

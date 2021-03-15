@@ -18,7 +18,7 @@ class StatesController < ApplicationController
   def create
     user = User.find(current_user.id)
 
-    State.find_state_data(params, user)
+    State.state_data(params, user)
     # EthnicCase.get_ethnic_data(params, user)
     # AgeGroup.age_data(params, user)
     # GenderCase.gender_data(params, user)

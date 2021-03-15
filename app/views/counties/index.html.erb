@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style type="text/css">
+
+       table {
+        width: 1200px;
+       }
+
+       th, td {
+        padding: 10px 10px 10px 10px 10px 10px 10px;
+       }       
+
+
+    </style>
+
+
+  </head>
+
+
+  <body>
+
+  <% if current_user.counties.empty? %>
+
+      <h4><%= current_user.username %>,</h4>
+
+       You have no data saved yet please click the following link to begin your search: <br>
+
+  <% else %>
+
+      <p>Here is a list of your COUNTYWIDE COVID-19 data by date</p>
+
+      <p>Click on date to drill down on more data take to show page for each instance of county</p><br>
+
+      <table >
+
+        <tr>
+
+          <th>Date</th>
+          <th>Total Tests</th>
+          <th>Test Change</th>
+          <th>Total Cases</th>
+          <th>Case Change</th>
+          <th>Hospitalizations</th>
+          <th>Hospitalized</th>
+          <th>Deaths</th>
+          <th>Death Change</th>
+
+
+
+          
+
+
+        </tr>
+        
+          <% @counties.map do |county| %>
+          <tr>      
+             <td> <%= link_to county.query_date.strftime('%m/%d/%Y'), user_county_path(current_user.id, county.id) %></td>
+             <td><%= county.total_tests %> </td>
+             <td><%= county.test_dir %> <%= county.test_change %> </td>
+             <td><%= county.total_cases %> </td>
+             <td><%= county.case_dir %> <%= county.case_change %> </td>
+             <td><%= county.hospitalized_cases %> </td>
+             <td><%= county.hosp_dir %> <%= county.hospitalized_change %> </td>
+             <td><%= county.confirmed_deaths %> </td>
+             <td><%= county.death_dir %> <%= county.death_change %> </td>
+
+
+          </tr>
+          <% end %>
+      </table>
+
+  <% end %>
+
+<br>
+  <%= link_to "Select Additional Dates", new_user_county_path(current_user) %>
+  
+  </body>    
+</html>
+
+
+
+
+
+
+
+
+
+
