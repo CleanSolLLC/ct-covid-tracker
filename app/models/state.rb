@@ -6,9 +6,6 @@ class State < ApplicationRecord
   has_many :ethnic_cases
   has_one :county_lookup
 
-  accepts_nested_attributes_for :county_lookup
-
-
   #1. we need to find the prev date to grab totals that will be used to compare to current date
   #2. check to see if date falls on a Sunday
   #3. if it does we need the data from the Thursday prior to comapre with Sunday's data

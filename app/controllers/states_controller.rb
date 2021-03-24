@@ -11,19 +11,12 @@ class StatesController < ApplicationController
   end
 
   def new
-    #@user = User.find(current_user.id)
     @state = State.new
   end
 
   def create
     user = User.find(current_user.id)
-
     State.state_data(params, user)
-    # EthnicCase.get_ethnic_data(params, user)
-    # AgeGroup.age_data(params, user)
-    # GenderCase.gender_data(params, user)
-    #County.county_data(params, user)
-    binding.pry
     redirect_to user_states_path(user)
   end
 

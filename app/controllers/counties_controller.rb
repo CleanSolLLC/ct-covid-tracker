@@ -3,23 +3,16 @@ class CountiesController < ApplicationController
    before_action :check_date, only: [:create]
 
   def index
-    @counties = current_user.counties.order('query_date DESC')
+    @counties = current_user.counties.order('name ASC', 'query_date DESC',)
   end
 
   def new
-    #@user = User.find(current_user.id)
     @county = County.new
   end
 
   def create
     user = User.find(current_user.id)
-
-    a = County.county_data(params, user)
-    binding.pry
-    # EthnicCase.get_ethnic_data(params, user)
-    # AgeGroup.age_data(params, user)
-    # GenderCase.gender_data(params, user)
-    #County.county_data(params, user)
+    County.county_data(params, user)
     redirect_to user_counties_path(user)
   end
 
@@ -39,10 +32,6 @@ class CountiesController < ApplicationController
       if Date.parse(params[:start_date]) >= Date.today || Date.parse(params[:end_date]) >= Date.today
         flash[:alert] = "Start or End Date Cannot Be Today or In The Future"
       end
-
-      # def county_params
-      #   params.require(:county).permit(*args)
-      # end
 
     end
 
