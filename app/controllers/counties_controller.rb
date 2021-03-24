@@ -26,7 +26,7 @@ class CountiesController < ApplicationController
     def check_date
       if Date.parse(params[:start_date]).friday? || Date.parse(params[:start_date]).saturday?
         flash[:alert] = "Start Date Cannot Be on a Friday or Saturday"
-        redirect_to new_user_state_path(current_user)
+        redirect_to new_user_county_path(current_user)
       end
 
       if Date.parse(params[:start_date]) >= Date.today || Date.parse(params[:end_date]) >= Date.today
