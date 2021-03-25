@@ -39,10 +39,10 @@
 
           <th>Date</th>
           <th>Town Name</th>
+          <th>Total Tests</th>
+          <th>Test Change</th>          
           <th>Confirmed Cases</th>
           <th>Case Change</th>
-          <th>Hospitalizations</th>
-          <th>Hospitalized</th>
           <th>Deaths</th>
           <th>Death Change</th>
 
@@ -57,10 +57,10 @@
           <tr>      
              <td> <%= link_to town.query_date.strftime('%m/%d/%Y'), user_town_path(current_user.id, town.id) %></td>
              <td><%= town.name %> </td>
+             <td><%= town.total_tests %> </td> 
+             <td><%= town.test_dir %> <%= town.test_change %> </td>
              <td><%= town.confirmed_cases %> </td>
              <td><%= town.case_dir %> <%= town.case_change %> </td>
-             <td><%= town.hospitalizations %> </td>
-             <td><%= town.hosp_dir %> <%= town.hospitalized_change %> </td>
              <td><%= town.confirmed_deaths %> </td>
              <td><%= town.death_dir %> <%= town.death_change %> </td>
 
