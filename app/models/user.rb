@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :age_groups
   has_many :gender_cases
   has_many :counties
-  has_many :towns, through: :counties
+  has_many :towns
 end

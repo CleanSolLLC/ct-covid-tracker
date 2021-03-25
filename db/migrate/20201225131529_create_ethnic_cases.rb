@@ -1,7 +1,7 @@
 class CreateEthnicCases < ActiveRecord::Migration[6.0]
   def change
     create_table :ethnic_cases do |t|
-      t.references :user, null: false, foreign_key: true
+      t.belongs_to :user
       t.date :query_date
       t.string :ethnic_group
       t.integer :total_pop

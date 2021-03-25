@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_03_25_143939) do
   end
 
   create_table "ethnic_cases", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.date "query_date"
     t.string "ethnic_group"
     t.integer "total_pop"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2021_03_25_143939) do
   end
 
   create_table "gender_cases", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "query_date"
     t.string "gender"
     t.integer "confirmed_cases"
@@ -102,9 +102,9 @@ ActiveRecord::Schema.define(version: 2021_03_25_143939) do
   end
 
   create_table "towns", force: :cascade do |t|
+    t.bigint "user_id"
     t.datetime "query_date"
     t.string "name"
-    t.bigint "county_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "town_cod"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2021_03_25_143939) do
     t.string "test_dir"
     t.string "case_dir"
     t.string "death_dir"
-    t.index ["county_id"], name: "index_towns_on_county_id"
+    t.index ["user_id"], name: "index_towns_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -139,7 +139,4 @@ ActiveRecord::Schema.define(version: 2021_03_25_143939) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "ethnic_cases", "users"
-  add_foreign_key "gender_cases", "users"
-  add_foreign_key "towns", "counties"
 end

@@ -1,7 +1,8 @@
 class Town < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :county
-  belongs_to_active_hash :county_lookup, :shortcuts => [:name]
+  belongs_to :user
+  # belongs_to :county
+  # belongs_to_active_hash :county_lookup, :shortcuts => [:name]
 
 
   #1. we need to find the prev date to grab totals that will be used to compare to current date
@@ -40,8 +41,6 @@ class Town < ApplicationRecord
 
   	  client = SODA::Client.new({:domain => "https://data.ct.gov/resource/28fr-iqnx.json"})
 
-  	  binding.pry
-
     
       data = client.get("https://data.ct.gov/resource/28fr-iqnx.json", "$where" => "lastupdatedate between'#{prev_date}' and '#{end_date}' and town_no in (#{array_to_s})")
      
@@ -61,7 +60,6 @@ class Town < ApplicationRecord
       #while i < sorted_data.count
 
       sorted_data.each_index do |i|
-      	binding.pry
 
         return if sorted_data[i+1].nil?
 
@@ -86,13 +84,11 @@ class Town < ApplicationRecord
             town.death_change = (sorted_data[i+1].townconfirmeddeaths.to_i - sorted_data[i].townconfirmeddeaths.to_i)
             (sorted_data[i+1].townconfirmeddeaths.to_i > sorted_data[i].townconfirmeddeaths.to_i) ? town.death_dir = "+" : town.death_dir = "-"
           
-
             user.towns << town
 
           end
 
         end
-
-  end
+  	end
 end
 
