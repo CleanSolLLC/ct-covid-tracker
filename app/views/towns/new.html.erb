@@ -18,13 +18,13 @@
  <h5>Enter Date Range:</h5>
 
 
- <%= form_tag('/user/:user_id/counties') do %> 
+ <%= form_tag('/user/:user_id/towns') do %> 
 
   <div><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></div>
   <div><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %></div>
   <br>
   
-  <div><%= collection_select :county_lookup_id, CountyLookup.all, CountyLookup.order(:name), :id, :name, {:prompt => 'County/None'}, {multiple: true} %>
+  <div><%= collection_select :town_lookup_id, TownLookup.all, TownLookup.order(:name), :id, :name, {:prompt => 'Town/None'}, {multiple: true} %>
   </div>
  
  
