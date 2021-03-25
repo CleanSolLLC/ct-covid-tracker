@@ -55,7 +55,7 @@ class Town < ApplicationRecord
       #That should return all elements in array
 
 
-      sorted_data = data.body.sort_by{|hsh| hsh[:cnty_no]}
+      sorted_data = data.body.sort_by{|hsh| hsh[:town_no]}
 
 
       #while i < sorted_data.count

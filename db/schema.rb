@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_164431) do
+ActiveRecord::Schema.define(version: 2021_03_25_143939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,16 @@ ActiveRecord::Schema.define(version: 2021_03_15_164431) do
     t.bigint "county_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "town_cod"
+    t.integer "total_tests"
+    t.integer "confirmed_cases"
+    t.integer "confirmed_deaths"
+    t.integer "test_change"
+    t.integer "case_change"
+    t.integer "death_change"
+    t.string "test_dir"
+    t.string "case_dir"
+    t.string "death_dir"
     t.index ["county_id"], name: "index_towns_on_county_id"
   end
 
