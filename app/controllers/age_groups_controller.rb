@@ -1,19 +1,39 @@
 class AgeGroupsController < ApplicationController
   
-  before_action :authenticate_user!
+   before_action :authenticate_user!
+   before_action :check_date, only: [:create]
 
-  
   def index
-    @age_groups = current_user.age_groups.order('query_date DESC', 'age_group DESC')
+    @age_groups = current_user.age_groups.order('name ASC', 'query_date DESC',)
   end
 
+  def new
+    @age_group = AgeGroup.new
+  end
 
   def create
-
+    user = User.find(current_user.id)
+    AgeGroup.age_data(params, user)
+    redirect_to user_age_groups_path(user)
   end
 
   
   def show
-
+    @age_group = current_user.age_groups.find(params[:id])
   end
+
+  private
+
+    def check_date
+      if Date.parse(params[:start_date]).friday? || Date.parse(params[:start_date]).saturday?
+        flash[:alert] = "Start Date Cannot Be on a Friday or Saturday"
+        redirect_to new_user_town_path(current_user)
+      end
+
+      if Date.parse(params[:start_date]) >= Date.today || Date.parse(params[:end_date]) >= Date.today
+        flash[:alert] = "Start or End Date Cannot Be Today or In The Future"
+      end
+
+    end
+
 end

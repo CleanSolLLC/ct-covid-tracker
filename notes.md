@@ -80,14 +80,14 @@ Use of several state of CT apis:
         confirmeddeaths       
 
 
-  2. COVID-19 Tests, Cases, and Deaths (By Town)
+  4. COVID-19 Tests, Cases, and Deaths (By Town)
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-and-Deaths-By-Town-/28fr-iqnx
 
      api: https://data.ct.gov/resource/28fr-iqnx.json
 
 
 
-  3. COVID-19 Cases and Deaths by Gender
+  5. COVID-19 Cases and Deaths by Gender
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Gender/qa53-fghg
 
      api: https://data.ct.gov/resource/qa53-fghg.json
@@ -100,7 +100,7 @@ Use of several state of CT apis:
         totaldeaths
 
 
-  4. COVID-19 Cases and Deaths by Age Group
+  6. COVID-19 Cases and Deaths by Age Group
 
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Age-Group/ypz6-8qyf
 
@@ -119,14 +119,14 @@ Use of several state of CT apis:
 
 
 
-  5. COVID-19 Cases and Deaths by Race/Ethnicity
+  7. COVID-19 Cases and Deaths by Race/Ethnicity
 
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Race-Ethnicity/7rne-efic
 
      api: https://data.ct.gov/resource/7rne-efic.json
 
 
-  6. COVID-19 State Summary **** Data to show on the landing page
+  8. COVID-19 State Summary **** Data to show on the landing page
       COVID-19 state summary including the following metrics, including the change from the data reported the previous day:
 
      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-state-summary/ncg4-6gkj
