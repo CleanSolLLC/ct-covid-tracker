@@ -28,7 +28,7 @@ class Town < ApplicationRecord
       end
 
       end_date = params[:end_date]
-      date = params[:start_date]
+      #date = params[:start_date]
 
 
 

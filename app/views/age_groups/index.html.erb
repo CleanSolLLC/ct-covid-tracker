@@ -29,7 +29,7 @@
 
 	<% else %>
 
-			<p>Here is a list of your statewide COVID-19 data by age group</p>
+			<p>Here is a list of your STATEWIDE COVID-19 data by AGE GROUP</p>
 
 			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
 
@@ -39,18 +39,23 @@
 
 			  	<th>Date</th>
 			  	<th>Age Group</th>
-			  	<th>Cases</th>
-			  	<th>Deaths</th>
+          		<th>Confirmed Cases</th>
+          		<th>Case Change</th>
+          		<th>Deaths</th>
+          		<th>Death Change</th>
 					
 
 			  </tr>
 				
 					<% @age_groups.each do |age_group| %>
-					<tr>			
+					<tr>
+								
 					   <td> <%= link_to age_group.query_date.strftime('%m/%d/%Y'), user_age_group_path(current_user.id, age_group.id) %></td>
 					   <td><%= age_group.age_group %></td>
-					   <td><%= age_group.confirmed_cases %></td>
-					   <td><%= age_group.confirmed_deaths %></td>
+             		   <td><%= age_group.confirmed_cases %> </td>
+			           <td><%= age_group.case_dir %> <%= age_group.case_change %> </td>
+			           <td><%= age_group.confirmed_deaths %> </td>
+			           <td><%= age_group.death_dir %> <%= age_group.death_change %> </td>
 
 					</tr>
 					<% end %>
@@ -59,7 +64,7 @@
 	<% end %>
 
 	<br>
-	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	<%= link_to "Select Additional Dates", new_user_age_group_path(current_user) %>
 	
 	</body>		 
 </html>

@@ -39,7 +39,7 @@
                                         <li class="is-active"><a></a></li>
                                         <li><%= link_to "Daily Summary", state_summary_path if user_signed_in?  %></li>
                                         <li><%= link_to "State Totals", user_states_path(current_user) if user_signed_in? %></li>
-                                        <li><%= link_to "Age Group Data", new_user_age_group_path(current_user) if user_signed_in? %></li> 
+                                        <li><%= link_to "Age Group Data", user_age_groups_path(current_user) if user_signed_in? %></li> 
                                          <li><%= link_to "County Totals", user_counties_path(current_user) if user_signed_in? %></li>
                                           <li><%= link_to "Town Totals", user_towns_path(current_user) if user_signed_in? %></li>
                                         <li><%= link_to "Log Out", destroy_user_session_path, method: :delete if user_signed_in? %></li>

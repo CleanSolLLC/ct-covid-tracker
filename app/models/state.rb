@@ -58,15 +58,15 @@ class State < ApplicationRecord
         state.death_change = (data.body[i].confirmeddeaths.to_i - data.body[i-1].confirmeddeaths.to_i)
         (data.body[i-1].confirmeddeaths.to_i < data.body[i].confirmeddeaths.to_i) ? state.death_dir = "+" : state.death_dir = "-"
 
-        state.cases_age0_9 = data.body[i].cases_age0_9
-        state.cases_age10_19 = data.body[i].cases_age10_19
-        state.cases_age20_29 = data.body[i].cases_age20_29
-        state.cases_age30_39 = data.body[i].cases_age30_39
-        state.cases_age40_49 = data.body[i].cases_age40_49
-        state.cases_age50_59 = data.body[i].cases_age50_59
-        state.cases_age60_69 = data.body[i].cases_age60_69
-        state.cases_age70_79 = data.body[i].cases_age70_79
-        state.cases_age80_older = data.body[i].cases_age80_older
+        # state.cases_age0_9 = data.body[i].cases_age0_9
+        # state.cases_age10_19 = data.body[i].cases_age10_19
+        # state.cases_age20_29 = data.body[i].cases_age20_29
+        # state.cases_age30_39 = data.body[i].cases_age30_39
+        # state.cases_age40_49 = data.body[i].cases_age40_49
+        # state.cases_age50_59 = data.body[i].cases_age50_59
+        # state.cases_age60_69 = data.body[i].cases_age60_69
+        # state.cases_age70_79 = data.body[i].cases_age70_79
+        # state.cases_age80_older = data.body[i].cases_age80_older
         
         user.states << state
       end
