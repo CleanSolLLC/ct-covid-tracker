@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  	<style type="text/css">
+
+       table {
+       	width: 1200px;
+       }
+
+       th, td {
+       	padding: 10px 10px 10px 10px 10px 10px 10px;
+       }       
+
+
+  	</style>
+
+
+  </head>
+
+
+  <body>
+
+	<% if current_user.age_groups.empty? %>
+
+	    <h4><%= current_user.username %>,</h4>
+
+	     You have no data saved yet please click the following link to begin your search: <br>
+
+	<% else %>
+
+			<p>Here is a list of your STATEWIDE COVID-19 data by AGE GROUP</p>
+
+			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
+
+			<table>
+
+			  <tr>
+
+			  	<th>Date</th>
+			  	<th>Age Group</th>
+          		<th>Confirmed Cases</th>
+          		<th>Case Change</th>
+          		<th>Deaths</th>
+          		<th>Death Change</th>
+					
+
+			  </tr>
+				
+					<% @age_groups.each do |age_group| %>
+					<tr>
+								
+					   <td> <%= link_to age_group.query_date.strftime('%m/%d/%Y'), user_age_group_path(current_user.id, age_group.id) %></td>
+					   <td><%= age_group.age_group %></td>
+             		   <td><%= age_group.confirmed_cases %> </td>
+			           <td><%= age_group.case_dir %> <%= age_group.case_change %> </td>
+			           <td><%= age_group.confirmed_deaths %> </td>
+			           <td><%= age_group.death_dir %> <%= age_group.death_change %> </td>
+
+					</tr>
+					<% end %>
+			</table>
+
+	<% end %>
+
+	<br>
+	<%= link_to "Select Additional Dates", new_user_age_group_path(current_user) %>
+	
+	</body>		 
+</html>
+
+
+
+
+
+
+
+

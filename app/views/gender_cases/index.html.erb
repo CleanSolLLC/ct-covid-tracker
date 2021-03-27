@@ -29,7 +29,7 @@
 
 	<% else %>
 
-			<p>Here is a list of your statewide COVID-19 data by age group</p>
+			<p>Here is a list of your STATEWIDE COVID-19 data by GENDER</p>
 
 			<p>Click on date to drill down on more data take to show page for each instance data by gender<br>
 
@@ -39,19 +39,23 @@
 
 			  	<th>Date</th>
 			  	<th>Gender</th>
-			  	<th>Cases</th>
-			  	<th>Deaths</th>
+          		<th>Confirmed Cases</th>
+          		<th>Case Change</th>
+          		<th>Deaths</th>
+          		<th>Death Change</th>
 					
 
 			  </tr>
 				
 					<% @gender_cases.each do |gender| %>
-					<tr>			
+					<tr>
+
 					   <td> <%= link_to gender.query_date.strftime('%m/%d/%Y'), user_gender_case_path(current_user.id, gender.id) %></td>
 					   <td><%= gender.gender %></td>
-					   <td><%= gender.confirmed_cases %></td>
-					   <td><%= gender.confirmed_deaths %></td>
-
+             		   <td><%= gender.confirmed_cases %> </td>
+			           <td><%= gender.case_dir %> <%= gender.case_change %> </td>
+			           <td><%= gender.confirmed_deaths %> </td>
+			           <td><%= gender.death_dir %> <%= gender.death_change %> </td>
 					</tr>
 					<% end %>
 			</table>
@@ -59,7 +63,7 @@
 	<% end %>
 
 	<br>
-	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	<%= link_to "Select Additional Dates", new_user_gender_case_path(current_user) %>
 	
 	</body>		 
 </html>

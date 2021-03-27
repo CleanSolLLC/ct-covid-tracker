@@ -1,0 +1,36 @@
+
+<!-- The user is directed here via a link if:
+
+ 1. There is no state data associated with the user
+
+ 2. If the user wants to create a new search for state data by date 
+
+ 3. We need a form that will ask for a date or date range
+
+ 4. The date or date range should be validated for proper input format -->
+
+ <div class="alert"> 
+    <% flash.each do |name, msg| -%>
+       <%= content_tag :div, msg, class: name %>
+     <% end -%> 
+ </div><br>
+
+ <h5>Enter Date Range:</h5>
+
+ 
+
+ <%= form_tag('/user/:user_id/gender_cases') do %> 
+
+  <div><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></div>
+  <div><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %></div>
+  <br>
+  
+ 
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  
+  <br>	
+
+ 
+
+ 
+  <%= submit_tag "Enter Date" %>
+<% end %>
