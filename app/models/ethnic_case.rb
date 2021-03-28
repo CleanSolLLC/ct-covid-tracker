@@ -3,12 +3,12 @@ class EthnicCase < ApplicationRecord
   belongs_to :user
 
 
-  def self.get_ethnic_data(params, user)
+  def self.ethnic_data(params, user)
 
     if Date.parse(params[:start_date]).sunday?
-      start_date = (Date.parse(params[:start_date]).prev_day-2).to_s
+      prev_date = (Date.parse(params[:start_date]).prev_day-2).to_s
     else
-      start_date = (Date.parse(params[:start_date]).prev_day).to_s
+      prev_date = (Date.parse(params[:start_date]).prev_day).to_s
     end
 
     end_date = params[:end_date]
@@ -16,34 +16,47 @@ class EthnicCase < ApplicationRecord
   	
   	client = SODA::Client.new({:domain => "https://data.ct.gov/resource/7rne-efic.json"})
   
-     data = client.get("https://data.ct.gov/resource/7rne-efic.json", "$where" => "dateupdated between '#{start_date}' and '#{end_date}'")
+     data = client.get("https://data.ct.gov/resource/7rne-efic.json", "$where" => "dateupdated between '#{prev_date}' and '#{end_date}'")
 
    
-    days = 0
-    i = 0
-    date = params[:start_date]
+     sorted_data = data.body.sort_by{|hsh| hsh[:hisp_race]}
 
-    while days <= (Date.parse(params[:end_date]) - Date.parse(params[:start_date])).to_i  
+      # #while i < sorted_data.count
 
-      ethnic_case = EthnicCase.find_or_initialize_by(user_id: user.id, query_date: data.body[i].dateupdated, ethnic_group: data.body[i].hisp_race) 
+     sorted_data.each_index do |i|
 
-      if ethnic_case.id.nil? && !data.body[i].nil?
+       return if sorted_data[i+1].nil? 
 
-          ethnic_case.query_date = data.body[i].dateupdated
-      	  ethnic_case.ethnic_group = data.body[i].hisp_race
-          ethnic_case.total_pop = data.body[i].total_pop.to_i
-          ethnic_case.case_tot = data.body[i].case_tot.to_i
-      	  ethnic_case.case_age_adjusted = data.body[i].caseageadjusted.to_i
-          ethnic_case.deaths = data.body[i].deaths.to_i
-          ethnic_case.death_age_adjusted = data.body[i].deathageadjusted.to_i
+        #trying to create a switch here to exit if there is no data beyond sorted_data[i+1].nil? however we need to enter this loop at least once if there is only one date
 
-          user.ethnic_cases << ethnic_case      
-      end     
-    
-      date = (Date.parse(date) + 1).to_s
-      days+=1
-      i+=1
-    end
+        #if one date is entered for start and end date we still return at least 2 values in the hash sorted_data[0] returns the previous dates values to determine if there has been an increase or decrease in values from the previous day. 
+
+
+        race = sorted_data[i].hisp_race if race != sorted_data[i].hisp_race
+
+        #binding.pry
+
+        ethnic_case = EthnicCase.find_or_initialize_by(user_id: user.id, query_date: "#{sorted_data[i+1].dateupdated}".to_date, ethnic_group: "#{race}")
+
+
+          if ethnic_case.id.nil? && race == sorted_data[i+1].hisp_race
+
+            ethnic_case.query_date = sorted_data[i+1].dateupdated
+            ethnic_case.ethnic_group = sorted_data[i+1].hisp_race
+            ethnic_case.total_pop = sorted_data[i+1].total_pop.to_i
+            ethnic_case.case_tot = sorted_data[i+1].case_tot.to_i 
+            ethnic_case.deaths = sorted_data[i+1].deaths.to_i 
+
+            ethnic_case.case_change = (sorted_data[i+1].case_tot.to_i - sorted_data[i].case_tot.to_i) 
+            (sorted_data[i+1].case_tot.to_i > sorted_data[i].case_tot.to_i) ? ethnic_case.case_dir = "+" : ethnic_case.case_dir = "-"
+            ethnic_case.death_change = (sorted_data[i+1].deaths.to_i - sorted_data[i].deaths.to_i)
+            (sorted_data[i+1].deaths.to_i > sorted_data[i].deaths.to_i) ? ethnic_case.death_dir = "+" : ethnic_case.death_dir = "-"
+          
+            user.ethnic_cases << ethnic_case
+
+          end
+
+        end
   end
 end
 

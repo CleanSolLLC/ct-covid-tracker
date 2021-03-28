@@ -16,7 +16,6 @@ class GenderCase < ApplicationRecord
 
       data = client.get("https://data.ct.gov/resource/qa53-fghg.json", "$where" => "dateupdated between'#{prev_date}' and '#{end_date}'")
 
-      binding.pry
       sorted_data = data.body.sort_by{|hsh| hsh[:gender]}
 
       #while i < sorted_data.count
@@ -35,7 +34,6 @@ class GenderCase < ApplicationRecord
         #binding.pry
 
         gender_case = GenderCase.find_or_initialize_by(user_id: user.id, query_date: "#{sorted_data[i+1].dateupdated}".to_date, gender: "#{gender_type}")
-        binding.pry
 
 
           if gender_case.id.nil? && gender_type == sorted_data[i+1].gender

@@ -29,7 +29,7 @@
 
 	<% else %>
 
-			<p>Here is a list of your statewide COVID-19 data by race and date</p>
+			<p>Here is a list of your STATEWIDE COVID-19 data by ETHNICITY</p>
 
 			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
 
@@ -38,12 +38,12 @@
 			  <tr>
 
 			  	<th>Date</th>
-			  	<th>Race</th>
+			  	<th>Ethnic Group</th>
 			  	<th>Population</th>
-			  	<th>Cases</th>
-			  	<th>Age Adjusted</th>
-			  	<th>Deaths</th>
-			  	<th>Deaths Adjusted</th>
+	          	<th>Total Cases</th>
+          		<th>Case Change</th>
+          		<th>Deaths</th>
+          		<th>Death Change</th>
 					
 
 			  </tr>
@@ -53,10 +53,10 @@
 					   <td> <%= link_to c.query_date.strftime('%m/%d/%Y'), user_ethnic_case_path(current_user.id, c.id) %></td>
 					   <td><%= c.ethnic_group %></td>
 					   <td><%= c.total_pop %></td>
-					   <td><%= c.case_tot %></td>
-					   <td><%= c.case_age_adjusted %></td>
-					   <td><%= c.deaths %></td>
-					   <td><%= c.death_age_adjusted %></td>
+             		   <td><%= c.case_tot %> </td>
+			           <td><%= c.case_dir %> <%= c.case_change %> </td>
+			           <td><%= c.deaths %> </td>
+			           <td><%= c.death_dir %> <%= c.death_change %> </td>
 
 
 					</tr>
@@ -66,7 +66,7 @@
 	<% end %>
 
 	<br>
-	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	<%= link_to "Select Additional Dates", new_user_ethnic_case_path(current_user) %>
 	
 	</body>		 
 </html>
