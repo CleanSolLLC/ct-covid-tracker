@@ -20,12 +20,15 @@ class StatesController < ApplicationController
     redirect_to user_states_path(user)
   end
 
-  
-  def show
-    @state = current_user.states.find(params[:id])
+
+  def destroy
+    @state = State.find(params[:id])
+    @state.destroy
+    redirect_to user_states_path(current_user)
   end
 
   private
+
 
     def check_date
       if Date.parse(params[:start_date]).friday? || Date.parse(params[:start_date]).saturday?

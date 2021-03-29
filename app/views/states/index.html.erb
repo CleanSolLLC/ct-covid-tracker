@@ -37,6 +37,7 @@
 
 			  <tr>
 
+			  	<th>Delete</th>
 			  	<th>Date</th>
 			  	<th>Total Tests</th>
 			  	<th>Test Change</th>
@@ -54,9 +55,11 @@
 
 			  </tr>
 				
-					<% @states.map do |state| %>
-					<tr>			
-					   <td> <%= link_to state.query_date.strftime('%m/%d/%Y'), user_state_path(current_user.id, state.id) %></td>
+					<% @states.each do |state| %>
+
+					<tr>	
+					   <td><%= link_to "Delete", destroy_state_path(current_user.id, state.id), :method => 'delete' %></td>		
+					   <td><%= state.query_date.strftime('%m/%d/%Y') %> </td>
 					   <td><%= state.total_tests %> </td>
 					   <td><%= state.test_dir %> <%= state.test_change %> </td>
 					   <td><%= state.total_cases %> </td>
