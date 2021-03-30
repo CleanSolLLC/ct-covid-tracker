@@ -37,6 +37,7 @@
 
         <tr>
 
+          <th>Delete</th>
           <th>Date</th>
           <th>County Name</th>
           <th>Confirmed Cases</th>
@@ -55,7 +56,8 @@
         
           <% @counties.map do |county| %>
           <tr>      
-             <td> <%= link_to county.query_date.strftime('%m/%d/%Y'), user_county_path(current_user.id, county.id) %></td>
+             <td><%= link_to "Delete", destroy_county_path(current_user.id, county.id), :method => 'delete' %></td>
+             <td><%= county.query_date.strftime('%m/%d/%Y') %> </td>
              <td><%= county.name %> </td>
              <td><%= county.confirmed_cases %> </td>
              <td><%= county.case_dir %> <%= county.case_change %> </td>

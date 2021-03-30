@@ -17,9 +17,12 @@ class CountiesController < ApplicationController
   end
 
   
-  def show
-    @county = current_user.counties.find(params[:id])
+  def destroy
+    @county = County.find(params[:id])
+    @county.destroy
+    redirect_to user_counties_path(current_user)
   end
+
 
   private
 

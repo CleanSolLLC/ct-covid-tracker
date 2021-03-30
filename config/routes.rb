@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   get '/user/:id/states/:id', to: 'states#destroy', as: 'destroy_state'
+  get '/user/:id/countiesd/:id', to: 'counties#destroy', as: 'destroy_county'
 
    devise_scope :user do
    	 get 'users/sign_out', to: 'devise/sessions#destroy', as: 'logged_out'

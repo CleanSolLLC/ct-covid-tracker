@@ -47,16 +47,12 @@ class County < ApplicationRecord
 
       #We have the data that includes previous date the hash will have multiple previous dates based on the number of counties selected we need to break on change in county. prev_date should only be used for the first iteration of data to calclate an increase of decreae in data from the previous day
 
-      #How do we do this?????
-
       #1. Iterate over the hash which is an array of hashes we want data_selected where dateupdated == params[:start_date]
       #That should return all elements in array
 
 
       sorted_data = data.body.sort_by{|hsh| hsh[:cnty_cod]}
 
-
-      #while i < sorted_data.count
 
       sorted_data.each_index do |i|
 
