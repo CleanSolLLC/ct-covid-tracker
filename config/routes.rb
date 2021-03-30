@@ -8,11 +8,11 @@ Rails.application.routes.draw do
 
   resources :user do
   	resources :states, :only => [:new, :create, :index]
-    resources :counties
-    resources :towns
-    resources :ethnic_cases
-    resources :age_groups
-    resources :gender_cases
+    resources :counties, :only => [:new, :create, :index]
+    resources :towns, :only => [:new, :create, :index]
+    resources :ethnic_cases, :only => [:new, :create, :index], :only => [:new, :create, :index]
+    resources :age_groups, :only => [:new, :create, :index]
+    resources :gender_cases, :only => [:new, :create, :index]
   end
 
   get '/user/:id/states/:id', to: 'states#destroy', as: 'destroy_state'
