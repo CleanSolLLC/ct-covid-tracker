@@ -61,3 +61,5 @@ gem 'validates_timeliness', '~> 4.1'
 gem 'bulma-rails', '~> 0.9.0'
 
 gem "active_hash", "~> 3.1"
+
+gem "font-awesome-rails", "~> 4.7"

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :user do
-  	resources :states, :only => [:new, :create, :index]
+  	resources :states, :only => [:new, :create, :index, :destroy]
     resources :counties, :only => [:new, :create, :index]
     resources :towns, :only => [:new, :create, :index]
     resources :ethnic_cases, :only => [:new, :create, :index], :only => [:new, :create, :index]
@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :gender_cases, :only => [:new, :create, :index]
   end
 
-  get '/user/:id/states/:id', to: 'states#destroy', as: 'destroy_state'
   get '/user/:id/countiesd/:id', to: 'counties#destroy', as: 'destroy_county'
 
    devise_scope :user do
