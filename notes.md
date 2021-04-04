@@ -40,7 +40,7 @@ Use of several state of CT apis:
         data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
 
 
-  2. COVID-19 PCR-Based Test Results by Date of Specimen Collection (By County)
+  2. COVID-19 PCR-Based Test Results by Date of Specimen Collection (By County) **** May consider this as an extention to project at a later date ***
 
       web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-PCR-Based-Test-Results-by-Date-of-Specime/qfkt-uahj
 
@@ -141,6 +141,20 @@ Use of several state of CT apis:
       change
       dateupdated 
 
+  9. COVID-19 Vaccine State Summary **** Data to shown on the landing page
+      COVID-19 state summary data is updated one tiome per week
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Vaccine-State-Summary/tttv-egb7
+
+     api: https://data.ct.gov/resource/tttv-egb7.json
+
+     Hash Keys:
+
+      date_updated
+      population
+      first_dose
+      first_dose_coverage
+      fully_vaccinated
+      fully_vaccinated_percent
 
 Some of Dwayne's popular gems 
 https://dwayne.fm/rails-gems-to-consider/
