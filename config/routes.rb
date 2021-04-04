@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   
   
-  root 'user#show'
+  root 'states#summary'
 
   devise_for :users
 
