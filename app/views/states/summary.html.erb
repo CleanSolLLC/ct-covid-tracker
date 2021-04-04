@@ -1,11 +1,17 @@
 
-<p>In Connecticut as of <%= Time.parse(@summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p') %></p><br>
+<p>Connecticut as of <%= Time.parse(@summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p') %></p><br>
+	
 	<b>Number of Vaccines Administered:</b>
 	<% i=0 %>
    	<% while i < 5 %>
-	  <p><b><%= @summary[i].measure %>:</b></p>
-	  <b><%= @summary[i].total %> <%= @summary[i].changedirection %><%= @summary[i].change %> cases</b>
-	  <br>
+	  <p><b><%= @summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:</b>
+	 
+	  	<% if @summary[i].measure == "Daily Test Positivity*" %>
+           <%= @summary[i].change%>%
+        <% else %>
+	  	  <%= @summary[i].total %> <%= @summary[i].changedirection %><%= @summary[i].change %></p><br>
+	    <% end %>
+
       <% i+=1 %>
       
     <% end %>
