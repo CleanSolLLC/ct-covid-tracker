@@ -61,13 +61,22 @@ class State < ApplicationRecord
 
 
 
-  def self.summary
+  def self.daily_summary
     #this logic creates a snapshot of statewide statistics from the prev day on a summary page 
 
     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/ncg4-6gkj.json"})
      data = client.get("https://data.ct.gov/resource/ncg4-6gkj.json?")
      data.body
-  end  
+  end 
+  
+  def self.vaccine_summary
+    #this logic creates a snapshot of statewide statistics from the prev day on a summary page 
+
+    client = SODA::Client.new({:domain => "https://data.ct.gov/resource/tttv-egb7.json"})
+     data = client.get("https://data.ct.gov/resource/tttv-egb7.json")
+     data.body.find{|d| d[:category] == "Total"}
+  end 
+
 
 end
 

@@ -1,15 +1,22 @@
 
-<p>Connecticut as of <%= Time.parse(@summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p') %></p><br>
-	
-	<b>Number of Vaccines Administered:</b>
+<p><b>Vaccine data as of <%= Time.parse(@vaccine_summary.date_updated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
+
+  <p>Population: <%= number_with_delimiter(@vaccine_summary[:population]) %></p>
+  <p>Residents First Dose Administered: <%= number_with_delimiter(@vaccine_summary[:first_dose]) %></p>
+  <p>Percentage of First Dose Administered: <%= @vaccine_summary[:first_dose_coverage]%>%</p>
+  <p>Residents Fully Vaccinated: <%= number_with_delimiter(@vaccine_summary[:fully_vaccinated]) %></p>
+  <p>Percentage Fully Vaccinated <%= @vaccine_summary[:fully_vaccinated_percent]%>%</p><br>
+
+
+<p><b>COVID-19 data as of <%= Time.parse(@daily_summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
 	<% i=0 %>
    	<% while i < 5 %>
-	  <p><b><%= @summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:</b>
+	  <p><%= @daily_summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:
 	 
-	  	<% if @summary[i].measure == "Daily Test Positivity*" %>
-           <%= @summary[i].change%>%
+	  	<% if @daily_summary[i].measure == "Daily Test Positivity*" %>
+           <%= @daily_summary[i].change%>%
         <% else %>
-	  	  <%= @summary[i].total %> <%= @summary[i].changedirection %><%= @summary[i].change %></p><br>
+	  	  <%= number_with_delimiter(@daily_summary[i].total) %> <%= @daily_summary[i].changedirection %><%= number_with_delimiter(@daily_summary[i].change) %></p>
 	    <% end %>
 
       <% i+=1 %>

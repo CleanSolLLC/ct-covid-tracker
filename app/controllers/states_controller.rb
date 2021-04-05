@@ -3,7 +3,8 @@ class StatesController < ApplicationController
    before_action :check_date, only: [:create]
 
  def summary
-   @summary = State.summary
+   @daily_summary = State.daily_summary
+   @vaccine_summary = State.vaccine_summary
  end
 
   def index
