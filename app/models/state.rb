@@ -44,13 +44,13 @@ class State < ApplicationRecord
         state.confirmed_cases = data.body[i+1].confirmedcases.to_i
         state.hospitalized_cases = data.body[i+1].hospitalizedcases.to_i
         state.confirmed_deaths = data.body[i+1].confirmeddeaths.to_i
-        state.test_change = (data.body[i+1].covid_19_tests_reported.to_i - data.body[i].covid_19_tests_reported.to_i)
+        state.test_change = (data.body[i+1].covid_19_tests_reported.to_i - data.body[i].covid_19_tests_reported.to_i).abs
         (data.body[i+1].covid_19_tests_reported.to_i > data.body[i].covid_19_tests_reported.to_i) ? state.test_dir = "+" : state.test_dir = "-"
-        state.case_change = (data.body[i+1].totalcases.to_i - data.body[i].totalcases.to_i)
+        state.case_change = (data.body[i+1].totalcases.to_i - data.body[i].totalcases.to_i).abs
         (data.body[i+1].totalcases.to_i > data.body[i].totalcases.to_i) ? state.case_dir = "+" : state.case_dir = "-"
-        state.hospitalized_change = (data.body[i+1].hospitalizedcases.to_i - data.body[i].hospitalizedcases.to_i)
+        state.hospitalized_change = (data.body[i+1].hospitalizedcases.to_i - data.body[i].hospitalizedcases.to_i).abs
         (data.body[i+1].hospitalizedcases.to_i > data.body[i].hospitalizedcases.to_i) ? state.hosp_dir = "+" : state.hosp_dir = "-"
-        state.death_change = (data.body[i+1].confirmeddeaths.to_i - data.body[i].confirmeddeaths.to_i)
+        state.death_change = (data.body[i+1].confirmeddeaths.to_i - data.body[i].confirmeddeaths.to_i).abs
         (data.body[i+1].confirmeddeaths.to_i > data.body[i].confirmeddeaths.to_i) ? state.death_dir = "+" : state.death_dir = "-"
 
         user.states << state
@@ -70,7 +70,7 @@ class State < ApplicationRecord
   end 
   
   def self.vaccine_summary
-    #this logic creates a snapshot of statewide statistics from the prev day on a summary page 
+    #this logic creates a snapshot of vaccine data for summary page
 
     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/tttv-egb7.json"})
      data = client.get("https://data.ct.gov/resource/tttv-egb7.json")
