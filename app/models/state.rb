@@ -2,6 +2,8 @@ class State < ApplicationRecord
   
   belongs_to :user
 
+  validates :start_date, :end_date, absence: true
+
   #1. we need to find the prev date to grab totals that will be used to compare to current date
   #2. check to see if date falls on a Sunday
   #3. if it does we need the data from the Thursday prior to comapre with Sunday's data
