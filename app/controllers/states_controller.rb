@@ -1,5 +1,5 @@
 class StatesController < ApplicationController
-   include ApplicationHelper
+   include StatesHelper
    
    before_action :authenticate_user!
    before_action :check_date, only: [:create]

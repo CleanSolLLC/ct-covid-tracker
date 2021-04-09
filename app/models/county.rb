@@ -72,11 +72,11 @@ class County < ApplicationRecord
             county.confirmed_deaths = sorted_data[i+1].confirmeddeaths.to_i 
 
             county_code == sorted_data[i+1].cnty_cod 
-            county.case_change = (sorted_data[i+1].confirmedcases.to_i - sorted_data[i].confirmedcases.to_i) 
+            county.case_change = (sorted_data[i+1].confirmedcases.to_i - sorted_data[i].confirmedcases.to_i).abs 
             (sorted_data[i+1].confirmedcases.to_i > sorted_data[i].confirmedcases.to_i) ? county.case_dir = "+" : county.case_dir = "-"
-            county.hospitalized_change = (sorted_data[i+1].hospitalization.to_i - sorted_data[i].hospitalization.to_i)
+            county.hospitalized_change = (sorted_data[i+1].hospitalization.to_i - sorted_data[i].hospitalization.to_i).abs
             (sorted_data[i+1].hospitalization.to_i > sorted_data[i].hospitalization.to_i) ? county.hosp_dir = "+" : county.hosp_dir = "-"
-            county.death_change = (sorted_data[i+1].confirmeddeaths.to_i - sorted_data[i].confirmeddeaths.to_i)
+            county.death_change = (sorted_data[i+1].confirmeddeaths.to_i - sorted_data[i].confirmeddeaths.to_i).abs
             (sorted_data[i+1].confirmeddeaths.to_i > sorted_data[i].confirmeddeaths.to_i) ? county.death_dir = "+" : county.death_dir = "-"
           
 

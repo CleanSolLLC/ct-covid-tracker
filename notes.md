@@ -1,5 +1,7 @@
 CT-COVID-TRACKER PROJECT
 
+Avi "I am going to write the code I wish I had"
+
 Flatiron 
 
 https://www.loom.com/share/9e066894c613463684bc094694a9fa09
