@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :user do
   	resources :states, :only => [:new, :create, :index, :destroy]
     resources :counties, :only => [:new, :create, :index, :destroy]
-    resources :towns, :only => [:new, :create, :index]
+    resources :towns, :only => [:new, :create, :index, :destroy]
     resources :ethnic_cases, :only => [:new, :create, :index], :only => [:new, :create, :index]
     resources :age_groups, :only => [:new, :create, :index]
     resources :gender_cases, :only => [:new, :create, :index]

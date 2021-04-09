@@ -31,12 +31,11 @@
 
       <p>Here is a list of your TOWNWIDE COVID-19 data by date</p>
 
-      <p>Click on date to drill down on more data take to show page for each instance of county</p><br>
-
       <table >
 
         <tr>
 
+          <th>Delete</th>
           <th>Date</th>
           <th>Town Name</th>
           <th>Total Tests</th>
@@ -44,25 +43,21 @@
           <th>Confirmed Cases</th>
           <th>Case Change</th>
           <th>Deaths</th>
-          <th>Death Change</th>
-
-
-
-          
+          <th>Death Change</th>   
 
 
         </tr>
         
           <% @towns.map do |town| %>
-          <tr>      
-             <td> <%= link_to town.query_date.strftime('%m/%d/%Y'), user_town_path(current_user.id, town.id) %></td>
+          <tr>   
+             <td><%= button_to "Delete", {:controller => :towns, :action => :destroy, :id => town.id}, :method => 'delete' %></td>   <td> <%= town.query_date.strftime('%m/%d/%Y') %></td>
              <td><%= town.name %> </td>
-             <td><%= town.total_tests %> </td> 
-             <td><%= town.test_dir %> <%= town.test_change %> </td>
-             <td><%= town.confirmed_cases %> </td>
-             <td><%= town.case_dir %> <%= town.case_change %> </td>
-             <td><%= town.confirmed_deaths %> </td>
-             <td><%= town.death_dir %> <%= town.death_change %> </td>
+             <td><%= number_with_delimiter(town.total_tests) %> </td> 
+             <td><%= town.test_dir %> <%= number_with_delimiter(town.test_change) %> </td>
+             <td><%= number_with_delimiter(town.confirmed_cases) %> </td>
+             <td><%= town.case_dir %> <%= number_with_delimiter(town.case_change) %> </td>
+             <td><%= number_with_delimiter(town.confirmed_deaths) %> </td>
+             <td><%= town.death_dir %> <%= number_with_delimiter(town.death_change)%> </td>
 
 
           </tr>

@@ -1,4 +1,5 @@
 class CountiesController < ApplicationController
+  
   include CountiesHelper
 
    before_action :authenticate_user!
