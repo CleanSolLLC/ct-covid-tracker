@@ -77,13 +77,16 @@ class Town < ApplicationRecord
             town.confirmed_deaths = sorted_data[i+1].townconfirmeddeaths.to_i 
 
             town_code == sorted_data[i+1].town_no
+            
             town.test_change = (sorted_data[i+1].numberoftests.to_i - sorted_data[i].numberoftests.to_i).abs
-            (sorted_data[i+1].numberoftests.to_i > sorted_data[i].numberoftests.to_i) ? town.test_dir = "+" : town.test_dir = "-"
+            (sorted_data[i+1].numberoftests.to_i > sorted_data[i].numberoftests.to_i) ? town.test_dir = "+" : town.test_dir = "-" unless town.test_change == 0
+            
             town.case_change = (sorted_data[i+1].townconfirmedcases.to_i - sorted_data[i].townconfirmedcases.to_i).abs 
-            (sorted_data[i+1].townconfirmedcases.to_i > sorted_data[i].townconfirmedcases.to_i) ? town.case_dir = "+" : town.case_dir = "-"
-            town.death_change = (sorted_data[i+1].townconfirmeddeaths.to_i - sorted_data[i].townconfirmeddeaths.to_i).abs
-            (sorted_data[i+1].townconfirmeddeaths.to_i > sorted_data[i].townconfirmeddeaths.to_i) ? town.death_dir = "+" : town.death_dir = "-"
-          
+            (sorted_data[i+1].townconfirmedcases.to_i > sorted_data[i].townconfirmedcases.to_i) ? town.case_dir = "+" : town.case_dir = "-" unless town.case_change == 0
+
+            town.death_change = (sorted_data[i+1].townconfirmeddeaths.to_i - sorted_data[i].townconfirmeddeaths.to_i).abs 
+            (sorted_data[i+1].townconfirmeddeaths.to_i > sorted_data[i].townconfirmeddeaths.to_i) ? town.death_dir = "+" : town.death_dir = "-" unless town.death_change == 0
+            
             user.towns << town
 
           end

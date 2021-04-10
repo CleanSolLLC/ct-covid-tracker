@@ -45,13 +45,13 @@ class State < ApplicationRecord
         state.hospitalized_cases = data.body[i+1].hospitalizedcases.to_i
         state.confirmed_deaths = data.body[i+1].confirmeddeaths.to_i
         state.test_change = (data.body[i+1].covid_19_tests_reported.to_i - data.body[i].covid_19_tests_reported.to_i).abs
-        (data.body[i+1].covid_19_tests_reported.to_i > data.body[i].covid_19_tests_reported.to_i) ? state.test_dir = "+" : state.test_dir = "-"
+        (data.body[i+1].covid_19_tests_reported.to_i > data.body[i].covid_19_tests_reported.to_i) ? state.test_dir = "+" : state.test_dir = "-" unless state.test_change == 0
         state.case_change = (data.body[i+1].totalcases.to_i - data.body[i].totalcases.to_i).abs
-        (data.body[i+1].totalcases.to_i > data.body[i].totalcases.to_i) ? state.case_dir = "+" : state.case_dir = "-"
+        (data.body[i+1].totalcases.to_i > data.body[i].totalcases.to_i) ? state.case_dir = "+" : state.case_dir = "-" unless state.case_change == 0
         state.hospitalized_change = (data.body[i+1].hospitalizedcases.to_i - data.body[i].hospitalizedcases.to_i).abs
-        (data.body[i+1].hospitalizedcases.to_i > data.body[i].hospitalizedcases.to_i) ? state.hosp_dir = "+" : state.hosp_dir = "-"
+        (data.body[i+1].hospitalizedcases.to_i > data.body[i].hospitalizedcases.to_i) ? state.hosp_dir = "+" : state.hosp_dir = "-" unless state.hospitalized_change == 0
         state.death_change = (data.body[i+1].confirmeddeaths.to_i - data.body[i].confirmeddeaths.to_i).abs
-        (data.body[i+1].confirmeddeaths.to_i > data.body[i].confirmeddeaths.to_i) ? state.death_dir = "+" : state.death_dir = "-"
+        (data.body[i+1].confirmeddeaths.to_i > data.body[i].confirmeddeaths.to_i) ? state.death_dir = "+" : state.death_dir = "-" unless state.death_change == 0
 
         user.states << state
       end
