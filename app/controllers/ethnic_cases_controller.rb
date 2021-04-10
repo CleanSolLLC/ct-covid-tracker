@@ -18,8 +18,10 @@ class EthnicCasesController < ApplicationController
   end
 
   
-  def show
-    @ethnic_case = current_user.ethnic_cases.find(params[:id])
+  def destroy
+    @ethnic_case = EthnicCase.find(params[:id])
+    @ethnic_case.destroy
+    redirect_to user_ethnic_cases_path(current_user)
   end
 
   private

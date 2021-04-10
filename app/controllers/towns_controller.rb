@@ -20,11 +20,6 @@ class TownsController < ApplicationController
     redirect_to user_towns_path(user)
   end
 
-  
-  def show
-    @town = current_user.towns.find(params[:id])
-  end
-
   def destroy
     @town = Town.find(params[:id])
     @town.destroy

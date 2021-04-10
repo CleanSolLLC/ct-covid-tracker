@@ -22,6 +22,12 @@ class AgeGroupsController < ApplicationController
     @age_group = current_user.age_groups.find(params[:id])
   end
 
+  def destroy
+    @age_group = AgeGroup.find(params[:id])
+    @age_group.destroy
+    redirect_to user_age_groups_path(current_user)
+  end  
+
   private
 
     def check_date

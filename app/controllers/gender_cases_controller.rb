@@ -4,7 +4,7 @@ class GenderCasesController < ApplicationController
    before_action :check_date, only: [:create]
 
   def index
-    @gender_cases = current_user.gender_cases.order('gender ASC', 'query_date DESC',)
+    @gender_cases = current_user.gender_cases.order('query_date DESC','gender ASC')
   end
 
   def new
@@ -18,8 +18,10 @@ class GenderCasesController < ApplicationController
   end
 
   
-  def show
-    @gender_case = current_user.gender_cases.find(params[:id])
+  def destroy
+    @gender_case = GenderCase.find(params[:id])
+    @gender_case.destroy
+    redirect_to user_gender_cases_path(current_user)
   end
 
   private

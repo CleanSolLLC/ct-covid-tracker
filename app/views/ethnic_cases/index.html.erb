@@ -30,13 +30,13 @@
 	<% else %>
 
 			<p>Here is a list of your STATEWIDE COVID-19 data by ETHNICITY</p>
-
-			<p>Click on date to drill down on more data take to show page for each instance data by race</p><br>
+			<br>
 
 			<table>
 
 			  <tr>
 
+			  	<th>Delete</th>
 			  	<th>Date</th>
 			  	<th>Ethnic Group</th>
 			  	<th>Population</th>
@@ -49,8 +49,10 @@
 			  </tr>
 				
 					<% @ethnic_cases.each do |c| %>
-					<tr>			
-					   <td> <%= link_to c.query_date.strftime('%m/%d/%Y'), user_ethnic_case_path(current_user.id, c.id) %></td>
+
+					<tr>
+					   <td><%= button_to "Delete", {:controller => :ethnic_cases, :action => :destroy, :id => c.id}, :method => 'delete' %></td>
+					   <td> <%= c.query_date.strftime('%m/%d/%Y') %></td>
 					   <td><%= c.ethnic_group %></td>
 					   <td><%= c.total_pop %></td>
              		   <td><%= c.case_tot %> </td>
