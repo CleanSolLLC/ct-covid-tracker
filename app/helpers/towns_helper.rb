@@ -25,7 +25,7 @@ module TownsHelper
 
   def check_values
     
-    if params[:town_lookup_id].values[0][1].nil? || params[:town_lookup_id].values[0][1] == "" 
+    if params[:town_lookup_id].values[0].last.empty?
       flash[:alert] = "You must select at least 1 town"
       redirect_to new_user_town_path(current_user) 
     end

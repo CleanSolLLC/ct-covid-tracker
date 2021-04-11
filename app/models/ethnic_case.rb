@@ -1,4 +1,6 @@
 class EthnicCase < ApplicationRecord
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
   
   belongs_to :user
 
@@ -13,12 +15,25 @@ class EthnicCase < ApplicationRecord
 
     end_date = params[:end_date]
 
+
+    #array formatting to pass values from params multi-select menu
+
+    
+
+    array = params[:ethnic_case_lookup_id].values.first.reject{|t| t == ""}
+
+
+    array_to_s = array.map { |s| "'#{s}'" }.join(', ')     
+
   	
   	client = SODA::Client.new({:domain => "https://data.ct.gov/resource/7rne-efic.json"})
-  
-     data = client.get("https://data.ct.gov/resource/7rne-efic.json", "$where" => "dateupdated between '#{prev_date}' and '#{end_date}'")
 
-   
+    data = client.get("https://data.ct.gov/resource/7rne-efic.json", "$where" => "hisp_race in (#{array_to_s}) and dateupdated between '#{prev_date}' and '#{end_date}'")
+  
+    #data = client.get("https://data.ct.gov/resource/7rne-efic.json", "$where" => "dateupdated between '#{prev_date}' and '#{end_date}'")
+
+     
+
      sorted_data = data.body.sort_by{|hsh| hsh[:hisp_race]}
 
       # #while i < sorted_data.count

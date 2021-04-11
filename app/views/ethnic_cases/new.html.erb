@@ -21,8 +21,13 @@
   <p><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></p>
  
   <p><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %><p>
+  	<br>
+
+  <div><%= collection_select :ethnic_case_lookup_id, EthnicCaseLookup.all, EthnicCaseLookup.order(:name), :id, :name, {:prompt => 'Select Ethnic Group'}, {multiple: true} %>
+  </div>
+  <br>  	
 
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  	
  
-  <%= submit_tag "Enter Date" %>
+  <%= submit_tag "Submit" %>
 <% end %>

@@ -25,7 +25,7 @@ module CountiesHelper
 
   def check_values
     
-    if params[:county_lookup_id].values[0][1].nil? || params[:county_lookup_id].values[0][1] == "" 
+    if params[:county_lookup_id].values[0].last.empty?
       flash[:alert] = "You must select at least 1 county"
       redirect_to new_user_county_path(current_user) 
     end

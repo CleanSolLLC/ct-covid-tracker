@@ -1,4 +1,5 @@
 class AgeGroup < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
 
   	def self.age_data(params, user)
@@ -12,9 +13,20 @@ class AgeGroup < ApplicationRecord
       end_date = params[:end_date]
 
 
+      #array formatting to pass values from params multi-select menu
+
+    
+
+      array = params[:age_group_lookup_id].values.first.reject{|t| t == ""}
+
+
+      array_to_s = array.map { |s| "'#{s}'" }.join(', ') 
+
+
   	  client = SODA::Client.new({:domain => "https://data.ct.gov/resource/ypz6-8qyf.json"})
 
-      data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json", "$where" => "dateupdated between'#{prev_date}' and '#{end_date}'")
+
+      data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json", "$where" => "agegroups in (#{array_to_s}) and dateupdated between '#{prev_date}' and '#{end_date}'")
 
       
       sorted_data = data.body.sort_by{|hsh| hsh[:agegroups]}
@@ -22,6 +34,7 @@ class AgeGroup < ApplicationRecord
       #while i < sorted_data.count
 
       sorted_data.each_index do |i|
+
 
         #trying to create a switch here to exit if there is no data beyond sorted_data[i+1].nil? however we need to enter this loop at least once if there is only one date
 

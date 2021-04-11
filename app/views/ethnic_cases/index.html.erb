@@ -52,8 +52,8 @@
 
 					<tr>
 					   <td><%= button_to "Delete", {:controller => :ethnic_cases, :action => :destroy, :id => c.id}, :method => 'delete' %></td>
-					   <td> <%= c.query_date.strftime('%m/%d/%Y') %></td>
-					   <td><%= c.ethnic_group %></td>
+					   <td><%= c.query_date.strftime('%m/%d/%Y') %></td>
+					   <td><%= c.ethnic_group.gsub("NH",'').strip %></td>
 					   <td><%= c.total_pop == 0 ? "Unknown" : number_with_delimiter(c.total_pop) %></td>
              		   <td><%= number_with_delimiter(c.case_tot) %> </td>
 			           <td><%= c.case_change == 0 ? "**" : c.case_dir %><%= number_with_delimiter(c.case_change) %> </td>

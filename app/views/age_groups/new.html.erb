@@ -22,6 +22,9 @@
   <div><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></div>
   <div><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %></div>
   <br>
+
+  <div><%= collection_select :age_group_lookup_id, AgeGroupLookup.all, AgeGroupLookup.order(:name), :id, :name, {:prompt => 'Select Age Group'}, {multiple: true} %>
+  </div>
   
  
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  
@@ -30,5 +33,5 @@
  
 
  
-  <%= submit_tag "Enter Date" %>
+  <%= submit_tag "Submit" %>
 <% end %>
