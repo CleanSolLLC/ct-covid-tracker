@@ -47,10 +47,10 @@ class EthnicCase < ApplicationRecord
             ethnic_case.case_tot = sorted_data[i+1].case_tot.to_i 
             ethnic_case.deaths = sorted_data[i+1].deaths.to_i 
 
-            ethnic_case.case_change = (sorted_data[i+1].case_tot.to_i - sorted_data[i].case_tot.to_i) 
-            (sorted_data[i+1].case_tot.to_i > sorted_data[i].case_tot.to_i) ? ethnic_case.case_dir = "+" : ethnic_case.case_dir = "-"
-            ethnic_case.death_change = (sorted_data[i+1].deaths.to_i - sorted_data[i].deaths.to_i)
-            (sorted_data[i+1].deaths.to_i > sorted_data[i].deaths.to_i) ? ethnic_case.death_dir = "+" : ethnic_case.death_dir = "-"
+            ethnic_case.case_change = (sorted_data[i+1].case_tot.to_i - sorted_data[i].case_tot.to_i).abs 
+            (sorted_data[i+1].case_tot.to_i > sorted_data[i].case_tot.to_i) ? ethnic_case.case_dir = "+" : ethnic_case.case_dir = "-" unless ethnic_case.case_change == 0
+            ethnic_case.death_change = (sorted_data[i+1].deaths.to_i - sorted_data[i].deaths.to_i).abs
+            (sorted_data[i+1].deaths.to_i > sorted_data[i].deaths.to_i) ? ethnic_case.death_dir = "+" : ethnic_case.death_dir = "-" unless ethnic_case.death_change == 0
           
             user.ethnic_cases << ethnic_case
 

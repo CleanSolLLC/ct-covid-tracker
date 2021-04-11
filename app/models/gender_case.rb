@@ -44,10 +44,10 @@ class GenderCase < ApplicationRecord
             gender_case.confirmed_deaths = sorted_data[i+1].confirmeddeaths.to_i 
 
             gender_type == sorted_data[i+1].gender
-            gender_case.case_change = (sorted_data[i+1].confirmedcases.to_i - sorted_data[i].confirmedcases.to_i) 
-            (sorted_data[i+1].confirmedcases.to_i > sorted_data[i].confirmedcases.to_i) ? gender_case.case_dir = "+" : gender_case.case_dir = "-"
-            gender_case.death_change = (sorted_data[i+1].confirmeddeaths.to_i - sorted_data[i].confirmeddeaths.to_i)
-            (sorted_data[i+1].confirmeddeaths.to_i > sorted_data[i].confirmeddeaths.to_i) ? gender_case.death_dir = "+" : gender_case.death_dir = "-"
+            gender_case.case_change = (sorted_data[i+1].confirmedcases.to_i - sorted_data[i].confirmedcases.to_i).abs 
+            (sorted_data[i+1].confirmedcases.to_i > sorted_data[i].confirmedcases.to_i) ? gender_case.case_dir = "+" : gender_case.case_dir = "-" unless gender_case.case_change == 0
+            gender_case.death_change = (sorted_data[i+1].confirmeddeaths.to_i - sorted_data[i].confirmeddeaths.to_i).abs
+            (sorted_data[i+1].confirmeddeaths.to_i > sorted_data[i].confirmeddeaths.to_i) ? gender_case.death_dir = "+" : gender_case.death_dir = "-" unless gender_case.death_change == 0
           
             user.gender_cases << gender_case
 

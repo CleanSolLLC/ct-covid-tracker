@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_233226) do
+ActiveRecord::Schema.define(version: 2021_04_11_003146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 2021_03_27_233226) do
     t.integer "confirmed_deaths"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "case_change"
-    t.string "death_change"
     t.string "case_dir"
     t.string "death_dir"
+    t.integer "case_change"
+    t.integer "death_change"
     t.index ["user_id"], name: "index_age_groups_on_user_id"
   end
 
@@ -99,15 +99,6 @@ ActiveRecord::Schema.define(version: 2021_03_27_233226) do
     t.string "case_dir"
     t.string "hosp_dir"
     t.string "death_dir"
-    t.integer "cases_age0_9"
-    t.integer "cases_age10_19"
-    t.integer "cases_age20_29"
-    t.integer "cases_age30_39"
-    t.integer "cases_age40_49"
-    t.integer "cases_age50_59"
-    t.integer "cases_age60_69"
-    t.integer "cases_age70_79"
-    t.integer "cases_age80_older"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_states_on_user_id"

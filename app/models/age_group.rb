@@ -45,10 +45,10 @@ class AgeGroup < ApplicationRecord
             age_group.confirmed_deaths = sorted_data[i+1].confirmeddeaths.to_i 
 
             age_group == sorted_data[i+1].agegroups
-            age_group.case_change = (sorted_data[i+1].confirmedcases.to_i - sorted_data[i].confirmedcases.to_i) 
-            (sorted_data[i+1].confirmedcases.to_i > sorted_data[i].confirmedcases.to_i) ? age_group.case_dir = "+" : age_group.case_dir = "-"
-            age_group.death_change = (sorted_data[i+1].confirmeddeaths.to_i - sorted_data[i].confirmeddeaths.to_i)
-            (sorted_data[i+1].confirmeddeaths.to_i > sorted_data[i].confirmeddeaths.to_i) ? age_group.death_dir = "+" : age_group.death_dir = "-"
+            age_group.case_change = (sorted_data[i+1].confirmedcases.to_i - sorted_data[i].confirmedcases.to_i).abs 
+            (sorted_data[i+1].confirmedcases.to_i > sorted_data[i].confirmedcases.to_i) ? age_group.case_dir = "+" : age_group.case_dir = "-" unless age_group.case_change == 0
+            age_group.death_change = (sorted_data[i+1].confirmeddeaths.to_i - sorted_data[i].confirmeddeaths.to_i).abs
+            sorted_data[i+1].confirmeddeaths.to_i > sorted_data[i].confirmeddeaths.to_i ? age_group.death_dir = "+" : age_group.death_dir = "-" unless age_group.death_change == 0
           
             user.age_groups << age_group
 
