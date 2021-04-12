@@ -34,8 +34,9 @@
 
 			<table >
 
-			  <tr>
+			  <%= button_to "Delete All", {:controller => :states, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure?'} %><br>
 
+			  <tr>
 			  	<th>Delete</th>
 			  	<th>Date</th>
 			  	<th>Total Tests</th>
@@ -47,12 +48,8 @@
 			  	<th>Deaths</th>
 			  	<th>Death Change</th>
 
-
-
-					
-
-
 			  </tr>
+			  <br>
 				
 					<% @states.each do |state| %>
 

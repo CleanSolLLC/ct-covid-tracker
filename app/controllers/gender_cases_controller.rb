@@ -26,4 +26,11 @@ class GenderCasesController < ApplicationController
     redirect_to user_gender_cases_path(current_user)
   end
 
+
+  def destroy_all
+    gender_cases = GenderCase.all
+    gender_cases.delete_all
+    redirect_to user_gender_cases_path(current_user)
+  end   
+
 end

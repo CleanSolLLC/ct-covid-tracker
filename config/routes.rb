@@ -7,12 +7,41 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :user do
-  	resources :states, :only => [:new, :create, :index, :destroy]
-    resources :counties, :only => [:new, :create, :index, :destroy]
-    resources :towns, :only => [:new, :create, :index, :destroy]
-    resources :ethnic_cases, :only => [:new, :create, :index, :destroy]
-    resources :age_groups, :only => [:new, :create, :index, :destroy]
-    resources :gender_cases, :only => [:new, :create, :index, :destroy]
+  	resources :states, :only => [:new, :create, :index, :destroy] do 
+      collection do
+        delete :destroy_all
+      end
+    end
+
+    resources :counties, :only => [:new, :create, :index, :destroy] do
+      collection do
+        delete :destroy_all
+      end
+    end
+
+    resources :towns, :only => [:new, :create, :index, :destroy] do
+      collection do
+        delete :destroy_all
+      end
+    end
+
+    resources :ethnic_cases, :only => [:new, :create, :index, :destroy] do
+      collection do
+        delete :destroy_all
+      end
+    end
+
+    resources :age_groups, :only => [:new, :create, :index, :destroy] do
+      collection do
+        delete :destroy_all
+      end
+    end
+
+    resources :gender_cases, :only => [:new, :create, :index, :destroy] do
+      collection do
+        delete :destroy_all
+      end
+    end
   end
 
    devise_scope :user do

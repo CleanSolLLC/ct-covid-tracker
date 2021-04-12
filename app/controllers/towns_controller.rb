@@ -26,6 +26,12 @@ class TownsController < ApplicationController
     redirect_to user_towns_path(current_user)
   end
 
+  def destroy_all
+    towns = Town.all
+    towns.delete_all
+    redirect_to user_towns_path(current_user)
+  end   
+
 end
 
 

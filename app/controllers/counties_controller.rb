@@ -27,6 +27,14 @@ class CountiesController < ApplicationController
     redirect_to user_counties_path(current_user)
   end
 
+
+  def destroy_all
+    counties = County.all
+    counties.delete_all
+    redirect_to user_counties_path(current_user)
+  end
+
+
 end
 
 

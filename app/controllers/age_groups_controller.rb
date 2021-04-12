@@ -25,10 +25,18 @@ class AgeGroupsController < ApplicationController
     @age_group = current_user.age_groups.find(params[:id])
   end
 
+  
   def destroy
     @age_group = AgeGroup.find(params[:id])
     @age_group.destroy
     redirect_to user_age_groups_path(current_user)
-  end  
+  end 
+
+
+  def destroy_all
+    age_groups = AgeGroup.all
+    age_groups.delete_all
+    redirect_to user_age_groups_path(current_user)
+  end    
 
 end

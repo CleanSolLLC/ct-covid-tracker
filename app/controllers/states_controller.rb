@@ -30,4 +30,10 @@ class StatesController < ApplicationController
     redirect_to user_states_path(current_user)
   end
 
+  def destroy_all
+    states = State.all
+    states.delete_all
+    redirect_to user_states_path(current_user)
+  end
+
 end

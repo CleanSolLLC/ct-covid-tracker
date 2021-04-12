@@ -35,6 +35,8 @@
 
 			<table>
 
+        	  <%= button_to "Delete All", {:controller => :gender_cases, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure?'} %><br> 				
+
 			  <tr>
 
 			  	<th>Delete</th>
@@ -47,6 +49,7 @@
 					
 
 			  </tr>
+			  <br>
 				
 					<% @gender_cases.each do |gender| %>
 					<tr>

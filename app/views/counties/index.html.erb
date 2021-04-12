@@ -34,6 +34,8 @@
 
       <table >
 
+        <%= button_to "Delete All", {:controller => :counties, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure?'} %><br>        
+
         <tr>
 
           <th>Delete</th>
@@ -46,12 +48,8 @@
           <th>Deaths</th>
           <th>Death Change</th>
 
-
-
-          
-
-
         </tr>
+        <br>
         
           <% @counties.map do |county| %>
           <tr>      

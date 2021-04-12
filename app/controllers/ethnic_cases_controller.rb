@@ -27,4 +27,10 @@ class EthnicCasesController < ApplicationController
     redirect_to user_ethnic_cases_path(current_user)
   end
 
+  def destroy_all
+    ethnic_cases = EthnicCase.all
+    ethnic_cases.delete_all
+    redirect_to user_ethnic_cases_path(current_user)
+  end  
+
 end
