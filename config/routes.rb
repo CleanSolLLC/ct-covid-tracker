@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
   
-  
   root 'states#summary'
 
   devise_for :users
+
+   match '/404', via: :all, to: 'errors#not_found'
+   match '/422', via: :all, to: 'errors#unprocessable_entity'
+   match '/500', via: :all, to: 'errors#server_error'
 
   resources :user do
   	resources :states, :only => [:new, :create, :index, :destroy] do 
@@ -49,6 +52,7 @@ Rails.application.routes.draw do
    end
 
    get '/state/summary', to: 'states#summary'
+
 end
 
   

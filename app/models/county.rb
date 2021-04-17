@@ -2,7 +2,7 @@ class County < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   #belongs_to_active_hash :town_lookup
   belongs_to :user
-  #has_many :towns
+  has_many :towns
 
     #1. we need to find the prev date to grab totals that will be used to compare to current date
   #2. check to see if date falls on a Sunday
