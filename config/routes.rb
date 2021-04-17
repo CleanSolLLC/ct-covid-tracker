@@ -5,46 +5,26 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-   match '/404', via: :all, to: 'errors#not_found'
-   match '/422', via: :all, to: 'errors#unprocessable_entity'
-   match '/500', via: :all, to: 'errors#server_error'
+    match '/404', via: :all, to: 'errors#not_found'
+    match '/422', via: :all, to: 'errors#unprocessable_entity'
+    match '/500', via: :all, to: 'errors#server_error'
 
-  resources :user do
-  	resources :states, :only => [:new, :create, :index, :destroy] do 
-      collection do
-        delete :destroy_all
-      end
-    end
 
-    resources :counties, :only => [:new, :create, :index, :destroy] do
-      collection do
-        delete :destroy_all
+  shallow do
+    resources :user do
+      resources :states, :only => [:new, :create, :index, :destroy]
+      resources :counties, :only => [:new, :create, :index, :show, :destroy]
+      resources :towns, :only => [:new, :create, :index, :destroy]
+      resources :ethnic_cases, :only => [:new, :create, :index, :destroy]
+      resources :age_groups, :only => [:new, :create, :index, :destroy]
+      resources :gender_cases, :only => [:new, :create, :index, :destroy]
+      resources :states, :counties, :towns, :ethnic_cases, :age_groups, :gender_cases do
+        collection do 
+          delete :destroy_all
+        end
       end
-    end
-
-    resources :towns, :only => [:new, :create, :index, :destroy] do
-      collection do
-        delete :destroy_all
-      end
-    end
-
-    resources :ethnic_cases, :only => [:new, :create, :index, :destroy] do
-      collection do
-        delete :destroy_all
-      end
-    end
-
-    resources :age_groups, :only => [:new, :create, :index, :destroy] do
-      collection do
-        delete :destroy_all
-      end
-    end
-
-    resources :gender_cases, :only => [:new, :create, :index, :destroy] do
-      collection do
-        delete :destroy_all
-      end
-    end
+    
+    end 
   end
 
    devise_scope :user do
