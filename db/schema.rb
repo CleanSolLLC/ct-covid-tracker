@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_011757) do
+ActiveRecord::Schema.define(version: 2021_05_07_205935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 2021_04_17_011757) do
     t.integer "case_change"
     t.integer "death_change"
     t.index ["user_id"], name: "index_age_groups_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "comment"
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "counties", force: :cascade do |t|
@@ -82,6 +92,13 @@ ActiveRecord::Schema.define(version: 2021_04_17_011757) do
     t.index ["user_id"], name: "index_gender_cases_on_user_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "states", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "query_date"
@@ -120,8 +137,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_011757) do
     t.string "test_dir"
     t.string "case_dir"
     t.string "death_dir"
-    t.bigint "county_id", null: false
-    t.index ["county_id"], name: "index_towns_on_county_id"
     t.index ["user_id"], name: "index_towns_on_user_id"
   end
 
@@ -144,5 +159,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_011757) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "towns", "counties"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
 end
