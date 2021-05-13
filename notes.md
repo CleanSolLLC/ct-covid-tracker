@@ -282,3 +282,51 @@ Stretch Goals
 
 Specifications for the Rails Assessment see spec.md
 
+
+ <div class="alert"> 
+    <% flash.each do |name, msg| -%>
+       <%= content_tag :div, msg, class: name %>
+     <% end -%> 
+ </div><br>
+
+ <%= form_for @vaccine do |f| %>
+   <div class="field">
+     <%= f.label :name %><br />
+     <%= f.text_field :name %>
+   </div>
+
+   <div class="field">
+     <%= f.label :req_dose %><br />
+     <%= f.number_field :req_dose %>
+   </div>   
+
+    <div class="action">
+      <%= f.submit %>
+    </div>
+
+ <% end %>
+
+
+  <div class="alert"> 
+    <% flash.each do |name, msg| -%>
+       <%= content_tag :div, msg, class: name %>
+     <% end -%> 
+ </div><br>
+
+ <%= form_for @vaccine do |f| %>
+   <div class="field">
+     <%= f.label :name %><br />
+     <%= f.text_field :name %>
+   </div>
+
+   <div class="field">
+     <%= f.label :req_dose %><br />
+     <%= f.number_field :req_dose %>
+   </div>   
+
+    <div class="action">
+      <%= f.submit %>
+    </div>
+
+ <% end %>
+

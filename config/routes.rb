@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :ethnic_cases, :only => [:new, :create, :index, :destroy]
       resources :age_groups, :only => [:new, :create, :index, :destroy]
       resources :gender_cases, :only => [:new, :create, :index, :destroy]
+      resources :posts
       resources :states, :counties, :towns, :ethnic_cases, :age_groups, :gender_cases do
         collection do 
           delete :destroy_all
@@ -32,7 +33,6 @@ Rails.application.routes.draw do
    end
 
    get '/state/summary', to: 'states#summary'
-
-end
+ end
 
   
