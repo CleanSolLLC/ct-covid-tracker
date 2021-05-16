@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :age_groups, :only => [:new, :create, :index, :destroy]
       resources :gender_cases, :only => [:new, :create, :index, :destroy]
       resources :posts
+      resources :comments
       resources :states, :counties, :towns, :ethnic_cases, :age_groups, :gender_cases do
         collection do 
           delete :destroy_all
@@ -32,6 +33,12 @@ Rails.application.routes.draw do
    	 get 'users/sign_out', to: 'devise/sessions#destroy', as: 'logged_out'
    end
 
+    resources :posts do
+      resources :comments
+    end
+
+
+   
    get '/state/summary', to: 'states#summary'
  end
 

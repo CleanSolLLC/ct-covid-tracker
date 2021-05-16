@@ -18,6 +18,18 @@ h1 {
 	font-size: 30px;
 }
 
+h2 {
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h3 {
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
+}
+
 
 a.link-to-text_color {
 	color: blue;
@@ -49,5 +61,9 @@ td {
   vertical-align: middle;
 }
 
+.button_position {
+  display: flex;
+  margin-left:100px;
+}
 
 

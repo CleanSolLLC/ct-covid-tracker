@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  	<style type="text/css">
+
+       table {
+       	width: 1200px;
+       }
+
+       th, td {
+       	padding: 10px 10px 10px 10px 10px 10px 10px;
+       }       
+
+
+  	</style>
+
+
+  </head>
+
+
+  <body>
+
+	<% if @posts.empty? %>
+
+	    <h4><%= current_user.username %>,</h4>
+
+	     There are no posts at this time. Please click the following link to create a post: <br>
+
+	<% else %>
+
+		<p>Here are some posts that users have submitted. Click the title of the post that you want to see or comment on. </p>
+		<br>
+				
+	    <% @posts.each do |post| %>
+	
+	        <p><b>Author: </b><%= post.user.username if post.user%></p>
+			<p><b>Title: </b><%= link_to post.title, post_path(post) %></p>
+			<br>
+		<% end %>
+
+	<% end %>
+
+	<br>
+	<%= link_to "Create New Post", new_user_post_path(current_user) %>
+	
+	</body>		 
+</html>
+
+
+
+
+
+
+
+
