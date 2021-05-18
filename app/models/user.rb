@@ -9,6 +9,6 @@ class User < ApplicationRecord
   has_many :gender_cases
   has_many :counties
   has_many :towns
-  has_many :comments
-  has_many :posts, through: :comments
+  has_many :comments, dependent: :destroy
+  has_many :posts, through: :comments, dependent: :destroy
 end

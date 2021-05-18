@@ -14,26 +14,26 @@ class PostsController < ApplicationController
   	post = Post.create(post_params(params[:post]))
   	post.user = current_user
   	current_user.posts << post
-  	redirect_to posts_path
+  	redirect_to posts_path(@post)
   end
 
   def show
   	@post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit
     @post = Post.find(params[:id])
+    if @post.user != current_user
+      flash[:alert] = "You do not have authorization to edit this post"
+      render :show
+    end
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.user == current_user
-      @post.update(post_params(params[:post]))
-      redirect_to post_path(@post)
-    else
-      flash[:alert] = "You do not have authorization to edit this post"
-      render :show
-    end
+    @post.update(post_params(params[:post]))
+    redirect_to post_path(@post)
   end
 
   def destroy

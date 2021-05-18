@@ -4,6 +4,7 @@ class CreateJoinTableComments < ActiveRecord::Migration[6.0]
   	  t.references :user
   	  t.references :post
   	  t.string :comment
+  	  t.timestamps
   	end	
   end
 end

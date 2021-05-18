@@ -1,17 +1,37 @@
 
- <%= form_for @comment do |f| %>
-   <div class="field">
-     <%= f.label :title %><br />
-     <%= f.text_field :title %>
-   </div>
+   <div class="alert"> 
+    <% flash.each do |name, msg| -%>
+       <%= content_tag :div, msg, class: name %>
+     <% end -%> 
+  </div><br>
 
+  <h3><%= @post.title%></h3>
+  <h3>Posted by: <%= @post.user.username %> on
+  <%= Time.parse(@post.created_at.to_s).localtime.strftime('%A %B %e, %Y %I:%M %p') %></h3>
+  
+  <div class="field">
+    <%= @post.content %>
+  </div>
+
+ <%= form_for(@post.comments.new) do |f| %>
    <div class="field">
-     <%= f.label :content %><br />
-     <%= f.text_area :content %>
-   </div>   
+     <%= f.label "comment" %><br />
+     <%= f.text_field :remarks %>
+   </div>
 
     <div class="action">
       <%= f.submit %>
     </div>
+
+    <br>
+
+   <div class="button_position">
+    <%= button_to "Edit Post", {:controller => :posts, :action => :update, :id => @post.id}, :method => 'patch' %>   
+    
+    <span style="width: 10px"></span>
+    
+    <%= button_to "Delete Post", {:controller => :posts, :action => :destroy, :id => @post.id}, :method => 'delete' %>
+
+  </div>   
 
  <% end %>
