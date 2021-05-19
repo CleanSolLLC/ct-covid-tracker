@@ -76,7 +76,7 @@
 </script> 
 
     <br>
-    <p> Last logged in on:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%A %B %e, %Y at %I:%M %p')%></p><br>
+    <p> Last login:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%a %B %e, %Y at %I:%M %p')%></p><br>
 
 <% end %>
 

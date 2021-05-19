@@ -1,4 +1,16 @@
 
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <h3><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h3>
+
+    <ul>
+      <% @post.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
  <%= form_for @post do |f| %>
    <div class="field">
