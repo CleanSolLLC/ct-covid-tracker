@@ -1,10 +1,10 @@
 class CountiesController < ApplicationController
-  
-  include CountiesHelper
+
+   include CountiesHelper
 
    before_action :authenticate_user!
-   before_action :check_date, only: [:create]
-   before_action :check_values, only: [:create]
+   before_action :date_error?, only: [:create]
+   before_action :county_error?, only: [:create]
 
   def index
     @counties = current_user.counties.order('name ASC', 'query_date DESC',)
@@ -15,9 +15,13 @@ class CountiesController < ApplicationController
   end
 
   def create
-    user = User.find(current_user.id)
-    County.county_data(params, user)
-    redirect_to user_counties_path(user)
+    if date_error? || county_error?
+      redirect_to new_user_county_path(current_user)
+    else
+      user = User.find(current_user.id)
+      County.county_data(params, user)
+      redirect_to user_counties_path(user)
+    end  
   end
 
   

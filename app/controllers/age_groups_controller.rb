@@ -1,10 +1,10 @@
 class AgeGroupsController < ApplicationController
 
-  include AgeGroupsHelper
-  
+   include AgeGroupsHelper
+   
    before_action :authenticate_user!
-   before_action :check_date, only: [:create]
-   before_action :check_values, only: [:create]
+   before_action :date_error?, only: [:create]
+   before_action :age_group_error?, only: [:create]
 
   def index
     @age_groups = current_user.age_groups.order('age_group ASC', 'query_date DESC',)
@@ -15,9 +15,13 @@ class AgeGroupsController < ApplicationController
   end
 
   def create
-    user = User.find(current_user.id)
-    AgeGroup.age_data(params, user)
-    redirect_to user_age_groups_path(user)
+    if date_error? || age_group_error?
+      redirect_to new_user_age_group_path(current_user)
+    else
+      user = User.find(current_user.id)
+      AgeGroup.age_data(params, user)
+      redirect_to user_age_groups_path(user)
+    end
   end
 
   

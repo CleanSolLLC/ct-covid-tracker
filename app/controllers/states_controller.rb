@@ -1,8 +1,7 @@
 class StatesController < ApplicationController
-   include StatesHelper
    
    before_action :authenticate_user!
-   before_action :check_date, only: [:create]
+   before_action :date_error?, only: [:create]
 
  def summary
    @daily_summary = State.daily_summary
@@ -18,9 +17,13 @@ class StatesController < ApplicationController
   end
 
   def create
-    user = User.find(current_user.id)
-    State.state_data(params, user)
-    redirect_to user_states_path(user)
+    if date_error?
+      redirect_to new_user_state_path(current_user) 
+    else 
+      user = User.find(current_user.id)
+      State.state_data(params, user)
+      redirect_to user_states_path(user)
+    end
   end
 
 
