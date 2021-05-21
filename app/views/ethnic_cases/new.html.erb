@@ -1,19 +1,4 @@
-
-<!-- The user is directed here via a link if:
-
- 1. There is no state data associated with the user
-
- 2. If the user wants to create a new search for state data by date 
-
- 3. We need a form that will ask for a date or date range
-
- 4. The date or date range should be validated for proper input format -->
-
- <div class="alert"> 
-    <% flash.each do |name, msg| -%>
-       <%= content_tag :div, msg, class: name %>
-     <% end -%> 
- </div><br>
+ <%= render "shared/errors" if flash[:alert] %>
 
  <h5>Enter Date Range:</h5>
 

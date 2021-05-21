@@ -1,9 +1,4 @@
-
-   <div class="alert"> 
-    <% flash.each do |name, msg| -%>
-       <%= content_tag :div, msg, class: name %>
-     <% end -%> 
-  </div><br>
+ <%= render "shared/errors" if flash[:alert] %>
 
   <h3><%= @post.title%></h3>
   <h3>Posted by: <%= @post.user.username %> on
