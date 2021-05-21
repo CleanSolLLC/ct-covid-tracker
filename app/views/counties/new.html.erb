@@ -1,24 +1,14 @@
  <%= render "shared/errors" if flash[:alert] %>
 
- <h5>Enter Date Range:</h5>
+ <%= form_tag user_counties_path do %> 
 
-
- <%= form_tag('/user/:user_id/counties') do %> 
-
-  <div><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></div>
-  <div><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %></div>
-  <br>
+   <%= render "shared/input_dates" %>
   
-  <div><%= collection_select :county_lookup_id, CountyLookup.all, CountyLookup.order(:name), :id, :name, {:prompt => 'Select County'}, {multiple: true} %>
-  </div>
- 
- 
+   <div><%= collection_select :county_lookup_id, CountyLookup.all, CountyLookup.order(:name), :id, :name, {:prompt => 'Select County'}, {multiple: true} %>
+   </div>
 
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  
-  <br>	
-
+   <br>	
  
+   <%= submit_tag "Submit" %>
 
- 
-  <%= submit_tag "Submit" %>
 <% end %>

@@ -1,18 +1,14 @@
  <%= render "shared/errors" if flash[:alert] %>
 
- <h5>Enter Date Range:</h5>
+ <%= form_tag user_ethnic_cases_path do %>
 
- <%= form_tag('/user/:user_id/ethnic_cases') do %>
-  <p><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></p>
+   <%= render "shared/input_dates" %>
+
+   <div><%= collection_select :ethnic_case_lookup_id, EthnicCaseLookup.all, EthnicCaseLookup.order(:name), :id, :name, {:prompt => 'Select Ethnic Group'}, {multiple: true} %>
+   </div>
+   
+   <br>  	
  
-  <p><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %><p>
-  	<br>
+   <%= submit_tag "Submit" %>
 
-  <div><%= collection_select :ethnic_case_lookup_id, EthnicCaseLookup.all, EthnicCaseLookup.order(:name), :id, :name, {:prompt => 'Select Ethnic Group'}, {multiple: true} %>
-  </div>
-  <br>  	
-
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  	
- 
-  <%= submit_tag "Submit" %>
 <% end %>

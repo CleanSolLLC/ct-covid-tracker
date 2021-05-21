@@ -1,22 +1,14 @@
  <%= render "shared/errors" if flash[:alert] %>
 
- <h5>Enter Date Range:</h5>
-
  <%= form_tag user_age_groups_path do %> 
 
-  <div><%= label_tag('start_date', "Start Date:")%><%= date_field_tag('start_date') %></div>
-  <div><%= label_tag('end_date', "End Date:")%> <%= date_field_tag('end_date') %></div>
-  <br>
-
-  <div><%= collection_select :age_group_lookup_id, AgeGroupLookup.all, AgeGroupLookup.order(:name), :id, :name, {:prompt => 'Select Age Group'}, {multiple: true} %>
-  </div>
+   <%= render "shared/input_dates" %>
   
- 
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>  
-  <br>	
+   <div><%= collection_select :age_group_lookup_id, AgeGroupLookup.all, AgeGroupLookup.order(:name), :id, :name, {:prompt => 'Select Age Group'}, {multiple: true} %>
+   </div>
+  
+   <br>	
 
- 
+   <%= submit_tag "Submit" %>
 
- 
-  <%= submit_tag "Submit" %>
 <% end %>
