@@ -14,7 +14,7 @@
 	  <p><%= @daily_summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:
 	 
 	  	<% if @daily_summary[i].measure == "Daily Test Positivity*" %>
-           <%= @daily_summary[i].change%>%
+           <%= @daily_summary[i].change %>%
         <% else %>
 	  	  <%= number_with_delimiter(@daily_summary[i].total) %> <%= @daily_summary[i].changedirection %><%= number_with_delimiter(@daily_summary[i].change) %></p>
 	    <% end %>
