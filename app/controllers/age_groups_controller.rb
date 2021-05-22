@@ -23,12 +23,6 @@ class AgeGroupsController < ApplicationController
       redirect_to user_age_groups_path(user)
     end
   end
-
-  
-  def show
-    @age_group = current_user.age_groups.find(params[:id])
-  end
-
   
   def destroy
     @age_group = AgeGroup.find(params[:id])

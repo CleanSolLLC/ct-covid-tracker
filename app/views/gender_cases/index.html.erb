@@ -31,7 +31,11 @@
 				
 					<% @gender_cases.each do |gender| %>
 					<tr>
-					   <td><%= button_to "Delete", {:controller => :gender_cases, :action => :destroy, :id => gender.id}, :method => 'delete' %></td>					   
+					   <td><%= button_to gender_case_path(gender.id), :method => 'delete' do  %> 
+					   	<span style="font-size: 15px; color: Dodgerblue;">
+					   	  <i class="fa fa-trash"></i>
+					   	</span>
+					   	<% end %></td>						   
 					   <td> <%= gender.query_date.strftime('%m/%d/%Y')%></td>
 					   <td><%= gender.gender %></td>
              		   <td><%= number_with_delimiter(gender.confirmed_cases) %> </td>

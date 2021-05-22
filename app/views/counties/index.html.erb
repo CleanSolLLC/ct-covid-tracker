@@ -31,7 +31,11 @@
         
           <% @counties.map do |county| %>
           <tr>      
-             <td><%= button_to "Delete", {:controller => :counties, :action => :destroy, :id => county.id}, :method => 'delete' %></td>
+             <td><%= button_to county_path(county.id), :method => 'delete' do  %> 
+              <span style="font-size: 15px; color: Dodgerblue;">
+                <i class="fa fa-trash"></i>
+              </span>
+              <% end %></td>  
              <td><%= county.query_date.strftime('%m/%d/%Y') %> </td>
              <td><%= county.name %> </td>
              <td><%= number_with_delimiter(county.confirmed_cases) %> </td>

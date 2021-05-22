@@ -29,17 +29,21 @@
 			  </tr>
 			  <br>
 				
-					<% @ethnic_cases.each do |c| %>
+					<% @ethnic_cases.each do |ethnic_case| %>
 
 					<tr>
-					   <td><%= button_to "Delete", {:controller => :ethnic_cases, :action => :destroy, :id => c.id}, :method => 'delete' %></td>
-					   <td><%= c.query_date.strftime('%m/%d/%Y') %></td>
-					   <td><%= c.ethnic_group.gsub("NH",'').strip %></td>
-					   <td><%= c.total_pop == 0 ? "Unknown" : number_with_delimiter(c.total_pop) %></td>
-             		   <td><%= number_with_delimiter(c.case_tot) %> </td>
-			           <td><%= c.case_change == 0 ? "**" : c.case_dir %><%= number_with_delimiter(c.case_change) %> </td>
-			           <td><%= number_with_delimiter(c.deaths) %> </td>
-			           <td><%= c.death_change == 0 ? "**" : c.death_dir %><%= number_with_delimiter(c.death_change) %> </td>
+					   <td><%= button_to ethnic_case_path(ethnic_case.id), :method => 'delete' do  %> 
+					   	<span style="font-size: 15px; color: Dodgerblue;">
+					   	  <i class="fa fa-trash"></i>
+					   	</span>
+					   	<% end %></td>	
+					   <td><%= ethnic_case.query_date.strftime('%m/%d/%Y') %></td>
+					   <td><%= ethnic_case.ethnic_group.gsub("NH",'').strip %></td>
+					   <td><%= ethnic_case.total_pop == 0 ? "Unknown" : number_with_delimiter(ethnic_case.total_pop) %></td>
+             		   <td><%= number_with_delimiter(ethnic_case.case_tot) %> </td>
+			           <td><%= ethnic_case.case_change == 0 ? "**" : ethnic_case.case_dir %><%= number_with_delimiter(ethnic_case.case_change) %> </td>
+			           <td><%= number_with_delimiter(ethnic_case.deaths) %> </td>
+			           <td><%= ethnic_case.death_change == 0 ? "**" : ethnic_case.death_dir %><%= number_with_delimiter(ethnic_case.death_change) %> </td>
 
 
 					</tr>

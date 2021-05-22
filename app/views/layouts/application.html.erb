@@ -13,21 +13,6 @@
     
     <%= javascript_include_tag "application" %>
 
-    
-    <style type="text/css">
-
-       table {
-        width: 1200px;
-       }
-
-       th, td {
-        padding: 10px 10px 10px 10px 10px 10px 10px;
-       }       
-
-
-    </style>
-
-
 
   </head>
 
@@ -36,20 +21,18 @@
        
             <section class="hero is-info is-medium is-bold">
             <div class="hero-head">
-                <h1>Connecticut COVID-19 Tracker System</h1>
+                Connecticut COVID-19 Tracker System
+            </div>
                 <br>
 
 
                 <nav class="navbar">
                     <div class="container">
-
-                        
-                            <div class="navbar"></div>
                         <div id="navbarMenu" class="navbar-menu">
                             <div class="navbar">
                                 <div class="tabs is-right">
+                                    <div class="navbar-item-is-bold">
                                     <ul>
-                                        <li class="is-active"></li>
                                         <li><%= link_to "Daily Summary", state_summary_path if user_signed_in?  %></li>
                                         <li><%= link_to "State Totals", user_states_path(current_user) if user_signed_in? %></li> 
                                         <li><%= link_to "County Totals", user_counties_path(current_user) if user_signed_in? %></li>
@@ -60,19 +43,16 @@
                                         <li><%= link_to "Posts", posts_path if user_signed_in? %></li>                                        
                                         <li><%= link_to "Log Out", destroy_user_session_path, method: :delete if user_signed_in? %></li>
                                     </ul>
-                                            
-
-                                        </a>
-                                    </span>
+                                    </div>      
                                 </div>
                             </div>
                         </div>
                     </div>
                 </nav>
-            </div>
+
                 <br>
-                <div class="tile is-ancestor">
-                    <div class="tile is-vertical is-8">
+
+                <div class="tile is-ancestor is-vertical is-8">
                         <div class="tile">
                             <div class="tile is-parent is-vertical"></div>
                             <div class="tile is-parent">
@@ -80,44 +60,27 @@
 
                                 <% if user_signed_in? && !@page_with_errors%>
                                     <h3><b>Welcome <%= current_user.username  %>!</b></h3> 
+                                    
 
                                     <div id="date" class="date_display" >
                                         <%= Date.today.strftime('%A %B %d, %Y') %>
                                     </div>
                                     <div  id="time" class="time_display"></div>
-<script type="text/javascript">
-  startTime();
-</script> 
 
-    <br>
-    <p> Last login:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%a %B %e, %Y at %I:%M %p')%></p><br>
+                                            <script type="text/javascript">
+                                              startTime();
+                                            </script> 
 
-<% end %>
+                                            <br>
+                                                 <p> Last login:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%a %B %e, %Y at %I:%M %p')%></p><br>
 
-
+                                <% end %>
 
     <%= yield %>
-
-    
-
-</div>
-
-
-                                                                    </article>
-                                                                </div>
-                                                            </div>
-
-                                                                </article>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                    <div class="tile is-parent is-shady">
-
-
-
-        
-
+                                </article>
+                            </div>                                                            
+                        </div>
+                </div>
+        <div class="tile is-parent is-shady"></div>
     </body>
 </html>
