@@ -1,15 +1,10 @@
+	<%= render partial: "shared/pageinfo", locals: {pagetitle: request.original_url.split("/").last.titleize} %>
 
 	<% if current_user.gender_cases.empty? %>
-
-	    <h4><%= current_user.username %>,</h4>
 
 	     You have no data saved yet please click the following link to begin your search: <br>
 
 	<% else %>
-
-			<p>Here is a list of your STATEWIDE COVID-19 data by GENDER</p>
-			<br>
-
 
 			<table>
 

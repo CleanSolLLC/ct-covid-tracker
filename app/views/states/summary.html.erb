@@ -1,5 +1,6 @@
+<%= render partial: "shared/pageinfo", locals: {pagetitle: request.original_url.split("/").last.titleize} %> 
 
-<p><b>Vaccine data as of <%= Time.parse(@vaccine_summary.date_updated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
+<p><b>CT Vaccine data as of <%= Time.parse(@vaccine_summary.date_updated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
 
   <p>Population: <%= number_with_delimiter(@vaccine_summary[:population]) %></p>
   <p>Residents First Dose Administered: <%= number_with_delimiter(@vaccine_summary[:first_dose]) %></p>
@@ -8,7 +9,7 @@
   <p>Percentage Fully Vaccinated <%= @vaccine_summary[:fully_vaccinated_percent]%>%</p><br>
 
 
-<p><b>COVID-19 data as of <%= Time.parse(@daily_summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
+<p><b>CT COVID-19 data as of <%= Time.parse(@daily_summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
 	<% i=0 %>
    	<% while i < 5 %>
 	  <p><%= @daily_summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:

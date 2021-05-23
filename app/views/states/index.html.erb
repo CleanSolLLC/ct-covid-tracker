@@ -1,13 +1,12 @@
+	<%= render partial: "shared/pageinfo", locals: {pagetitle: request.original_url.split("/").last.titleize} %>
 
 	<% if current_user.states.empty? %>
 
-	    <h4><%= current_user.username %>,</h4>
-
-	     You have no data saved yet please click the following link to begin your search: <br>
+	     You have no State Totals saved yet please click the following link to begin your search: <br>
 
 	<% else %>
 
-			<p>Here is a list of your STATEWIDE COVID-19 data by date</p>
+			<p><b>Here is a list of your Connecticut COVID-19 data by date</b></p>
 			<br>
 
 			<table >

@@ -59,24 +59,22 @@
                                 <article class="tile is-child notification is-white">
 
                                 <% if user_signed_in? && !@page_with_errors%>
-                                    <h3><b>Welcome <%= current_user.username  %>!</b></h3> 
-                                    
+                                     <p> Last login:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%a %B %e, %Y at %I:%M %p') %><p>
+                                        <div class="date_display"> Today is <%= Date.today.strftime('%A %B %d, %Y') %></div>
+                                
+                                      <div id="time" class="time_display"></div>
 
-                                    <div id="date" class="date_display" >
-                                        <%= Date.today.strftime('%A %B %d, %Y') %>
-                                    </div>
-                                    <div  id="time" class="time_display"></div>
-
-                                            <script type="text/javascript">
-                                              startTime();
-                                            </script> 
-
-                                            <br>
-                                                 <p> Last login:  <%= Time.parse(current_user.last_sign_in_at.to_s).localtime.strftime('%a %B %e, %Y at %I:%M %p')%></p><br>
+                                        <script type="text/javascript">
+                                           startTime();
+                                        </script> 
+                                     <br>
+                                     <br>
 
                                 <% end %>
 
-    <%= yield %>
+                               
+
+        <%= yield %>
                                 </article>
                             </div>                                                            
                         </div>
