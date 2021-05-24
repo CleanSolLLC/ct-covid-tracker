@@ -14,8 +14,9 @@ class PostsController < ApplicationController
   	  @post = Post.create(post_params(params[:post]))
       @post.user = current_user
     
-    if @post.save  
-  	  current_user.posts << @post
+    if @post.save
+      @post.comments.build(comment: Comment.new)
+      current_user.posts << @post
   	  redirect_to posts_path(@post)
     else
       render :new
@@ -55,6 +56,6 @@ class PostsController < ApplicationController
 
   private
     def post_params(*args)
-      params.require(:post).permit(:title, :remarks)
+      params.require(:post).permit(:title, :content)
     end	
 end

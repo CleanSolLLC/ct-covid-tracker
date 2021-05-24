@@ -1,3 +1,4 @@
+ <%= render "shared/errors" if flash[:alert] %>
 
 	<h3><%= @post.title%></h3>
 	<%= @post.user.username %> posted on
@@ -7,38 +8,24 @@
 	  <%= @post.content %>
 	</div>
 
-	   <% num_posts = @post.comments.count %> 
+	   <% num_posts = (@post.comments.count - 1) unless @post.comments.count == 0  %> 
 	   <b><%= pluralize(num_posts, "comment") %></b>
 
        <div class="comments"> 
 	      <% @post.comments.each do |comment| %>
-	        <% if !comment.remarks.empty? %>
+	 
+	        <% if !comment.comment.nil? %>
 	           <p><%= comment.user.username %> commented: <%= time_ago_in_words(comment.created_at) %> ago</p>
-	           <p><%= comment.remarks %><p>
+	           <p><%= comment.comment %><p>
 	        <% end %>
 	        <br>
 	      <% end %>
        </div>
-
- 
-<% if @comment.errors.any? %>
-  <div id="error_explanation">
-    <h3><%= pluralize(@comment.errors.count, "error") %> prohibited this post from being saved:</h3>
-
-    <ul>
-      <% @comment.errors.full_messages.each do |error| %>
-        <li><%= error %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>      
-    
-
  
  <%= form_for([@post,@post.comments.build]) do |f| %>
    <div class="field">
      <%= f.label "comment" %><br />
-     <%= f.text_field :remarks %>
+     <%= f.text_field :comment %>
    </div>
 
     <div class="action">
