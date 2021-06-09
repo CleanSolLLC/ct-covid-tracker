@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   
   root 'states#summary'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
 
     match '/404', via: :all, to: 'errors#not_found'
     match '/422', via: :all, to: 'errors#unprocessable_entity'

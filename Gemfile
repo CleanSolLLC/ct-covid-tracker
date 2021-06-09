@@ -65,3 +65,11 @@ gem 'bulma-rails', '~> 0.9.0'
 gem "active_hash", "~> 3.1"
 
 gem "font-awesome-rails", "~> 4.7"
+
+gem "dotenv-rails", "~> 2.7"
+
+gem 'omniauth-google-oauth2'
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+gem "omniauth", "~> 2.0"

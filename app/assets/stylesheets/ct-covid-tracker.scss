@@ -84,11 +84,19 @@ td {
 
 .username, .pagetitle {
   display: inline;
-  font-size: 18px;
+  font-size: 17px;
   color: blue;
   font-weight: bold;
 }
 
+.google-btn {
+    text-indent:20px;
+    background: image-url("google.png") no-repeat #EFEFEF;
+    padding: 4px;
+    vertical-align: top;
+
+    
+}
 
 
 

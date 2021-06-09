@@ -1,3 +1,4 @@
+	<%= render partial: "shared/pageinfo", locals: {pagetitle: request.original_url.split("/").last.titleize} %>
 
 	<% if @posts.empty? %>
 
