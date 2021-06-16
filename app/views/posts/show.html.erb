@@ -8,58 +8,70 @@
 	  <%= @post.content %>
 	</div>
 
-	   <% num_posts = @post.comments.count %> 
-	   <b><%= pluralize(num_posts, "comment") %></b>
+	<% num_posts = @post.comments.count %> 
+	<b><%= pluralize(num_posts, "comment") %></b>
 
-      <div class="comments"> 
-	      <% @post.comments.each do |comment|  %> 
+  <div class="comments"> 
+	  <% @post.comments.each do |comment|  %> 
 
-            <% if !comment.comment.include?("") || !comment.created_at.nil? %>    
-	           <p><%= comment.user.username %> commented: <%= time_ago_in_words(comment.updated_at) %> ago</p>
-	           <p><%= comment.comment %><p>
-	           <p><%= link_to "Edit Comment", edit_post_comment_path(@post, comment.id) %>
-	        		<br>
+       <% if !comment.comment.include?("") || !comment.created_at.nil? %>    
+	        <p><%= comment.user.username %> commented: <%= time_ago_in_words(comment.updated_at) %> ago</p>
+	        <p><%= comment.comment %></p>
+
+          <% if current_user.id == comment.user_id %>
+	          <p><%= link_to "Edit Comment", edit_post_comment_path(@post, comment.id) %>
+	        	<%= link_to "Delete Comment", post_delete_comment_path(@post, comment.id)  %></p>
+
+	        	<% elsif %> 
+	        	  <% current_user.id == comment.post.user_id %>
+	        	  <p><%= link_to "Delete Comment", post_delete_comment_path(@post, comment.id)  %></p>
 	        	<% end %>
-	        	<br>
-      	<% end %>
 
-      </div>
+	        <br>
+	     <% end %>
+    <% end %>
+
+  </div>
 
 
-<div>
-	<% if @comment.errors.any? %>
-	  <div id="error_explanation">
-	    <h3><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h3>
+  <div>
+	  <% if @comment.errors.any? %>
+	    <div id="error_explanation">
+	      <h3><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h3>
 
-	    <ul>
-	      <% @comment.errors.full_messages.each do |error| %>
-	        <li><%= error %></li>
-	      <% end %>
-	    </ul>
-	  </div>
-	<% end %>
-	<br>
-</div>
+	      <ul>
+	        <% @comment.errors.full_messages.each do |error| %>
+	          <li><%= error %></li>
+	        <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	  <br>
+  </div>
 
  
- <%= form_for([@post,@post.comments.build]) do |f| %>
-   <div class="field">
-     <%= f.label "comment" %><br />
-     <%= f.text_field :comment %>
-   </div>
+  <%= form_for([@post,@post.comments.build]) do |f| %>
+    <div class="field">
+       <%= f.label "comment" %><br />
+       <%= f.text_field :comment %>
+    </div>
 
     <div class="action">
       <%= f.submit %>
     </div>
-    <% end %>
+  <% end %>
 	<br>
 
-	<div class="button_position">
-	  <%= button_to "Edit Post", {:controller => :posts, :action => :edit, :id => @post.id}, :method => 'get' %>	 
+  <% if current_user.id == @post.user_id %>
+ 
+	  <div class="button_position">
+	     <%= button_to "Edit Post", {:controller => :posts, :action => :edit, :id => @post.id}, :method => 'get' %>	 
 	  
-	  <span style="width: 10px"></span>
+	      <span style="width: 10px"></span>
 	  
-	  <%= button_to "Delete Post", {:controller => :posts, :action => :destroy, :id => @post.id}, :method => 'delete' %>
+	      <%= button_to "Delete Post", {:controller => :posts, :action => :destroy, :id => @post.id}, :method => 'delete' %>
 
-	</div>	
+	   </div>
+
+	  <% end %>	
 

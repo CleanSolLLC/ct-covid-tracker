@@ -19,8 +19,7 @@ Rails.application.routes.draw do
       resources :ethnic_cases, :only => [:new, :create, :index, :destroy]
       resources :age_groups, :only => [:new, :create, :index, :destroy]
       resources :gender_cases, :only => [:new, :create, :index, :destroy]
-      # resources :posts
-      # resources :comments
+
       resources :states, :counties, :towns, :ethnic_cases, :age_groups, :gender_cases do
         collection do 
           delete :destroy_all
@@ -35,7 +34,8 @@ Rails.application.routes.draw do
    end
 
     resources :posts do
-      resources :comments
+      resources :comments, :only => [:create, :edit, :update]
+      get 'posts/:id/comments/:id', to: 'comments#destroy', as: 'delete_comment'
     end
 
 

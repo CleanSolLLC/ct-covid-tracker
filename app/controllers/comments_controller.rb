@@ -31,7 +31,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+  
+    if @comment.user_id == current_user.id || @post.user_id == current_user.id
+      @comment.destroy
+    else
+      flash[:alert] = "You are not authorized to delete this comment"
+    end
+    redirect_to post_path(@post)
   end
 
 
