@@ -15,10 +15,12 @@
 	      <% @post.comments.each do |comment|  %> 
 
             <% if !comment.comment.include?("") || !comment.created_at.nil? %>    
-	           <p><%= comment.user.username %> commented: <%= time_ago_in_words(comment.created_at) %> ago</p>
+	           <p><%= comment.user.username %> commented: <%= time_ago_in_words(comment.updated_at) %> ago</p>
 	           <p><%= comment.comment %><p>
+	           <p><%= link_to "Edit Comment", edit_post_comment_path(@post, comment.id) %>
 	        		<br>
 	        	<% end %>
+	        	<br>
       	<% end %>
 
       </div>
@@ -36,6 +38,7 @@
 	    </ul>
 	  </div>
 	<% end %>
+	<br>
 </div>
 
  

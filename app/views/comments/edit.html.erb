@@ -1,0 +1,16 @@
+ <%= render "shared/errors" if flash[:alert] %>
+
+ <%= form_with model: @comment, url: post_comment_path, method: "patch" do |f| %>
+
+   <div class="field">
+       <%= f.label "comment" %><br />
+       <%= f.text_field :comment %>
+   </div> 
+       <div class="action">
+         <%= f.submit %>
+       </div>
+  <% end %>
+
+
+
+

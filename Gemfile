@@ -74,3 +74,5 @@ gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 gem "omniauth", "~> 2.0"
+
+gem "tty-tree", "~> 0.4.0"
