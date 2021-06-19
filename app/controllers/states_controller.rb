@@ -1,7 +1,4 @@
 class StatesController < ApplicationController
-   
-   before_action :authenticate_user!
-   before_action :date_error?, only: [:create]
 
  def summary
    @daily_summary = State.daily_summary

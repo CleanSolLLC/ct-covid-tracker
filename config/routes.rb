@@ -38,9 +38,8 @@ Rails.application.routes.draw do
       get 'posts/:id/comments/:id', to: 'comments#destroy', as: 'delete_comment'
     end
 
-
-   
    get '/state/summary', to: 'states#summary'
+   
  end
 
   

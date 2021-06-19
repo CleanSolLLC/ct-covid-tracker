@@ -2,8 +2,6 @@ class EthnicCasesController < ApplicationController
 
   include EthnicCasesHelper
    
-   before_action :authenticate_user!
-   before_action :date_error?, only: [:create]
    before_action :ethnic_case_error?, only: [:create]
 
   def index

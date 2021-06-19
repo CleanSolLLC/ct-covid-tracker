@@ -1,8 +1,11 @@
 class CommentsController < ApplicationController
 
+  skip_before_action :date_error?
+  before_action :find_post, only: [:create]  
+  before_action :find_comment, only: [:edit, :update, :destroy]
+
   def create
-  	@post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params(params[:comments])) 
+    @comment = @post.comments.create(comment_params(params[:comment])) 
     @comment.user = current_user
 
     if @comment.save
@@ -14,32 +17,23 @@ class CommentsController < ApplicationController
   end 
 
   def edit
-    @post = Post.find(params[:post_id])
-    @comment = Comment.find(params[:id])
-
     if current_user.id != @comment.user_id
-      flash[:alert] = "You are not authorized to edit this comment"
       redirect_to post_path(@post)
     end
   end
 
   def update
-    comment = Comment.find(params[:id])
-    @post = comment.post
-    @comment = comment.update(comment_params(params[:comment]))
+    @post = @comment.post
+    @comment = @comment.update(comment_params(params[:comment]))
     redirect_to post_path(@post)
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
-    @comment = Comment.find(params[:id])
-  
-    if @comment.user_id == current_user.id || @post.user_id == current_user.id
+    post = @comment.post
+    if @comment.user_id == current_user.id || @comment.post.user_id == current_user.id
       @comment.destroy
-    else
-      flash[:alert] = "You are not authorized to delete this comment"
     end
-    redirect_to post_path(@post)
+    redirect_to post_path(post)
   end
 
 
@@ -48,4 +42,13 @@ class CommentsController < ApplicationController
     def comment_params(*args)	
       params.require(:comment).permit(:comment)	
     end
+
+    def find_post
+      @post = Post.find(params[:post_id])      
+    end
+
+    def find_comment
+      @comment = Comment.find(params[:id])    
+    end
+    
 end

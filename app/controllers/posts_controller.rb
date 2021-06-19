@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-
-  before_action :authenticate_user!
+  before_action :find_post, except: [:index, :new, :create]
+  skip_before_action :date_error?
 
   def index
   	@posts = Post.all
@@ -24,31 +24,25 @@ class PostsController < ApplicationController
   end
 
   def show
-  	@post = Post.find(params[:id])
-    @comment = Comment.new
+    #@comment = Comment.new
   end
 
   def edit
-    @post = Post.find(params[:id])
     if @post.user != current_user
-      flash[:alert] = "You do not have authorization to edit this post"
       redirect_to post_path(@post)
     end
   end
 
   def update
-    @post = Post.find(params[:id])
     @post.update(post_params(params[:post]))
     redirect_to post_path(@post)
   end
 
   def destroy
-    @post = Post.find(params[:id])
     if @post.user == current_user
       @post.destroy
       redirect_to posts_path
     else
-      flash[:alert] = "You do not have authorization to delete this post"
       redirect_to post_path(@post)
     end  
   end 
@@ -57,5 +51,9 @@ class PostsController < ApplicationController
   private
     def post_params(*args)
       params.require(:post).permit(:title, :content)
+    end
+
+    def find_post
+      @post = Post.find(params[:id])      
     end	
 end

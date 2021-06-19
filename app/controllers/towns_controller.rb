@@ -2,8 +2,6 @@ class TownsController < ApplicationController
 
   include TownsHelper
   
-   before_action :authenticate_user!
-   before_action :date_error?, only: [:create]
    before_action :town_error?, only: [:create]
 
   def index

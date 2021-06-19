@@ -2,8 +2,6 @@ class CountiesController < ApplicationController
 
    include CountiesHelper
 
-   before_action :authenticate_user!
-   before_action :date_error?, only: [:create]
    before_action :county_error?, only: [:create]
 
   def index

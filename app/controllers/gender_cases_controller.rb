@@ -1,8 +1,5 @@
 class GenderCasesController < ApplicationController
 
-   before_action :authenticate_user!
-   before_action :date_error?, only: [:create]
-
   def index
     @gender_cases = current_user.gender_cases.order('query_date DESC','gender ASC')
   end

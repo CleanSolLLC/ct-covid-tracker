@@ -1,9 +1,7 @@
 class AgeGroupsController < ApplicationController
 
    include AgeGroupsHelper
-   
-   before_action :authenticate_user!
-   before_action :date_error?, only: [:create]
+
    before_action :age_group_error?, only: [:create]
 
   def index
