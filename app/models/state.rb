@@ -24,7 +24,6 @@ class State < ApplicationRecord
     end
 
     end_date = params[:end_date]
-
   	
   	client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"})
   

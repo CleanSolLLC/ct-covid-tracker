@@ -2,7 +2,7 @@ class AgeGroup < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
 
-  	def self.age_data(params, user)
+  	def self.age_group_data(params, user)
   
       if Date.parse(params[:start_date]).sunday?
         prev_date = (Date.parse(params[:start_date]).prev_day-2).to_s
@@ -27,14 +27,10 @@ class AgeGroup < ApplicationRecord
 
 
       data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json", "$where" => "agegroups in (#{array_to_s}) and dateupdated between '#{prev_date}' and '#{end_date}'")
-
-      
+   
       sorted_data = data.body.sort_by{|hsh| hsh[:agegroups]}
 
-      #while i < sorted_data.count
-
       sorted_data.each_index do |i|
-
 
         #trying to create a switch here to exit if there is no data beyond sorted_data[i+1].nil? however we need to enter this loop at least once if there is only one date
 
@@ -45,7 +41,6 @@ class AgeGroup < ApplicationRecord
 
         age_range = sorted_data[i].agegroups if age_range != sorted_data[i].agegroups
 
-        #binding.pry
 
         age_group = AgeGroup.find_or_initialize_by(user_id: user.id, query_date: "#{sorted_data[i+1].dateupdated}".to_date, age_group: "#{age_range}")
 

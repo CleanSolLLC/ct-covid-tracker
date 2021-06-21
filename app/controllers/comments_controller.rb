@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  skip_before_action :date_error?
+  #skip_before_action :date_error?
   before_action :find_post, only: [:create]  
   before_action :find_comment, only: [:edit, :update, :destroy]
 

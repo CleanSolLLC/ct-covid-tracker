@@ -16,9 +16,7 @@ class TownsController < ApplicationController
     if date_error? || town_error?
       redirect_to new_user_town_path(current_user)
     else
-      user = User.find(current_user.id)
-      Town.town_data(params, user)
-      redirect_to user_towns_path(user)
+      check_data
     end
   end
 
@@ -32,8 +30,19 @@ class TownsController < ApplicationController
     towns = Town.all
     towns.delete_all
     redirect_to user_towns_path(current_user)
-  end   
+  end
 
+  private
+    def check_data
+      Town.town_data(params, current_user)
+      
+      if !!current_user.towns.find{|s| s.query_date >= params[:start_date].to_date && s.query_date <= params[:end_date].to_date}
+        redirect_to user_towns_path(current_user)
+      else
+        flash[:alert] = "No data found for dates input"
+        redirect_to new_user_town_path(current_user)
+      end
+    end   
 end
 
 

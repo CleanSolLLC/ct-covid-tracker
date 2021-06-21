@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, except: [:index, :new, :create]
-  skip_before_action :date_error?
+  #skip_before_action :date_error?
 
   def index
   	@posts = Post.all
@@ -24,7 +24,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    #@comment = Comment.new
   end
 
   def edit
