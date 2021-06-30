@@ -51,15 +51,15 @@ class State < ApplicationRecord
 
     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/ncg4-6gkj.json"})
      data = client.get("https://data.ct.gov/resource/ncg4-6gkj.json?")
-     data
+     data.body
   end 
   
   def self.vaccine_summary
     #this logic creates a snapshot of vaccine data for summary page
 
     client = SODA::Client.new({:domain => "https://data.ct.gov/resource/tttv-egb7.json"})
-     data.body = client.get("https://data.ct.gov/resource/tttv-egb7.json")
-     data.find{|d| d[:category] == "Total"}
+     data = client.get("https://data.ct.gov/resource/tttv-egb7.json")
+     data.body.find{|d| d[:category] == "Total"}
   end 
 
 
