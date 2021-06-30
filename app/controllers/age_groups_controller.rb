@@ -5,7 +5,7 @@ class AgeGroupsController < ApplicationController
    before_action :age_group_error?, only: [:create]
 
   def index
-    @age_groups = current_user.age_groups.order('age_group ASC', 'query_date DESC',)
+    @age_groups = current_user.age_groups.order('age_group ASC', 'query_date DESC')
   end
 
   def new

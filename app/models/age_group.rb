@@ -1,21 +1,16 @@
 class AgeGroup < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  extend GetData
+
   belongs_to :user
 
   	def self.age_group_data(params, user)
-  
-      if Date.parse(params[:start_date]).sunday?
-        prev_date = (Date.parse(params[:start_date]).prev_day-2).to_s
-      else
-        prev_date = (Date.parse(params[:start_date]).prev_day).to_s
-      end
-
+    
+      prev_date = get_prev_date(params[:start_date])
       end_date = params[:end_date]
 
 
       #array formatting to pass values from params multi-select menu
-
-    
 
       array = params[:age_group_lookup_id].values.first.reject{|t| t == ""}
 
@@ -27,8 +22,13 @@ class AgeGroup < ApplicationRecord
 
 
       data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json", "$where" => "agegroups in (#{array_to_s}) and dateupdated between '#{prev_date}' and '#{end_date}'")
-   
-      sorted_data = data.body.sort_by{|hsh| hsh[:agegroups]}
+  
+
+      #find the data that is one day prior to the start date for running avaerages
+
+      data_found = find_data(params[:start_date], data)
+      sorted_data = data_found.sort_by{|hsh| hsh[:agegroups]}
+     
 
       sorted_data.each_index do |i|
 
@@ -39,7 +39,7 @@ class AgeGroup < ApplicationRecord
 
         return if sorted_data[i+1].nil? 
 
-        age_range = sorted_data[i].agegroups if age_range != sorted_data[i].agegroups
+        age_range ||= sorted_data[i].agegroups
 
 
         age_group = AgeGroup.find_or_initialize_by(user_id: user.id, query_date: "#{sorted_data[i+1].dateupdated}".to_date, age_group: "#{age_range}")

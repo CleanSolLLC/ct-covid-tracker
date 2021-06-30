@@ -1,122 +1,190 @@
-# About Sinatra Comic Books
+<!-- CT-COVID-TRACKER PROJECT
 
-This is a simple Ruby app built with Sinatra that will allow you to keep track of your comic book collection.
+  API Data 
 
-User will have the ability to:
+  1. COVID-19 Tests, Cases, Hospitalizations, and Deaths (Statewide)  
+     https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-Hospitalizations-and-Deaths-S/rf3k-f8fg  
 
-* Create their own account and sign in and out of their own account.
-* Create one or more comic book listings.
-* Add, edit or delete comic books.
-* User can only create, view, edite or delete comic book listings from their own account.
-
-## Future improvements planned:
-
-* Create an option if the user wants to list their comic book publically
-* Create something similar to a comic book exchange
-* Create GUI that resembles more of a website
-* Video walkthough on Youtube: https://www.youtube.com/watch?v=eB9IbeH5HXo
-* Pleae visit my blog on Medium: https://medium.com/@mamark90/spiderman-to-sinatra-f62d0d5e317f
+     api: https://data.ct.gov/resource/rf3k-f8fg.json 
 
 
-## Set Up
+        Hash Keys: 
 
-### Prerequisites
-* Ruby
-* SQLite3
-* Boostrap https://getbootstrap.com/docs/4.4/getting-started/introduction/
+        date 
+        state
+        covid_19_tests_reported
+        totalcases
+        confirmedcases
+        probablecases
+        hospitalizedcases
+        totaldeaths
+        confirmeddeaths
+        probabledeaths
+
+
+        client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"}) 
+
+        #Getting data based on a date range:             
+        
+        data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date between '2020-10-28T00:00:00.000' and '2020-10-29T00:00:00.000'")
+
+        #logic for 1 date passed in
+        data = client.get("https://data.ct.gov/resource/rf3k-f8fg.json", "$where" => "date='2020-10-29T00:00:00.000'")
+
+
+  2. COVID-19 PCR-Based Test Results by Date of Specimen Collection (By County) **** May consider this as an extention to project at a later date ***
+
+      web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-PCR-Based-Test-Results-by-Date-of-Specime/qfkt-uahj
+
+      api: https://data.ct.gov/resource/qfkt-uahj.json
+
+        Hash Keys:
+
+        county
+        date
+        number_of_indeterminates
+        number_of_negatives
+        number_of_positives
+        number_of_tests 
+
+        client = SODA::Client.new({:domain => "https://data.ct.gov/resource/rf3k-f8fg.json"}) 
+
+        #Getting data based on a date range:             
+        
+        data = client.get("https://data.ct.gov/resource/qfkt-uahj.json.json", "$where" => "date between '2020-10-28T00:00:00.000' and '2020-10-29T00:00:00.000'")
+
+        #logic for 1 date passed in
+        data = client.get("https://data.ct.gov/resource/qfkt-uahj.json", "$where" => "date='2020-10-29T00:00:00.000'")      
+
+
+  3. COVID-19 Cases, Hospitalizations, and Deaths (By County)
+
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-Hospitalizations-and-Deaths-By-Coun/bfnu-rgqt
+
+     api: https://data.ct.gov/resource/bfnu-rgqt.json  
+
+      Hash Keys:
+
+        dateupdated
+        county
+        confirmedcases
+        hospitalization
+        confirmeddeaths       
+
+
+  4. COVID-19 Tests, Cases, and Deaths (By Town)
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Tests-Cases-and-Deaths-By-Town-/28fr-iqnx
+
+     api: https://data.ct.gov/resource/28fr-iqnx.json
+
+      Hash Keys:
+
+        lastupdatedate
+        town_no
+        town
+        numberoftests
+        townconfirmedcases
+        townconfirmeddeaths     
 
 
 
-## Development & Usage
-	
-### Installation
+  5. COVID-19 Cases and Deaths by Gender
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Gender/qa53-fghg
 
-1. This repository uses the BootstrapCDN to utilize HTML formatting
-2. Fork the repository and clone it.
-3. Run bundle install to install gems (If you don't have bundler, first run gem install bundler)
-4. Set up the database with rake db:migrate.
-5. There is seed data to get you started if you choose run rake db:seed.
-6. See login credentails below.
-6. Run shotgun to run the app locally at http://localhost:9393/.
+     api: https://data.ct.gov/resource/qa53-fghg.json
 
-```
-sinatra_comic_books
-├── Gemfile
-├── Gemfile.lock
-├── README.md
-├── Rakefile
-├── SPEC.md
-├── app
-│   ├── controllers
-│   │   ├── application_controller.rb
-│   │   ├── comic_book_controller.rb
-│   │   ├── user_controller.rb
-│   │   └── user_controller_hold.rb
-│   ├── models
-│   │   ├── comic.rb
-│   │   └── user.rb
-│   └── views
-│       ├── comics
-│       │   ├── edit.erb
-│       │   ├── index.erb
-│       │   ├── new.erb
-│       │   └── show.erb
-│       ├── home.erb
-│       ├── index.erb
-│       ├── layout.erb
-│       ├── registrations
-│       │   └── signup.erb
-│       └── sessions
-│           └── login.erb
-├── config
-│   ├── database.yml
-│   └── environment.rb
-├── config.ru
-├── db
-│   ├── comics.db
-│   ├── development.sqlite
-│   ├── migrate
-│   │   ├── 20191210202106_create_users.rb
-│   │   ├── 20191214033852_create_comic_list.rb
-│   │   ├── 20191214122636_update_comics_table.rb
-│   │   └── 20191216000049_add_column_to_comics.rb
-│   └── schema.rb
-└── public
-    ├── images
-    │   ├── avenger.jpeg
-    │   ├── batman.jpeg
-    │   ├── captainamerica.jpeg
-    │   ├── collage.jpeg
-    │   ├── collage2.jpeg
-    │   ├── deadpool.jpeg
-    │   ├── fantastic4.jpeg
-    │   ├── fantastic4.jpg
-    │   ├── isis.jpeg
-    │   ├── kapow.jpg
-    │   ├── spiderman2.jpg
-    │   ├── storm.jpeg
-    │   ├── superman.jpeg
-    │   ├── wonderwoman.jpeg
-    │   ├── wonderwoman2.jpeg
-    │   └── xmen.jpeg
-    ├── javascripts
-    └── stylesheets
-```
-## Login
+      Hash Keys:
 
-The Seed data uses the following login:
-username: GIJane@abc123.com 
-password:GIJane@abc123.com 
+        dateupdated
+        gender
+        confirmedcases
+        confirmeddeaths
 
-## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sinatra_comic_books. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+  6. COVID-19 Cases and Deaths by Age Group
 
-## License
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Age-Group/ypz6-8qyf
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+     example: data = client.get("https://data.ct.gov/resource/ypz6-8qyf.json?dateupdated=2020-05-01T00:00:00.000")
 
-## Code of Conduct
+     Hash Keys:
 
-Everyone interacting in the Sinatra Comic Books project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/sinatra_comic_books/blob/master/CODE_OF_CONDUCT.md).
+      dateupdated
+      agegroups
+      confirmedcases
+      confirmeddeaths
 
+      Data is an array of hashes returns data for each age group
+
+       #<Hashie::Mash agegroups="0-9" dateupdated="2020-05-01T00:00:00.000" totalcaserate="56" totalcases="214" totaldeaths="1"> 
+
+
+
+  7. COVID-19 Cases and Deaths by Race/Ethnicity
+
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Race-Ethnicity/7rne-efic
+
+     api: https://data.ct.gov/resource/7rne-efic.json
+
+     Hash Keys:
+
+      dateupdated
+      hisp_race
+      total_pop
+      case_tot
+      deaths
+
+  8. COVID-19 State Summary **** Data to show on the landing page
+      COVID-19 state summary including the following metrics, including the change from the data reported the previous day:
+
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-state-summary/ncg4-6gkj
+
+     api: https://data.ct.gov/resource/ncg4-6gkj.json
+
+     Hash Keys:
+
+      measure
+      total
+      changedirection
+      change
+      dateupdated 
+
+  9. COVID-19 Vaccine State Summary **** Data to shown on the landing page
+      COVID-19 state summary data is updated one tiome per week
+     web page: https://data.ct.gov/Health-and-Human-Services/COVID-19-Vaccine-State-Summary/tttv-egb7
+
+     api: https://data.ct.gov/resource/tttv-egb7.json
+
+     Hash Keys:
+
+      date_updated
+      population
+      first_dose
+      first_dose_coverage
+      fully_vaccinated
+      fully_vaccinated_percent
+
+
+Models
+
+  User - is used by this aplication as well as the Devise gem
+    
+  See erd.pdf for model relationships and attributes
+
+
+  Model Logic  
+    #1. we need to find the prev date to grab totals that will be used to compare to values with that of the nextday
+    #2. check for and validate against nonexistant data
+    #3. check to see if data queried persists in DB.
+    #4. The above logic applies to all of the models except comments, posts, and the loolup models 
+
+    Data was origionally colllected and posted Sunday through Thursday. However it seems like data is now being collected and posted Monday through Friday excluding holidays. The previous days data is needed to calculate the increase or decrease from the start date and each subsequent date through the end_date utilized data from the day before. If we use a prev_date that goes back 5 days prior to the start_date we are assured that we will capture the previous date.
+
+
+
+
+
+
+
+
+ -->
