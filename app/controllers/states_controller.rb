@@ -33,17 +33,5 @@ class StatesController < ApplicationController
     states.delete_all
     redirect_to user_states_path(current_user)
   end
-
-  private
-    def check_data
-      State.state_data(params, current_user)
-      
-      if current_user.states.find{|s| s.query_date >= params[:start_date].to_date && s.query_date <= params[:end_date].to_date}
-        redirect_to user_states_path(current_user)
-      else
-        flash[:alert] = "No data found for dates input"
-        redirect_to new_user_state_path(current_user)
-      end
-    end
-
+  
 end

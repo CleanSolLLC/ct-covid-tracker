@@ -6,7 +6,7 @@ class EthnicCase < ApplicationRecord
   belongs_to :user
 
 
-  def self.ethnic_data(params, user)
+  def self.ethnic_case_data(params, user)
 
     prev_date = get_prev_date(params[:start_date])
     end_date = params[:end_date]

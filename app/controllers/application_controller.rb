@@ -24,4 +24,22 @@ class ApplicationController < ActionController::Base
       redirect_back(fallback_location: root_path)
     end
 
+    def check_data
+  
+      model_method = "#{controller_name.singularize}" << "_data"
+      success_redirect_path = "user_" +  "#{controller_name}" + "_path"
+      error_redirect_path = "new_user_" +  "#{controller_name.singularize}" + "_path"
+
+      #call to Class.method
+      controller_name.classify.constantize.send(model_method, params, current_user)
+    
+      
+      if !!current_user.send(controller_name).find{|s| s.query_date >= params[:start_date].to_date && s.query_date <= params[:end_date].to_date}
+        redirect_to :action => "index", id: current_user.id
+      else
+        flash[:alert] = "No data found for dates input"
+        redirect_to :action => "new", id: current_user.id
+      end
+    end     
+
 end

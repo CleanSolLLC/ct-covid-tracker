@@ -32,18 +32,5 @@ class AgeGroupsController < ApplicationController
     age_groups.delete_all
     redirect_to user_age_groups_path(current_user)
   end
-
-  private
-    def check_data
-      AgeGroup.age_group_data(params, current_user)
-      
-      if !!current_user.age_groups.find{|s| s.query_date >= params[:start_date].to_date && s.query_date <= params[:end_date].to_date}
-        redirect_to user_age_groups_path(current_user)
-      else
-        flash[:alert] = "No data found for dates input"
-        redirect_to new_user_age_group_path(current_user)
-      end
-    end  
-
-
+  
 end

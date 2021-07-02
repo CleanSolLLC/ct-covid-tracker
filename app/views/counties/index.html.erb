@@ -1,4 +1,4 @@
-  <%= render partial: "shared/pageinfo", locals: {pagetitle: request.original_url.split("/").last.titleize} %>
+  <%= render partial: "shared/pageinfo", locals: {pagetitle: controller_name.titleize} %>
 
   <% if current_user.counties.empty? %>
 

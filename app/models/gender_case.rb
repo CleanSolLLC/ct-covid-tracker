@@ -3,7 +3,7 @@ class GenderCase < ApplicationRecord
  
   belongs_to :user
 
-  def self.gender_data(params, user)
+  def self.gender_case_data(params, user)
 
 
     prev_date = get_prev_date(params[:start_date])

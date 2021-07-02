@@ -32,17 +32,5 @@ class EthnicCasesController < ApplicationController
     ethnic_cases.delete_all
     redirect_to user_ethnic_cases_path(current_user)
   end
-
-  private
-    def check_data
-      EthnicCase.ethnic_data(params, current_user)
-      
-      if !!current_user.ethnic_cases.find{|s| s.query_date >= params[:start_date].to_date && s.query_date <= params[:end_date].to_date}
-        redirect_to user_ethnic_cases_path(current_user)
-      else
-        flash[:alert] = "No data found for dates input"
-        redirect_to new_user_ethnic_case_path(current_user)
-      end
-    end  
-
+  
 end

@@ -29,18 +29,4 @@ class GenderCasesController < ApplicationController
     gender_cases.delete_all
     redirect_to user_gender_cases_path(current_user)
   end
-
-  private
-    def check_data
-      GenderCase.gender_data(params, current_user)
-      
-      if !!current_user.gender_cases.find{|s| s.query_date >= params[:start_date].to_date && s.query_date <= params[:end_date].to_date}
-        redirect_to user_gender_cases_path(current_user)
-      else
-        flash[:alert] = "No data found for dates input"
-        redirect_to new_user_gender_case_path(current_user)
-      end
-    end   
-
-
 end
