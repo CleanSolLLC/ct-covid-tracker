@@ -1,10 +1,12 @@
-	<%= render partial: "shared/pageinfo", locals: {pagetitle: controller_name.titleize} %>
+	<%= render partial: "shared/pageinfo", locals: {pagetitle: controller_name.titleize} %> <br>
 
 	<% if current_user.age_groups.empty? %>
 
 	     You have no data saved yet please click the following link to begin your search: <br>
 
 	<% else %>
+
+	<%= line_chart @age_groups_chart, ytitle: "covid positive cases"%> <br>
 
 			<table>
 
@@ -43,8 +45,6 @@
 					</tr>
 					<% end %>
 			</table>
-			
-			<%= line_chart(@age_groups_chart)%>
 
 	<% end %>
 

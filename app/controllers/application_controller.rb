@@ -27,10 +27,10 @@ class ApplicationController < ActionController::Base
     def check_data
   
       model_method = "#{controller_name.singularize}" << "_data"
-      success_redirect_path = "user_" +  "#{controller_name}" + "_path"
-      error_redirect_path = "new_user_" +  "#{controller_name.singularize}" + "_path"
+      # success_redirect_path = "user_" +  "#{controller_name}" + "_path"
+      # error_redirect_path = "new_user_" +  "#{controller_name.singularize}" + "_path"
 
-      #call to Class.method
+      #call to speciffic class.method using values passed in from controller
       controller_name.classify.constantize.send(model_method, params, current_user)
     
       
