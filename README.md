@@ -1,6 +1,8 @@
-# About Sinatra Comic Books
+# About CT-Covid-Tracker
 
-This is a simple Ruby app built with Sinatra that will allow you to keep track of your comic book collection.
+This is a Rails app that allows users to reseach Connecticut COVID-19 data at the State, County, Town level. The user can also reseach data based on Gender, Race/Etnicity and Age Group.
+
+Data is accessed 
 
 User will have the ability to:
 

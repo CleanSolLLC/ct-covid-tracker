@@ -18,13 +18,16 @@ Rails.application.routes.draw do
       resources :towns, :only => [:new, :create, :index, :destroy]
       resources :ethnic_cases, :only => [:new, :create, :index, :destroy]
       resources :age_groups, :only => [:new, :create, :index, :destroy]
-      resources :gender_cases, :only => [:new, :create, :index, :destroy]
+      resources :gender_cases, :only => [:new, :create, :index, :destroy] 
 
       resources :states, :counties, :towns, :ethnic_cases, :age_groups, :gender_cases do
         collection do 
           delete :destroy_all
         end
       end
+
+   get '/chart/state_rates', to: 'charts#state_rates'
+   get '/chart/state_tests', to: 'charts#state_tests' 
     
     end 
   end
@@ -39,6 +42,7 @@ Rails.application.routes.draw do
     end
 
    get '/state/summary', to: 'states#summary'
+
    
  end
 

@@ -45,8 +45,6 @@
 					   <td><%= state.hospitalized_change == 0 ? "**" : state.hosp_dir %><%= number_with_delimiter(state.hospitalized_change) %></td>
 					   <td><%= number_with_delimiter(state.confirmed_deaths) %></td>
 					   <td><%= state.death_change == 0 ? "**" : state.death_dir %><%= number_with_delimiter(state.death_change) %></td>
-
-
 					</tr>
 					<% end %>
 			</table>
@@ -54,7 +52,11 @@
 	<% end %>
 
 <br>
-	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %>
+	<%= link_to "Select Additional Dates", new_user_state_path(current_user) %><br>
+
+
+
+
 	
 
 

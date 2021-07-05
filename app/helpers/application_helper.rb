@@ -5,8 +5,8 @@ module ApplicationHelper
     if !params[:start_date].present? || !params[:end_date].present?
       flash[:alert] = "Start Date or End Date Cannot Be Blank"
     
-    # elsif Date.parse(params[:start_date]).friday? || Date.parse(params[:start_date]).saturday?
-    #   flash[:alert] = "Start Date Cannot Be on a Friday or Saturday"
+    elsif Date.parse(params[:start_date]) <  Date.parse("2020-03-25") || Date.parse(params[:end_date]) <  Date.parse("2020-03-25")
+      flash[:alert] = "Start Date or End Date Cannot Be Before 03-25-2020"
     
     elsif Date.parse(params[:start_date]) >= Date.today || Date.parse(params[:end_date]) >= Date.today
       flash[:alert] = "Start or End Date Cannot Be Today or In The Future"
