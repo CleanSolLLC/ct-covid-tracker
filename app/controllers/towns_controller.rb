@@ -5,7 +5,12 @@ class TownsController < ApplicationController
    before_action :town_error?, only: [:create]
 
   def index
-    @towns = current_user.towns.order('name ASC', 'query_date DESC',)
+    @towns = current_user.towns.order('name ASC', 'query_date DESC')
+
+    all_town_values = @towns.pluck(:name).uniq
+    @towns_chart = all_town_values.map do |town|
+      {name: town, data: Town.where(name: town, user_id: current_user.id).group_by_day(:query_date, series: false).sum(:case_change)}
+     end 
   end
 
   def new

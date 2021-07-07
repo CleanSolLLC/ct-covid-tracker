@@ -2,6 +2,11 @@ class GenderCasesController < ApplicationController
 
   def index
     @gender_cases = current_user.gender_cases.order('query_date DESC','gender ASC')
+
+    all_gender_case_values = @gender_cases.pluck(:gender).uniq
+    @gender_case_chart = all_gender_case_values.map do |gender_case|
+      {name: gender_case, data: GenderCase.where(gender: gender_case, user_id: current_user.id).group_by_day(:query_date, series: false).sum(:case_change)}
+     end 
   end
 
   def new

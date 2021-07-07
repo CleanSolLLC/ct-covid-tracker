@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   after_action :date_error?, only: [:create]
@@ -19,18 +17,11 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     end
 
-    def record_not_found
-      flash[:error] = "Record already deleted."
-      redirect_back(fallback_location: root_path)
-    end
-
     def check_data
   
       model_method = "#{controller_name.singularize}" << "_data"
-      # success_redirect_path = "user_" +  "#{controller_name}" + "_path"
-      # error_redirect_path = "new_user_" +  "#{controller_name.singularize}" + "_path"
 
-      #call to speciffic class.method using values passed in from controller
+      #call to specific class.method using values passed in from controller
       controller_name.classify.constantize.send(model_method, params, current_user)
     
       

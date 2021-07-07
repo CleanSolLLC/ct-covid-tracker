@@ -8,6 +8,8 @@
 
   <% else %>
 
+  <%= line_chart @towns_chart, ytitle: "net change in covid cases"%> <br>
+
       <table >
 
         <%= button_to "Delete All", {:controller => :towns, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure?'} %><br>         

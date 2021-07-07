@@ -7,6 +7,11 @@ class StatesController < ApplicationController
 
   def index
     @states = current_user.states.order('query_date DESC')
+
+    all_state_values = @states.pluck(:name).uniq
+    @states_chart = all_state_values.map do |state|
+      {name: "Statewide", data: State.where(name: state, user_id: current_user.id).group_by_day(:query_date, series: false).sum(:case_change)}
+     end 
   end
 
   def new

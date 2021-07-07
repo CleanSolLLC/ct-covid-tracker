@@ -5,7 +5,13 @@ class EthnicCasesController < ApplicationController
    before_action :ethnic_case_error?, only: [:create]
 
   def index
-    @ethnic_cases = current_user.ethnic_cases.order('ethnic_group ASC', 'query_date DESC',)
+    @ethnic_cases = current_user.ethnic_cases.order('ethnic_group ASC', 'query_date DESC')
+
+    ethnic_cases_values = @ethnic_cases.pluck(:ethnic_group).uniq
+    @ethnic_case_chart = all_ethnic_case_values.map do |ethnic_group|
+      {name: ethnic_group, data: EthnicCase.where(ethnic_group: ethnic_group, user_id: current_user.id).group_by_day(:query_date, series: false).sum(:case_change)}
+     end 
+
   end
 
   def new

@@ -6,11 +6,11 @@
 
 	<% else %>
 
-	<%= line_chart @age_groups_chart, ytitle: "covid positive cases"%> <br>
+	<%= line_chart @age_groups_chart, ytitle: "net change in covid cases"%> <br>
 
 			<table>
 
-        	  <%= button_to "Delete All", {:controller => :age_groups, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure?'} %>
+        	  <%= button_to "Delete All", {:controller => :age_groups, :action => :destroy_all}, method: :delete, data: { confirm: "Are you sure?"} %>
         	  <br> 				
 
 			  <tr>

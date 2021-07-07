@@ -5,7 +5,13 @@ class CountiesController < ApplicationController
    before_action :county_error?, only: [:create]
 
   def index
-    @counties = current_user.counties.order('name ASC', 'query_date DESC',)
+    @counties = current_user.counties.order('name ASC', 'query_date DESC')
+
+    all_county_values = @counties.pluck(:name).uniq
+    @counties_chart = all_county_values.map do |county|
+      {name: county, data: County.where(name: county, user_id: current_user.id).group_by_day(:query_date, series: false).sum(:case_change)}
+     end 
+
   end
 
   def new
