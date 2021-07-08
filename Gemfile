@@ -80,3 +80,5 @@ gem "tty-tree", "~> 0.4.0"
 gem "chartkick"
 
 gem 'groupdate'
+
+gem 'jquery-rails'

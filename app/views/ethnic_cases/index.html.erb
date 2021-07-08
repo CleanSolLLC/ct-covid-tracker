@@ -6,11 +6,11 @@
 
 	<% else %>
 
-	<%= line_chart @ethnic_cases_chart, ytitle: "net change in covid cases"%> <br>
+	<%= line_chart @ethnic_case_chart, ytitle: "net change in covid cases"%> <br>
 
 			<table>
 
-			<%= button_to "Delete All", {:controller => :ethnic_cases, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure?'} %><br>				
+			<%= link_to "Delete All", {:controller => :ethnic_cases, :action => :destroy_all}, :method => 'delete', data: { confirm: 'Are you sure you want to delete all rows of data?'} %><br>				
 
 			  <tr>
 
