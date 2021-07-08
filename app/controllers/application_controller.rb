@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
         flash[:alert] = "No data found for dates input"
         redirect_to :action => "new", id: current_user.id
       end
-    end     
+    end    
 
 end

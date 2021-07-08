@@ -1,118 +1,59 @@
 # About CT-Covid-Tracker
 
-This is a Rails app that allows users to reseach Connecticut COVID-19 data at the State, County, Town level. The user can also reseach data based on Gender, Race/Etnicity and Age Group.
+This is a Rails application that allows users to research Connecticut COVID-19 data at the state, county and town level. The user can also research data based on gender, race/etnicity and age group.
 
-Data is accessed 
+Data is accessed via the State of Connecticut COVID-19 Data portal https://data.ct.gov/browse?tags=covid-19 using the Socrata Open Data API (SODA) https://dev.socrata.com/. The application utilizes the Soda-Ruby gem to access data through api endpoints and allows for the writing of SQL-like statements to return values from various datasets. Please read the notes.md file for more information on the datasets and the models used in this application. An entity relationship diagram is also provided (erd.pdf).
 
-User will have the ability to:
 
-* Create their own account and sign in and out of their own account.
-* Create one or more comic book listings.
-* Add, edit or delete comic books.
-* User can only create, view, edite or delete comic book listings from their own account.
+The user will have the ability to:
+
+* Create/delete their own account and sign in and out of their own account with a username and password.
+* Sign in to their own account using their Google login credentials.
+* Input dates and other input parameters to run queries within various State of Connecticut COVID-19 datasets.
+* View line charts that are dynamically created based on the values returned by the dataset queried.
+* Create, edit, and delete posts that can be read by other users.
+* Comment on posts written by other users.
+* Create, view, edit or delete data from their own account.
+
+
+* Video walkthrough on Youtube: 
+* Please visit my blog on Medium:
+* The application is hosted on Heroku:
+
 
 ## Future improvements planned:
 
-* Create an option if the user wants to list their comic book publically
-* Create something similar to a comic book exchange
-* Create GUI that resembles more of a website
-* Video walkthough on Youtube: https://www.youtube.com/watch?v=eB9IbeH5HXo
-* Pleae visit my blog on Medium: https://medium.com/@mamark90/spiderman-to-sinatra-f62d0d5e317f
-
+* Extend the application to provide additional search criteria based on vaccination rates.
+* Allow the user to save queries in differnt formats such as .pdf and .csv.
+* Provide other graphing options such as bar charts, scatter plots, etc.
+ 
 
 ## Set Up
 
 ### Prerequisites
-* Ruby
-* SQLite3
-* Boostrap https://getbootstrap.com/docs/4.4/getting-started/introduction/
-
+* Ruby 2.7
+* Rails 6.0
+* PostgreSQL 12 or later
 
 
 ## Development & Usage
   
 ### Installation
 
-1. This repository uses the BootstrapCDN to utilize HTML formatting
+1. This repository uses the Bulma for css styling.
 2. Fork the repository and clone it.
 3. Run bundle install to install gems (If you don't have bundler, first run gem install bundler)
-4. Set up the database with rake db:migrate.
-5. There is seed data to get you started if you choose run rake db:seed.
-6. See login credentails below.
-6. Run shotgun to run the app locally at http://localhost:9393/.
+4. Set up the database with rake db:migrate.e r
+5. You will need to install the dotenv-rails gem and set up a .env file in the root directory.
+6. Store the database user name and password in environment variables in the .env file.
+7. Request a Google client id and a Google client secret to store in the .env file
+   https://www.rubydoc.info/gems/omniauth-google-oauth2/0.2.5/frames 
+8. Run rails s (server) to run the app locally at http://localhost:3000
 
-```
-sinatra_comic_books
-├── Gemfile
-├── Gemfile.lock
-├── README.md
-├── Rakefile
-├── SPEC.md
-├── app
-│   ├── controllers
-│   │   ├── application_controller.rb
-│   │   ├── comic_book_controller.rb
-│   │   ├── user_controller.rb
-│   │   └── user_controller_hold.rb
-│   ├── models
-│   │   ├── comic.rb
-│   │   └── user.rb
-│   └── views
-│       ├── comics
-│       │   ├── edit.erb
-│       │   ├── index.erb
-│       │   ├── new.erb
-│       │   └── show.erb
-│       ├── home.erb
-│       ├── index.erb
-│       ├── layout.erb
-│       ├── registrations
-│       │   └── signup.erb
-│       └── sessions
-│           └── login.erb
-├── config
-│   ├── database.yml
-│   └── environment.rb
-├── config.ru
-├── db
-│   ├── comics.db
-│   ├── development.sqlite
-│   ├── migrate
-│   │   ├── 20191210202106_create_users.rb
-│   │   ├── 20191214033852_create_comic_list.rb
-│   │   ├── 20191214122636_update_comics_table.rb
-│   │   └── 20191216000049_add_column_to_comics.rb
-│   └── schema.rb
-└── public
-    ├── images
-    │   ├── avenger.jpeg
-    │   ├── batman.jpeg
-    │   ├── captainamerica.jpeg
-    │   ├── collage.jpeg
-    │   ├── collage2.jpeg
-    │   ├── deadpool.jpeg
-    │   ├── fantastic4.jpeg
-    │   ├── fantastic4.jpg
-    │   ├── isis.jpeg
-    │   ├── kapow.jpg
-    │   ├── spiderman2.jpg
-    │   ├── storm.jpeg
-    │   ├── superman.jpeg
-    │   ├── wonderwoman.jpeg
-    │   ├── wonderwoman2.jpeg
-    │   └── xmen.jpeg
-    ├── javascripts
-    └── stylesheets
-```
-## Login
-
-The Seed data uses the following login:
-username: GIJane@abc123.com 
-password:GIJane@abc123.com 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sinatra_comic_books. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/CleanSolLLC/ct-covid-tracker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -120,5 +61,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Sinatra Comic Books project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/sinatra_comic_books/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Sinatra Comic Books project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/CleanSolLLC/ct-covid-tracker/blob/master/CODE_OF_CONDUCT.md).
 
