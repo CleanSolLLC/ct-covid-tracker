@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     match '/422', via: :all, to: 'errors#unprocessable_entity'
     match '/500', via: :all, to: 'errors#server_error'
 
+    match 'users/:id' => 'user#destroy', :via => :delete, :as => :destroy_user
+
 
   shallow do
     resources :user do
@@ -42,6 +44,9 @@ Rails.application.routes.draw do
     end
 
    get '/state/summary', to: 'states#summary'
+
+
+
 
    
  end

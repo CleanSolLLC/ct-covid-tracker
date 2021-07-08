@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :towns
   has_many :comments, dependent: :destroy
   has_many :posts, through: :comments, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
 
   def self.from_omniauth(access_token)

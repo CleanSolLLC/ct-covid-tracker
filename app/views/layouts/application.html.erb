@@ -41,7 +41,10 @@
                                         <li><%= link_to "Age Group Data", user_age_groups_path(current_user) if user_signed_in? %></li>
                                         <li><%= link_to "Gender Data", user_gender_cases_path(current_user) if user_signed_in? %></li>
                                         <li><%= link_to "Etrhnic Group Data", user_ethnic_cases_path(current_user) if user_signed_in? %></li>
-                                        <li><%= link_to "Posts", posts_path if user_signed_in? %></li>                                        
+                                        <li><%= link_to "Posts", posts_path if user_signed_in? %></li>
+                                        <li><%= link_to "Delete User", destroy_user_path(current_user), method: :delete, data: { confirm: "Are You Sure You Want To Delete Your Account?" } if user_signed_in? %></li>
+
+
                                         <li><%= link_to "Log Out", destroy_user_session_path, method: :delete if user_signed_in? %></li>
                                     </ul>
                                     </div>      
