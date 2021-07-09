@@ -4,6 +4,8 @@ This is a Rails application that allows users to research Connecticut COVID-19 d
 
 Data is accessed via the State of Connecticut COVID-19 Data portal https://data.ct.gov/browse?tags=covid-19 using the Socrata Open Data API (SODA) https://dev.socrata.com/. The application utilizes the Soda-Ruby gem to access data through api endpoints and allows for the writing of SQL-like statements to return values from various datasets. Please read the notes.md file for more information on the datasets and the models used in this application. An entity relationship diagram is also provided (erd.pdf).
 
+### Note that the data is cumulative
+
 
 The user will have the ability to:
 
@@ -18,7 +20,7 @@ The user will have the ability to:
 
 * Video walkthrough on Youtube: 
 * Please visit my blog on Medium:
-* The application is hosted on Heroku:
+* The application is hosted on Heroku: https://stark-ocean-74969.herokuapp.com
 
 
 ## Future improvements planned:
@@ -48,7 +50,8 @@ The user will have the ability to:
 6. Store the database user name and password in environment variables in the .env file.
 7. Request a Google client id and a Google client secret to store in the .env file
    https://www.rubydoc.info/gems/omniauth-google-oauth2/0.2.5/frames 
-8. Run rails s (server) to run the app locally at http://localhost:3000
+8. Add the .env file to .gitignore so that it is not added to your file structure on github   
+9. Run rails s (server) to run the app locally at http://localhost:3000
 
 
 ## Contributing
