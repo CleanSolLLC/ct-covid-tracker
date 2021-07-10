@@ -1,5 +1,5 @@
 class Town < ApplicationRecord
-  extend ActiveHash::Associations::ActiveRecordExtensions
+  #extend ActiveHash::Associations::ActiveRecordExtensions
   extend GetData
 
   belongs_to :user
@@ -20,7 +20,7 @@ class Town < ApplicationRecord
 
     
       data = client.get("https://data.ct.gov/resource/28fr-iqnx.json", "$where" => "lastupdatedate between'#{prev_date}' and '#{end_date}' and town_no in (#{array_to_s})")
-     
+  
       data_found = find_town_data(params[:start_date], data) 
       sorted_data = data_found.sort_by{|hsh| hsh[:town_no]}
 

@@ -1,5 +1,5 @@
 class County < ApplicationRecord
-  extend ActiveHash::Associations::ActiveRecordExtensions
+  #extend ActiveHash::Associations::ActiveRecordExtensions
   extend GetData
 
   belongs_to :user

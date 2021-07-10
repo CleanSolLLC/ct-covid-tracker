@@ -4,7 +4,7 @@ This is a Rails application that allows users to research Connecticut COVID-19 d
 
 Data is accessed via the State of Connecticut COVID-19 Data portal https://data.ct.gov/browse?tags=covid-19 using the Socrata Open Data API (SODA) https://dev.socrata.com/. The application utilizes the Soda-Ruby gem to access data through api endpoints and allows for the writing of SQL-like statements to return values from various datasets. Please read the notes.md file for more information on the datasets and the models used in this application. An entity relationship diagram is also provided (erd.pdf).
 
-### Note that the data is cumulative
+### Note that the data is cumulative and depending on breaks in time periods in between queries it may be worthwhile to delete data and rerun queries to interpret the graph results. 
 
 
 The user will have the ability to:
@@ -18,8 +18,8 @@ The user will have the ability to:
 * Create, view, edit or delete data from their own account.
 
 
-* Video walkthrough on Youtube: 
-* Please visit my blog on Medium:
+* Video walkthrough on Youtube: https://youtu.be/NFiGJOWFtJc
+* Please visit my blog on Medium: https://medium.com/p/4ef3e19a4cc5
 * The application is hosted on Heroku: https://stark-ocean-74969.herokuapp.com
 
 
@@ -64,5 +64,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Sinatra Comic Books project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/CleanSolLLC/ct-covid-tracker/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the ct-covid-tracker project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/CleanSolLLC/ct-covid-tracker/blob/master/CODE_OF_CONDUCT.md).
 

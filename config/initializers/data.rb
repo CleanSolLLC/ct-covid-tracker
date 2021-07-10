@@ -17,7 +17,7 @@ Rails.application.config.to_prepare do
 	  {:id =>	1,	 :name =>	"Andover",		:county_lookup_id =>	7},
 	  {:id =>	2,	 :name =>	"Ansonia",		:county_lookup_id =>	5},
 	  {:id =>	3,	 :name =>	"Ashford",		:county_lookup_id =>	8},
-	  {:id =>	4,	 :name =>	"Avon",			:county_lookup_id =>	2},
+	  {:id =>	4,	 :name =>	"Avon",		:county_lookup_id =>	2},
 	  {:id =>	5,	 :name =>	"Barkhamsted",	:county_lookup_id =>	3},
 	  {:id =>	6,	 :name =>	"Beacon Falls",	:county_lookup_id =>	5},
 	  {:id =>	7,	 :name =>	"Berlin",		:county_lookup_id =>	2},
