@@ -12,7 +12,7 @@
 
   <div class="comments"> 
 	  <% @post.comments.each do |comment|  %> 
-
+      
        <% if !comment.comment.include?("") || !comment.created_at.nil? %>    
 	        <p><%= comment.user.username %> commented: <%= time_ago_in_words(comment.updated_at) %> ago</p>
 	        <p><%= comment.comment %></p>

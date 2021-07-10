@@ -27,9 +27,6 @@ Rails.application.routes.draw do
           delete :destroy_all
         end
       end
-
-   get '/chart/state_rates', to: 'charts#state_rates'
-   get '/chart/state_tests', to: 'charts#state_tests' 
     
     end 
   end
