@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :find_post, except: [:index, :new, :create]
-  #skip_before_action :date_error?
 
   def index
   	@posts = Post.all
@@ -15,7 +14,6 @@ class PostsController < ApplicationController
       @post.user = current_user
     
     if @post.save 
-      #current_user.posts << @post
       @post.comments.build
   	  redirect_to posts_path(@post)
     else
