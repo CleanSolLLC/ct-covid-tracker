@@ -42,6 +42,8 @@ Rails.application.routes.draw do
 
    get '/state/summary', to: 'states#summary'
 
+   get '/state/about', to: 'states#about', as: 'about'
+ 
 
 
 

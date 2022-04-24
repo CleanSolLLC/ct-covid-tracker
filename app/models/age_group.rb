@@ -28,7 +28,6 @@ class AgeGroup < ApplicationRecord
 
       data_found = find_data(params[:start_date], data)
       sorted_data = data_found.sort_by{|hsh| hsh[:agegroups]}
-     
 
       sorted_data.each_index do |i|
 

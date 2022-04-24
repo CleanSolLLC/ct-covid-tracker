@@ -5,6 +5,9 @@ class StatesController < ApplicationController
    @vaccine_summary = State.vaccine_summary
  end
 
+ def about
+ end
+
   def index
     @states = current_user.states.order('query_date DESC')
 

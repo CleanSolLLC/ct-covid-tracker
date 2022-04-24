@@ -33,7 +33,7 @@ The user will have the ability to:
 ## Set Up
 
 ### Prerequisites
-* Ruby 2.7
+* Ruby 2.7.2
 * Rails 6.0
 * PostgreSQL 12 or later
 
@@ -45,7 +45,7 @@ The user will have the ability to:
 1. This repository uses the Bulma for css styling.
 2. Fork the repository and clone it.
 3. Run bundle install to install gems (If you don't have bundler, first run gem install bundler)
-4. Set up the database with rake db:migrate.e r
+4. Set up the database with rake db:migrate.
 5. You will need to install the dotenv-rails gem and set up a .env file in the root directory.
 6. Store the database user name and password in environment variables in the .env file.
 7. Request a Google client id and a Google client secret to store in the .env file

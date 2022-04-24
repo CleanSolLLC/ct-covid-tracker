@@ -34,6 +34,7 @@
                                 <div class="tabs is-right">
                                     <div class="navbar-item-is-bold">
                                     <ul>
+                                        <li><%= link_to "About", about_path if user_signed_in?  %></li>
                                         <li><%= link_to "Daily Summary", state_summary_path if user_signed_in?  %></li>
                                         <li><%= link_to "State Totals", user_states_path(current_user) if user_signed_in? %></li> 
                                         <li><%= link_to "County Totals", user_counties_path(current_user) if user_signed_in? %></li>

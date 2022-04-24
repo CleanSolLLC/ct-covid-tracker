@@ -10,17 +10,12 @@
 
 
 <p><b>CT COVID-19 data as of <%= Time.parse(@daily_summary.first.dateupdated.to_s).localtime.strftime('%A %B %e, %Y') %></b></p>
+<b>Daily Positivity Rate: <%= number_with_delimiter(@daily_summary[6].value) %>%</b>
 	<% i=0 %>
-   	<% while i < 5 %>
-	  <p><%= @daily_summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:
-	 
-	  	<% if @daily_summary[i].measure == "Daily Test Positivity*" %>
-           <%= @daily_summary[i].change %>%
-        <% else %>
-	  	  <%= number_with_delimiter(@daily_summary[i].total) %> <%= @daily_summary[i].changedirection %><%= number_with_delimiter(@daily_summary[i].change) %></p>
-	    <% end %>
-
-      <% i+=1 %>
-      
+   	<% while i < 6 %>
+	     <p><%= @daily_summary[i].measure.gsub("COVID-19",'').gsub("-", '').strip %>:
+	  	 <%= number_with_delimiter(@daily_summary[i].value) %></p>
+       <% i+=1 %>     
     <% end %>
+  
  
