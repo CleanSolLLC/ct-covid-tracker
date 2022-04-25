@@ -20,7 +20,7 @@ The user will have the ability to:
 
 * Video walkthrough on Youtube: https://youtu.be/NFiGJOWFtJc
 * Please visit my blog on Medium: https://medium.com/p/4ef3e19a4cc5
-* The application is hosted on Heroku: https://stark-ocean-74969.herokuapp.com
+* The application is hosted on Heroku: https://ct-covid-tracker.herokuapp.com
 
 
 ## Future improvements planned:
